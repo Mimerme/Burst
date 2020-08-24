@@ -88,7 +88,7 @@ public final class TacoCmd extends Command
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-		if(WURST.getHax().rainbowUiHack.isEnabled())
+		if(WURST.getHax().getRainbowUiHack().isEnabled())
 		{
 			float[] acColor = WURST.getGui().getAcColor();
 			GL11.glColor4f(acColor[0], acColor[1], acColor[2], 1);

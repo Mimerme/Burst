@@ -101,8 +101,8 @@ public final class AutoSwordHack extends Hack implements UpdateListener
 			return;
 		
 		// wait for AutoEat
-		if(WURST.getHax().autoEatHack.isEating())
-			return;
+/*		if(WURST.getHax().autoEatHack.isEating())
+			return;*/
 		
 		// find best weapon
 		float bestValue = Integer.MIN_VALUE;

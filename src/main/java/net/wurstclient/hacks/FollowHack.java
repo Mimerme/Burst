@@ -340,7 +340,7 @@ public final class FollowHack extends Hack
 			// control height if flying
 			if(!MC.player.isOnGround()
 				&& (MC.player.abilities.flying
-					|| WURST.getHax().flightHack.isEnabled())
+					|| WURST.getHax().getFlightHack().isEnabled())
 				&& MC.player.squaredDistanceTo(entity.getX(), MC.player.getY(),
 					entity.getZ()) <= MC.player.squaredDistanceTo(
 						MC.player.getX(), entity.getY(), MC.player.getZ()))

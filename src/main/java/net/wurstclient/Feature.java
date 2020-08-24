@@ -21,10 +21,10 @@ import net.wurstclient.settings.Setting;
 
 public abstract class Feature
 {
-	protected static final WurstClient WURST = WurstClient.INSTANCE;
+	protected static final BurstClient WURST = BurstClient.INSTANCE;
 	protected static final EventManager EVENTS = WURST.getEventManager();
-	protected static final MinecraftClient MC = WurstClient.MC;
-	protected static final IMinecraftClient IMC = WurstClient.IMC;
+	protected static final MinecraftClient MC = BurstClient.MC;
+	protected static final IMinecraftClient IMC = BurstClient.IMC;
 	
 	private final LinkedHashMap<String, Setting> settings =
 		new LinkedHashMap<>();

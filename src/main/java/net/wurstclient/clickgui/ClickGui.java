@@ -30,7 +30,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.wurstclient.Category;
 import net.wurstclient.Feature;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.components.FeatureButton;
 import net.wurstclient.hacks.ClickGuiHack;
 import net.wurstclient.settings.Setting;
@@ -38,8 +38,8 @@ import net.wurstclient.util.json.JsonUtils;
 
 public final class ClickGui
 {
-	private static final WurstClient WURST = WurstClient.INSTANCE;
-	private static final MinecraftClient MC = WurstClient.MC;
+	private static final BurstClient WURST = BurstClient.INSTANCE;
+	private static final MinecraftClient MC = BurstClient.MC;
 	
 	private final ArrayList<Window> windows = new ArrayList<>();
 	private final ArrayList<Popup> popups = new ArrayList<>();
@@ -80,15 +80,16 @@ public final class ClickGui
 		Window uiSettings = new Window("UI Settings");
 		uiSettings.add(new FeatureButton(WURST.getOtfs().wurstLogoOtf));
 		uiSettings.add(new FeatureButton(WURST.getOtfs().hackListOtf));
-		ClickGuiHack clickGuiHack = WURST.getHax().clickGuiHack;
+		ClickGuiHack clickGuiHack = WURST.getHax().getClickGuiHack();
 		Stream<Setting> settings = clickGuiHack.getSettings().values().stream();
 		settings.map(Setting::getComponent).forEach(c -> uiSettings.add(c));
 		windows.add(uiSettings);
 		
 		for(Window window : windows)
 			window.setMinimized(true);
-		
-		windows.add(WurstClient.INSTANCE.getHax().radarHack.getWindow());
+
+		//TODO: radar hack is disabled because its shit
+		//windows.add(BurstClient.INSTANCE.getHax().radarHack.getWindow());
 		
 		int x = 5;
 		int y = 5;
@@ -591,12 +592,12 @@ public final class ClickGui
 	
 	public void updateColors()
 	{
-		ClickGuiHack clickGui = WURST.getHax().clickGuiHack;
+		ClickGuiHack clickGui = WURST.getHax().getClickGuiHack();
 		
 		opacity = clickGui.getOpacity();
 		bgColor = clickGui.getBgColor();
 		
-		if(WurstClient.INSTANCE.getHax().rainbowUiHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getRainbowUiHack().isEnabled())
 		{
 			float x = System.currentTimeMillis() % 2000 / 1000F;
 			acColor[0] = 0.5F + 0.5F * (float)Math.sin(x * Math.PI);

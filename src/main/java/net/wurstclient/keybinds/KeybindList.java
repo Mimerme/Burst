@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.util.json.JsonException;
 
 public final class KeybindList
@@ -28,7 +28,7 @@ public final class KeybindList
 	
 	private final KeybindsFile keybindsFile;
 	private final Path profilesFolder =
-		WurstClient.INSTANCE.getWurstFolder().resolve("keybinds");
+		BurstClient.INSTANCE.getWurstFolder().resolve("keybinds");
 	
 	public KeybindList(Path keybindsFile)
 	{

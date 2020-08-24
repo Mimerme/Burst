@@ -34,7 +34,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.CheckboxSetting;
@@ -131,13 +131,13 @@ public final class MultiAuraHack extends Hack implements UpdateListener
 	public void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().fightBotHack.setEnabled(false);
 		WURST.getHax().killauraLegitHack.setEnabled(false);
 		WURST.getHax().killauraHack.setEnabled(false);
 		WURST.getHax().protectHack.setEnabled(false);
 		WURST.getHax().tpAuraHack.setEnabled(false);
-		WURST.getHax().triggerBotHack.setEnabled(false);
+		WURST.getHax().triggerBotHack.setEnabled(false);*/
 		
 		timer = 0;
 		EVENTS.add(UpdateListener.class, this);
@@ -234,7 +234,7 @@ public final class MultiAuraHack extends Hack implements UpdateListener
 		if(entities.isEmpty())
 			return;
 		
-		WURST.getHax().autoSwordHack.setSlot();
+		//WURST.getHax().autoSwordHack.setSlot();
 		
 		// attack entities
 		for(Entity entity : entities)
@@ -242,11 +242,11 @@ public final class MultiAuraHack extends Hack implements UpdateListener
 			RotationUtils.Rotation rotations = RotationUtils
 				.getNeededRotations(entity.getBoundingBox().getCenter());
 			
-			WurstClient.MC.player.networkHandler
+			BurstClient.MC.player.networkHandler
 				.sendPacket(new PlayerMoveC2SPacket.LookOnly(rotations.getYaw(),
 					rotations.getPitch(), MC.player.isOnGround()));
 			
-			WURST.getHax().criticalsHack.doCritical();
+			//WURST.getHax().criticalsHack.doCritical();
 			MC.interactionManager.attackEntity(player, entity);
 		}
 		

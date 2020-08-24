@@ -25,8 +25,8 @@ public final class TiredHack extends Hack implements UpdateListener
 	public void onEnable()
 	{
 		// disable incompatible derps
-		WURST.getHax().derpHack.setEnabled(false);
-		WURST.getHax().headRollHack.setEnabled(false);
+/*		WURST.getHax().derpHack.setEnabled(false);
+		WURST.getHax().headRollHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 	}

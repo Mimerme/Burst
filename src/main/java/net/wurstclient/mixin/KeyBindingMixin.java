@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.IKeyBinding;
 
 @Mixin(KeyBinding.class)
@@ -24,7 +24,7 @@ public class KeyBindingMixin implements IKeyBinding
 	@Override
 	public boolean isActallyPressed()
 	{
-		long handle = WurstClient.MC.getWindow().getHandle();
+		long handle = BurstClient.MC.getWindow().getHandle();
 		int code = boundKey.getCode();
 		return InputUtil.isKeyPressed(handle, code);
 	}

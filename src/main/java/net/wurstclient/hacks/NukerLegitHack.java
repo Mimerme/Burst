@@ -101,11 +101,11 @@ public final class NukerLegitHack extends Hack
 	public void onEnable()
 	{
 		// disable other nukers
-		WURST.getHax().autoMineHack.setEnabled(false);
+/*		WURST.getHax().autoMineHack.setEnabled(false);
 		WURST.getHax().excavatorHack.setEnabled(false);
 		WURST.getHax().nukerHack.setEnabled(false);
 		WURST.getHax().speedNukerHack.setEnabled(false);
-		WURST.getHax().tunnellerHack.setEnabled(false);
+		WURST.getHax().tunnellerHack.setEnabled(false);*/
 		
 		// add listeners
 		EVENTS.add(LeftClickListener.class, this);
@@ -232,8 +232,8 @@ public final class NukerLegitHack extends Hack
 			// face block
 			WURST.getRotationFaker().faceVectorClient(hitVec);
 			
-			if(currentBlock != null)
-				WURST.getHax().autoToolHack.equipIfEnabled(currentBlock);
+/*			if(currentBlock != null)
+				WURST.getHax().autoToolHack.equipIfEnabled(currentBlock);*/
 				
 			// if attack key is down but nothing happens, release it for one
 			// tick

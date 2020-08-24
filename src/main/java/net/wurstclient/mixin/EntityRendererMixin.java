@@ -24,7 +24,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Matrix4f;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hacks.NameTagsHack;
 
 @Mixin(EntityRenderer.class)
@@ -43,7 +43,7 @@ public abstract class EntityRendererMixin<T extends Entity>
 		int i, CallbackInfo ci)
 	{
 		if(entity instanceof LivingEntity)
-			text = new LiteralText(WurstClient.INSTANCE.getHax().healthTagsHack
+			text = new LiteralText(BurstClient.INSTANCE.getHax().getHealTagsHack()
 				.addHealth((LivingEntity)entity, text.getString()));
 		
 		wurstRenderLabelIfPresent(entity, text, matrixStack,
@@ -64,7 +64,7 @@ public abstract class EntityRendererMixin<T extends Entity>
 		if(d > 4096)
 			return;
 		
-		NameTagsHack nameTagsHack = WurstClient.INSTANCE.getHax().nameTagsHack;
+		NameTagsHack nameTagsHack = BurstClient.INSTANCE.getHax().getNameTagsHack();
 		
 		boolean bl = !entity.isSneaky() || nameTagsHack.isEnabled();
 		float f = entity.getHeight() + 0.5F;
@@ -77,7 +77,7 @@ public abstract class EntityRendererMixin<T extends Entity>
 		float scale = 0.025F;
 		if(nameTagsHack.isEnabled())
 		{
-			double distance = WurstClient.MC.player.distanceTo(entity);
+			double distance = BurstClient.MC.player.distanceTo(entity);
 			
 			if(distance > 10)
 				scale *= distance / 10;
@@ -86,7 +86,7 @@ public abstract class EntityRendererMixin<T extends Entity>
 		matrixStack.scale(-scale, -scale, scale);
 		
 		Matrix4f matrix4f = matrixStack.peek().getModel();
-		float g = WurstClient.MC.options.getTextBackgroundOpacity(0.25F);
+		float g = BurstClient.MC.options.getTextBackgroundOpacity(0.25F);
 		int k = (int)(g * 255.0F) << 24;
 		
 		TextRenderer textRenderer = this.getFontRenderer();

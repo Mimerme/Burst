@@ -93,11 +93,11 @@ public final class SpeedNukerHack extends Hack
 	public void onEnable()
 	{
 		// disable other nukers
-		WURST.getHax().autoMineHack.setEnabled(false);
+/*		WURST.getHax().autoMineHack.setEnabled(false);
 		WURST.getHax().excavatorHack.setEnabled(false);
 		WURST.getHax().nukerHack.setEnabled(false);
 		WURST.getHax().nukerLegitHack.setEnabled(false);
-		WURST.getHax().tunnellerHack.setEnabled(false);
+		WURST.getHax().tunnellerHack.setEnabled(false);*/
 		
 		// add listeners
 		EVENTS.add(LeftClickListener.class, this);
@@ -128,8 +128,8 @@ public final class SpeedNukerHack extends Hack
 			pos -> mode.getSelected().validator.test(this, pos));
 		
 		Iterator<BlockPos> autoToolIterator = validBlocks.iterator();
-		if(autoToolIterator.hasNext())
-			WURST.getHax().autoToolHack.equipIfEnabled(autoToolIterator.next());
+/*		if(autoToolIterator.hasNext())
+			WURST.getHax().autoToolHack.equipIfEnabled(autoToolIterator.next());*/
 		
 		// break all blocks
 		BlockBreaker.breakBlocksWithPacketSpam(validBlocks);

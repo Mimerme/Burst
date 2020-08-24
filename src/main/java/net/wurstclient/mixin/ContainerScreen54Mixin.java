@@ -21,7 +21,7 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hacks.AutoStealHack;
 
 @Mixin(GenericContainerScreen.class)
@@ -34,12 +34,12 @@ public abstract class ContainerScreen54Mixin
 	private int rows;
 	
 	private final AutoStealHack autoSteal =
-		WurstClient.INSTANCE.getHax().autoStealHack;
+		BurstClient.INSTANCE.getHax().getAutoStealHack();
 	private int mode;
 	
-	public ContainerScreen54Mixin(WurstClient wurst,
-		GenericContainerScreenHandler container,
-		PlayerInventory playerInventory, Text name)
+	public ContainerScreen54Mixin(BurstClient wurst,
+                                  GenericContainerScreenHandler container,
+                                  PlayerInventory playerInventory, Text name)
 	{
 		super(container, playerInventory, name);
 	}
@@ -49,7 +49,7 @@ public abstract class ContainerScreen54Mixin
 	{
 		super.init();
 		
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		if(autoSteal.areButtonsVisible())

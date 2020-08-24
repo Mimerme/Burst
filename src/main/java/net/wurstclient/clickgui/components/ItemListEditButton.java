@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.screens.EditItemListScreen;
@@ -26,7 +26,7 @@ public final class ItemListEditButton extends Component
 	{
 		this.setting = setting;
 		
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		buttonWidth = fr.getWidth("Edit...");
 		
 		setWidth(getDefaultWidth());
@@ -42,15 +42,15 @@ public final class ItemListEditButton extends Component
 		if(mouseX < getX() + getWidth() - buttonWidth - 4)
 			return;
 		
-		WurstClient.MC.openScreen(
-			new EditItemListScreen(WurstClient.MC.currentScreen, setting));
+		BurstClient.MC.openScreen(
+			new EditItemListScreen(BurstClient.MC.currentScreen, setting));
 	}
 	
 	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY,
 		float partialTicks)
 	{
-		ClickGui gui = WurstClient.INSTANCE.getGui();
+		ClickGui gui = BurstClient.INSTANCE.getGui();
 		float[] bgColor = gui.getBgColor();
 		float[] acColor = gui.getAcColor();
 		float opacity = gui.getOpacity();
@@ -102,7 +102,7 @@ public final class ItemListEditButton extends Component
 		// setting name
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		String text = setting.getName() + ": " + setting.getItemNames().size();
 		fr.draw(matrixStack, text, x1, y1 + 2, 0xf0f0f0);
 		fr.draw(matrixStack, "Edit...", x3 + 2, y1 + 2, 0xf0f0f0);
@@ -112,7 +112,7 @@ public final class ItemListEditButton extends Component
 	@Override
 	public int getDefaultWidth()
 	{
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		String text = setting.getName() + ": " + setting.getItemNames().size();
 		return fr.getWidth(text) + buttonWidth + 6;
 	}

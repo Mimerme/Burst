@@ -11,7 +11,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.wurstclient.RotationFaker;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.IClientPlayerEntity;
 
 public enum RotationUtils
@@ -20,7 +20,7 @@ public enum RotationUtils
 	
 	public static Vec3d getEyesPos()
 	{
-		ClientPlayerEntity player = WurstClient.MC.player;
+		ClientPlayerEntity player = BurstClient.MC.player;
 		
 		return new Vec3d(player.getX(),
 			player.getY() + player.getEyeHeight(player.getPose()),
@@ -29,7 +29,7 @@ public enum RotationUtils
 	
 	public static Vec3d getClientLookVec()
 	{
-		ClientPlayerEntity player = WurstClient.MC.player;
+		ClientPlayerEntity player = BurstClient.MC.player;
 		float f = 0.017453292F;
 		float pi = (float)Math.PI;
 		
@@ -43,7 +43,7 @@ public enum RotationUtils
 	
 	public static Vec3d getServerLookVec()
 	{
-		RotationFaker rotationFaker = WurstClient.INSTANCE.getRotationFaker();
+		RotationFaker rotationFaker = BurstClient.INSTANCE.getRotationFaker();
 		float serverYaw = rotationFaker.getServerYaw();
 		float serverPitch = rotationFaker.getServerPitch();
 		
@@ -74,7 +74,7 @@ public enum RotationUtils
 	{
 		Rotation needed = getNeededRotations(vec);
 		
-		ClientPlayerEntity player = WurstClient.MC.player;
+		ClientPlayerEntity player = BurstClient.MC.player;
 		float currentYaw = MathHelper.wrapDegrees(player.yaw);
 		float currentPitch = MathHelper.wrapDegrees(player.pitch);
 		
@@ -88,7 +88,7 @@ public enum RotationUtils
 	{
 		Rotation needed = getNeededRotations(vec);
 		
-		IClientPlayerEntity player = WurstClient.IMC.getPlayer();
+		IClientPlayerEntity player = BurstClient.IMC.getPlayer();
 		float lastReportedYaw = MathHelper.wrapDegrees(player.getLastYaw());
 		float lastReportedPitch = MathHelper.wrapDegrees(player.getLastPitch());
 		
@@ -101,7 +101,7 @@ public enum RotationUtils
 	public static float getHorizontalAngleToLookVec(Vec3d vec)
 	{
 		Rotation needed = getNeededRotations(vec);
-		return MathHelper.wrapDegrees(WurstClient.MC.player.yaw) - needed.yaw;
+		return MathHelper.wrapDegrees(BurstClient.MC.player.yaw) - needed.yaw;
 	}
 	
 	public static final class Rotation

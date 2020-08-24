@@ -19,7 +19,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.ISwordItem;
 
 @Mixin(SwordItem.class)
@@ -33,8 +33,8 @@ public class SwordItemMixin extends ToolItem implements ISwordItem
 	@Final
 	private Multimap<EntityAttribute, EntityAttributeModifier> field_23745;
 	
-	private SwordItemMixin(WurstClient wurst, ToolMaterial material,
-		Settings settings)
+	private SwordItemMixin(BurstClient wurst, ToolMaterial material,
+                           Settings settings)
 	{
 		super(material, settings);
 	}

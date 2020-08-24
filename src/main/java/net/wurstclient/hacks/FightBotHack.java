@@ -142,13 +142,13 @@ public final class FightBotHack extends Hack
 	public void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().killauraLegitHack.setEnabled(false);
 		WURST.getHax().killauraHack.setEnabled(false);
 		WURST.getHax().multiAuraHack.setEnabled(false);
 		WURST.getHax().protectHack.setEnabled(false);
 		WURST.getHax().triggerBotHack.setEnabled(false);
-		WURST.getHax().tpAuraHack.setEnabled(false);
+		WURST.getHax().tpAuraHack.setEnabled(false);*/
 		
 		pathFinder = new EntityPathFinder(MC.player);
 		
@@ -242,7 +242,7 @@ public final class FightBotHack extends Hack
 		if(entity == null)
 			return;
 		
-		WURST.getHax().autoSwordHack.setSlot();
+		//WURST.getHax().autoSwordHack.setSlot();
 		
 		if(useAi.isChecked())
 		{
@@ -286,7 +286,7 @@ public final class FightBotHack extends Hack
 			// control height if flying
 			if(!MC.player.isOnGround()
 				&& (MC.player.abilities.flying
-					|| WURST.getHax().flightHack.isEnabled())
+					|| WURST.getHax().getFlightHack().isEnabled())
 				&& MC.player.squaredDistanceTo(entity.getX(), MC.player.getY(),
 					entity.getZ()) <= MC.player.squaredDistanceTo(
 						MC.player.getX(), entity.getY(), MC.player.getZ()))
@@ -317,7 +317,7 @@ public final class FightBotHack extends Hack
 			return;
 		
 		// attack entity
-		WURST.getHax().criticalsHack.doCritical();
+		//WURST.getHax().criticalsHack.doCritical();
 		MC.interactionManager.attackEntity(MC.player, entity);
 		MC.player.swingHand(Hand.MAIN_HAND);
 	}

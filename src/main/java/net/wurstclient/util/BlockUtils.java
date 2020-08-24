@@ -20,13 +20,13 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public enum BlockUtils
 {
 	;
 	
-	private static final MinecraftClient MC = WurstClient.MC;
+	private static final MinecraftClient MC = BurstClient.MC;
 	
 	public static BlockState getState(BlockPos pos)
 	{

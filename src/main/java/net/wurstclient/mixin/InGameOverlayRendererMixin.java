@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(InGameOverlayRenderer.class)
 public class InGameOverlayRendererMixin
@@ -27,7 +27,7 @@ public class InGameOverlayRendererMixin
 	private static void onRenderFireOverlay(MinecraftClient minecraftClient,
 		MatrixStack matrixStack, CallbackInfo ci)
 	{
-		if(WurstClient.INSTANCE.getHax().noFireOverlayHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getNoFireOverlayHack().isEnabled())
 			ci.cancel();
 	}
 	
@@ -39,7 +39,7 @@ public class InGameOverlayRendererMixin
 		MinecraftClient minecraftClient, MatrixStack matrixStack,
 		CallbackInfo ci)
 	{
-		if(WurstClient.INSTANCE.getHax().noOverlayHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getNoOverlayHack().isEnabled())
 			ci.cancel();
 	}
 }

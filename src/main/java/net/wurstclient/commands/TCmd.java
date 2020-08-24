@@ -55,7 +55,7 @@ public final class TCmd extends Command
 	
 	private void setEnabled(Hack hack, boolean enabled)
 	{
-		TooManyHaxHack tooManyHax = WURST.getHax().tooManyHaxHack;
+		TooManyHaxHack tooManyHax = WURST.getHax().getTooManyHaxHack();
 		if(!hack.isEnabled() && tooManyHax.isEnabled()
 			&& tooManyHax.isBlocked(hack))
 		{

@@ -92,8 +92,8 @@ public final class XRayHack extends Hack implements UpdateListener,
 		EVENTS.remove(RenderBlockEntityListener.class, this);
 		MC.worldRenderer.reload();
 		
-		if(!WURST.getHax().fullbrightHack.isEnabled())
-			MC.options.gamma = 0.5F;
+/*		if(!WURST.getHax().fullbrightHack.isEnabled())
+			MC.options.gamma = 0.5F;*/
 	}
 	
 	@Override

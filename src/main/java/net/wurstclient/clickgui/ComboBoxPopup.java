@@ -11,13 +11,13 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.settings.EnumSetting;
 
 public final class ComboBoxPopup<T extends Enum<T>> extends Popup
 {
-	private final ClickGui gui = WurstClient.INSTANCE.getGui();
-	private final TextRenderer tr = WurstClient.MC.textRenderer;
+	private final ClickGui gui = BurstClient.INSTANCE.getGui();
+	private final TextRenderer tr = BurstClient.MC.textRenderer;
 	
 	private final EnumSetting<T> setting;
 	private final int popupWidth;

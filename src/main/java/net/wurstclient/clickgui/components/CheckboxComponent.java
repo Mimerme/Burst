@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.Window;
@@ -19,8 +19,8 @@ import net.wurstclient.settings.CheckboxSetting;
 
 public final class CheckboxComponent extends Component
 {
-	private final MinecraftClient MC = WurstClient.MC;
-	private final ClickGui GUI = WurstClient.INSTANCE.getGui();
+	private final MinecraftClient MC = BurstClient.MC;
+	private final ClickGui GUI = BurstClient.INSTANCE.getGui();
 	
 	private final CheckboxSetting setting;
 	

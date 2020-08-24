@@ -137,7 +137,7 @@ public final class AutoFarmHack extends Hack
 		List<BlockPos> blocksToHarvest = new ArrayList<>();
 		List<BlockPos> blocksToReplant = new ArrayList<>();
 		
-		if(!WURST.getHax().freecamHack.isEnabled())
+		if(!WURST.getHax().getFreecamHack().isEnabled())
 		{
 			blocksToHarvest =
 				blocks.parallelStream().filter(this::shouldBeHarvested)

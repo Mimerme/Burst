@@ -20,11 +20,11 @@ import net.minecraft.client.util.DefaultSkinHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public final class AltRenderer
 {
-	private static final MinecraftClient mc = WurstClient.MC;
+	private static final MinecraftClient mc = BurstClient.MC;
 	private static final HashSet<String> loadedSkins = new HashSet<>();
 	
 	private static void bindSkinTexture(String name)

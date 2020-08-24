@@ -18,7 +18,7 @@ import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.keybinds.PossibleKeybind;
 import net.wurstclient.util.RenderUtils;
 
@@ -56,7 +56,7 @@ public class NavigatorRemoveKeybindScreen extends NavigatorScreen
 	private void remove()
 	{
 		String oldCommands =
-			WurstClient.INSTANCE.getKeybinds().getCommands(selectedKey);
+			BurstClient.INSTANCE.getKeybinds().getCommands(selectedKey);
 		if(oldCommands == null)
 			return;
 		
@@ -72,15 +72,15 @@ public class NavigatorRemoveKeybindScreen extends NavigatorScreen
 			commandsList.remove(command);
 		
 		if(commandsList.isEmpty())
-			WurstClient.INSTANCE.getKeybinds().remove(selectedKey);
+			BurstClient.INSTANCE.getKeybinds().remove(selectedKey);
 		else
 		{
 			String newCommands = String.join("\u00a7", commandsList)
 				.replace(";", "\u00a7\u00a7").replace("\u00a7", ";");
-			WurstClient.INSTANCE.getKeybinds().add(selectedKey, newCommands);
+			BurstClient.INSTANCE.getKeybinds().add(selectedKey, newCommands);
 		}
 		
-		WurstClient.INSTANCE.getNavigator()
+		BurstClient.INSTANCE.getNavigator()
 			.addPreference(parent.getFeature().getName());
 		
 		client.openScreen(parent);

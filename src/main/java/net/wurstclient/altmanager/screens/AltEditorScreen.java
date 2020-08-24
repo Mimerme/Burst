@@ -32,14 +32,14 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.altmanager.AltRenderer;
 import net.wurstclient.altmanager.NameGenerator;
 
 public abstract class AltEditorScreen extends Screen
 {
 	private final Path skinFolder =
-		WurstClient.INSTANCE.getWurstFolder().resolve("skins");
+		BurstClient.INSTANCE.getWurstFolder().resolve("skins");
 	
 	protected final Screen prevScreen;
 	

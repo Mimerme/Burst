@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.other_features.HackListOtf;
@@ -26,13 +26,13 @@ import net.wurstclient.other_features.HackListOtf.Position;
 public final class HackListHUD implements UpdateListener
 {
 	private final ArrayList<HackListEntry> activeHax = new ArrayList<>();
-	private final HackListOtf otf = WurstClient.INSTANCE.getOtfs().hackListOtf;
+	private final HackListOtf otf = BurstClient.INSTANCE.getOtfs().hackListOtf;
 	private int posY;
 	private int textColor;
 	
 	public HackListHUD()
 	{
-		WurstClient.INSTANCE.getEventManager().add(UpdateListener.class, this);
+		BurstClient.INSTANCE.getEventManager().add(UpdateListener.class, this);
 	}
 	
 	public void render(MatrixStack matrixStack, float partialTicks)
@@ -41,15 +41,15 @@ public final class HackListHUD implements UpdateListener
 			return;
 		
 		if(otf.getPosition() == Position.LEFT
-			&& WurstClient.INSTANCE.getOtfs().wurstLogoOtf.isVisible())
+			&& BurstClient.INSTANCE.getOtfs().wurstLogoOtf.isVisible())
 			posY = 22;
 		else
 			posY = 2;
 		
 		// color
-		if(WurstClient.INSTANCE.getHax().rainbowUiHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getRainbowUiHack().isEnabled())
 		{
-			float[] acColor = WurstClient.INSTANCE.getGui().getAcColor();
+			float[] acColor = BurstClient.INSTANCE.getGui().getAcColor();
 			textColor = 0x04 << 24 | (int)(acColor[0] * 256) << 16
 				| (int)(acColor[1] * 256) << 8 | (int)(acColor[2] * 256);
 			
@@ -64,7 +64,7 @@ public final class HackListHUD implements UpdateListener
 		// drawString("YesCheat+: " + yesCheatSpf.getProfile().getName());
 		
 		int height = posY + activeHax.size() * 9;
-		Window sr = WurstClient.MC.getWindow();
+		Window sr = BurstClient.MC.getWindow();
 		
 		if(otf.getMode() == Mode.COUNT || height > sr.getScaledHeight())
 			drawCounter(matrixStack);
@@ -129,14 +129,14 @@ public final class HackListHUD implements UpdateListener
 	
 	private void drawString(MatrixStack matrixStack, String s)
 	{
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		int posX;
 		
 		if(otf.getPosition() == Position.LEFT)
 			posX = 2;
 		else
 		{
-			int screenWidth = WurstClient.MC.getWindow().getScaledWidth();
+			int screenWidth = BurstClient.MC.getWindow().getScaledWidth();
 			int stringWidth = tr.getWidth(s);
 			
 			posX = screenWidth - stringWidth - 2;
@@ -151,7 +151,7 @@ public final class HackListHUD implements UpdateListener
 	private void drawWithOffset(MatrixStack matrixStack, HackListEntry e,
 		float partialTicks)
 	{
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		String s = e.hack.getRenderName();
 		
 		float offset =
@@ -162,7 +162,7 @@ public final class HackListHUD implements UpdateListener
 			posX = 2 - 5 * offset;
 		else
 		{
-			int screenWidth = WurstClient.MC.getWindow().getScaledWidth();
+			int screenWidth = BurstClient.MC.getWindow().getScaledWidth();
 			int stringWidth = tr.getWidth(s);
 			
 			posX = screenWidth - stringWidth - 2 + 5 * offset;

@@ -13,7 +13,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.Window;
@@ -22,8 +22,8 @@ import net.wurstclient.settings.SliderSetting;
 
 public final class SliderComponent extends Component
 {
-	private final MinecraftClient MC = WurstClient.MC;
-	private final ClickGui GUI = WurstClient.INSTANCE.getGui();
+	private final MinecraftClient MC = BurstClient.MC;
+	private final ClickGui GUI = BurstClient.INSTANCE.getGui();
 	
 	private final SliderSetting setting;
 	private boolean dragging;

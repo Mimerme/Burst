@@ -18,13 +18,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hack.HackList;
 
 @Mixin(FluidBlock.class)
 public abstract class FluidBlockMixin extends Block implements FluidDrainable
 {
-	private FluidBlockMixin(WurstClient wurst, Settings block$Settings_1)
+	private FluidBlockMixin(BurstClient wurst, Settings block$Settings_1)
 	{
 		super(block$Settings_1);
 	}
@@ -34,8 +34,8 @@ public abstract class FluidBlockMixin extends Block implements FluidDrainable
 		BlockView blockView_1, BlockPos blockPos_1,
 		ShapeContext entityContext_1)
 	{
-		HackList hax = WurstClient.INSTANCE.getHax();
-		if(hax != null && hax.jesusHack.shouldBeSolid())
+		HackList hax = BurstClient.INSTANCE.getHax();
+		if(hax != null && hax.getJesusHack().shouldBeSolid())
 			return VoxelShapes.fullCube();
 		
 		return super.getCollisionShape(blockState_1, blockView_1, blockPos_1,

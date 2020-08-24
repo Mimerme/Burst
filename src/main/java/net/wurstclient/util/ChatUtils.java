@@ -11,13 +11,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public enum ChatUtils
 {
 	;
 	
-	private static final MinecraftClient MC = WurstClient.MC;
+	private static final MinecraftClient MC = BurstClient.MC;
 	
 	public static final String WURST_PREFIX =
 		"\u00a7c[\u00a76Wurst\u00a7c]\u00a7r ";

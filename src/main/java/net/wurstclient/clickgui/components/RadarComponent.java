@@ -17,7 +17,7 @@ import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.hacks.RadarHack;
@@ -37,7 +37,7 @@ public final class RadarComponent extends Component
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY,
 		float partialTicks)
 	{
-		ClickGui gui = WurstClient.INSTANCE.getGui();
+		ClickGui gui = BurstClient.INSTANCE.getGui();
 		float[] bgColor = gui.getBgColor();
 		float[] acColor = gui.getAcColor();
 		float opacity = gui.getOpacity();
@@ -71,7 +71,7 @@ public final class RadarComponent extends Component
 		
 		GL11.glPushMatrix();
 		GL11.glTranslated(middleX, middleY, 0);
-		ClientPlayerEntity player = WurstClient.MC.player;
+		ClientPlayerEntity player = BurstClient.MC.player;
 		if(!hack.isRotateEnabled())
 			GL11.glRotated(180 + player.yaw, 0, 0, 1);
 		

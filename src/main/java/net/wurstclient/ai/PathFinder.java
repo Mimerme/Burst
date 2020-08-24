@@ -17,26 +17,33 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.util.BlockUtils;
 import net.wurstclient.util.RenderUtils;
 
 public class PathFinder
 {
-	private final WurstClient wurst = WurstClient.INSTANCE;
+	private final BurstClient wurst = BurstClient.INSTANCE;
 	
 	private final boolean invulnerable =
-		WurstClient.MC.player.abilities.creativeMode;
+		BurstClient.MC.player.abilities.creativeMode;
 	private final boolean creativeFlying =
-		WurstClient.MC.player.abilities.flying;
-	protected final boolean flying =
+		BurstClient.MC.player.abilities.flying;
+/*	protected final boolean flying =
 		creativeFlying || wurst.getHax().flightHack.isEnabled();
 	private final boolean immuneToFallDamage =
 		invulnerable || wurst.getHax().noFallHack.isEnabled();
 	private final boolean noWaterSlowdown = false;
 	// TODO: wurst.getHax().noSlowdownHack.blockWaterSlowness();
 	private final boolean jesus = wurst.getHax().jesusHack.isEnabled();
-	private final boolean spider = wurst.getHax().spiderHack.isEnabled();
+	private final boolean spider = wurst.getHax().spiderHack.isEnabled();*/
+
+	//TODO: Leggacy support. remove and replace with baritone eventually
+		protected final boolean flying = false;
+	private final boolean immuneToFallDamage = true;
+	private final boolean noWaterSlowdown = false;
+	private final boolean jesus = false;
+	private final boolean spider = false;
 	protected boolean fallingAllowed = true;
 	protected boolean divingAllowed = true;
 	
@@ -58,12 +65,12 @@ public class PathFinder
 	
 	public PathFinder(BlockPos goal)
 	{
-		if(WurstClient.MC.player.isOnGround())
-			start = new PathPos(new BlockPos(WurstClient.MC.player.getX(),
-				WurstClient.MC.player.getY() + 0.5,
-				WurstClient.MC.player.getZ()));
+		if(BurstClient.MC.player.isOnGround())
+			start = new PathPos(new BlockPos(BurstClient.MC.player.getX(),
+				BurstClient.MC.player.getY() + 0.5,
+				BurstClient.MC.player.getZ()));
 		else
-			start = new PathPos(new BlockPos(WurstClient.MC.player.getPos()));
+			start = new PathPos(new BlockPos(BurstClient.MC.player.getPos()));
 		this.goal = goal;
 		
 		costMap.put(start, 0F);
@@ -248,7 +255,7 @@ public class PathFinder
 	private boolean canGoThrough(BlockPos pos)
 	{
 		// check if loaded
-		if(!WurstClient.MC.world.isChunkLoaded(pos))
+		if(!BurstClient.MC.world.isChunkLoaded(pos))
 			return false;
 		
 		// check if solid
@@ -573,8 +580,8 @@ public class PathFinder
 		if(path.isEmpty())
 			throw new IllegalStateException("Path is not formatted!");
 		
-		// check player abilities
-		if(invulnerable != WurstClient.MC.player.abilities.creativeMode
+/*		// check player abilities
+		if(invulnerable != BurstClient.MC.player.abilities.creativeMode
 			|| flying != (creativeFlying
 				|| wurst.getHax().flightHack.isEnabled())
 			|| immuneToFallDamage != (invulnerable
@@ -584,7 +591,7 @@ public class PathFinder
 			// wurst.getHax().noSlowdownHack.blockWaterSlowness()
 			|| jesus != wurst.getHax().jesusHack.isEnabled()
 			|| spider != wurst.getHax().spiderHack.isEnabled())
-			return false;
+			return false;*/
 		
 		// if index is zero, check if first pos is safe
 		if(index == 0)

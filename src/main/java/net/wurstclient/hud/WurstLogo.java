@@ -13,7 +13,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public final class WurstLogo
 {
@@ -22,19 +22,19 @@ public final class WurstLogo
 	
 	public void render(MatrixStack matrixStack)
 	{
-		if(!WurstClient.INSTANCE.getOtfs().wurstLogoOtf.isVisible())
+		if(!BurstClient.INSTANCE.getOtfs().wurstLogoOtf.isVisible())
 			return;
 		
 		String version = getVersionString();
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		
 		// draw version background
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-		if(WurstClient.INSTANCE.getHax().rainbowUiHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getRainbowUiHack().isEnabled())
 		{
-			float[] acColor = WurstClient.INSTANCE.getGui().getAcColor();
+			float[] acColor = BurstClient.INSTANCE.getGui().getAcColor();
 			GL11.glColor4f(acColor[0], acColor[1], acColor[2], 0.5F);
 			
 		}else
@@ -51,16 +51,16 @@ public final class WurstLogo
 		// draw Wurst logo
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glEnable(GL11.GL_BLEND);
-		WurstClient.MC.getTextureManager().bindTexture(texture);
+		BurstClient.MC.getTextureManager().bindTexture(texture);
 		DrawableHelper.drawTexture(matrixStack, 0, 3, 0, 0, 72, 18, 72, 18);
 	}
 	
 	private String getVersionString()
 	{
-		String version = "v" + WurstClient.VERSION;
-		version += " MC" + WurstClient.MC_VERSION;
+		String version = "v" + BurstClient.VERSION;
+		version += " MC" + BurstClient.MC_VERSION;
 		
-		if(WurstClient.INSTANCE.getUpdater().isOutdated())
+		if(BurstClient.INSTANCE.getUpdater().isOutdated())
 			version += " (outdated)";
 		
 		return version;

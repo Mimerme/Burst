@@ -15,7 +15,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.screens.EditBlockScreen;
@@ -42,10 +42,10 @@ public final class BlockComponent extends Component
 		
 		if(mouseButton == 0)
 		{
-			Screen currentScreen = WurstClient.MC.currentScreen;
+			Screen currentScreen = BurstClient.MC.currentScreen;
 			EditBlockScreen editScreen =
 				new EditBlockScreen(currentScreen, setting);
-			WurstClient.MC.openScreen(editScreen);
+			BurstClient.MC.openScreen(editScreen);
 			
 		}else if(mouseButton == 1)
 			setting.resetToDefault();
@@ -55,7 +55,7 @@ public final class BlockComponent extends Component
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY,
 		float partialTicks)
 	{
-		ClickGui gui = WurstClient.INSTANCE.getGui();
+		ClickGui gui = BurstClient.INSTANCE.getGui();
 		float[] bgColor = gui.getBgColor();
 		float opacity = gui.getOpacity();
 		
@@ -99,7 +99,7 @@ public final class BlockComponent extends Component
 		// setting name
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		String text = setting.getName() + ":";
 		fr.draw(matrixStack, text, x1, y1 + 2, 0xf0f0f0);
 		
@@ -112,7 +112,7 @@ public final class BlockComponent extends Component
 	@Override
 	public int getDefaultWidth()
 	{
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		String text = setting.getName() + ":";
 		return tr.getWidth(text) + BLOCK_WITDH + 4;
 	}
@@ -135,7 +135,7 @@ public final class BlockComponent extends Component
 		DiffuseLighting.enable();
 		ItemStack grass = new ItemStack(Blocks.GRASS_BLOCK);
 		ItemStack renderStack = !stack.isEmpty() ? stack : grass;
-		WurstClient.MC.getItemRenderer().renderInGuiWithOverrides(renderStack,
+		BurstClient.MC.getItemRenderer().renderInGuiWithOverrides(renderStack,
 			0, 0);
 		DiffuseLighting.disable();
 		
@@ -155,7 +155,7 @@ public final class BlockComponent extends Component
 			GL11.glScaled(2, 2, 2);
 		
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		tr.drawWithShadow(matrixStack, "?", 3, 2, 0xf0f0f0);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_BLEND);

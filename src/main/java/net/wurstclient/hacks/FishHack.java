@@ -28,7 +28,7 @@ public final class FishHack extends Hack implements UpdateListener
 	public void onEnable()
 	{
 		EVENTS.add(UpdateListener.class, this);
-		WURST.getHax().dolphinHack.setEnabled(false);
+		//WURST.getHax().dolphinHack.setEnabled(false);
 	}
 	
 	@Override

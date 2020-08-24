@@ -15,7 +15,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.ISignBlockEntity;
 
 @Mixin(SignBlockEntity.class)
@@ -26,7 +26,7 @@ public abstract class SignBlockEntityMixin extends BlockEntity
 	@Final
 	private Text[] text;
 	
-	public SignBlockEntityMixin(WurstClient wurst, BlockEntityType<?> type)
+	public SignBlockEntityMixin(BurstClient wurst, BlockEntityType<?> type)
 	{
 		super(type);
 	}

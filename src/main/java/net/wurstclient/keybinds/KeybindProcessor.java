@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFW;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.InputUtil;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.screens.ClickGuiScreen;
 import net.wurstclient.command.CmdProcessor;
 import net.wurstclient.events.KeyPressListener;
@@ -39,7 +39,7 @@ public final class KeybindProcessor implements KeyPressListener
 		if(event.getAction() != GLFW.GLFW_PRESS)
 			return;
 		
-		Screen screen = WurstClient.MC.currentScreen;
+		Screen screen = BurstClient.MC.currentScreen;
 		if(screen != null && !(screen instanceof ClickGuiScreen))
 			return;
 		
@@ -81,8 +81,8 @@ public final class KeybindProcessor implements KeyPressListener
 				return;
 			}
 			
-			if(!hack.isEnabled() && hax.tooManyHaxHack.isEnabled()
-				&& hax.tooManyHaxHack.isBlocked(hack))
+			if(!hack.isEnabled() && hax.getTooManyHaxHack().isEnabled()
+				&& hax.getTooManyHaxHack().isBlocked(hack))
 			{
 				ChatUtils.error(hack.getName() + " is blocked by TooManyHax.");
 				return;

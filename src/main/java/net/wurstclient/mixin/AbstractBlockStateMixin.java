@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.event.EventManager;
 import net.wurstclient.events.GetAmbientOcclusionLightLevelListener.GetAmbientOcclusionLightLevelEvent;
 import net.wurstclient.events.IsNormalCubeListener.IsNormalCubeEvent;
@@ -35,9 +35,9 @@ import net.wurstclient.hacks.HandNoClipHack;
 @Mixin(AbstractBlockState.class)
 public class AbstractBlockStateMixin extends State<Block, BlockState>
 {
-	private AbstractBlockStateMixin(WurstClient wurst, Block object,
-		ImmutableMap<Property<?>, Comparable<?>> immutableMap,
-		MapCodec<BlockState> mapCodec)
+	private AbstractBlockStateMixin(BurstClient wurst, Block object,
+                                    ImmutableMap<Property<?>, Comparable<?>> immutableMap,
+                                    MapCodec<BlockState> mapCodec)
 	{
 		super(object, immutableMap, mapCodec);
 	}
@@ -49,7 +49,7 @@ public class AbstractBlockStateMixin extends State<Block, BlockState>
 	private void onIsFullCube(BlockView world, BlockPos pos,
 		CallbackInfoReturnable<Boolean> cir)
 	{
-		EventManager eventManager = WurstClient.INSTANCE.getEventManager();
+		EventManager eventManager = BurstClient.INSTANCE.getEventManager();
 		if(eventManager == null)
 			return;
 		
@@ -70,7 +70,7 @@ public class AbstractBlockStateMixin extends State<Block, BlockState>
 			new GetAmbientOcclusionLightLevelEvent((BlockState)(Object)this,
 				cir.getReturnValueF());
 		
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		cir.setReturnValue(event.getLightLevel());
 	}
 	
@@ -81,10 +81,10 @@ public class AbstractBlockStateMixin extends State<Block, BlockState>
 	private void onGetOutlineShape(BlockView view, BlockPos pos,
 		ShapeContext context, CallbackInfoReturnable<VoxelShape> cir)
 	{
-		if(context == ShapeContext.absent())
+/*		if(context == ShapeContext.absent())
 			return;
 		
-		HackList hax = WurstClient.INSTANCE.getHax();
+		HackList hax = BurstClient.INSTANCE.getHax();
 		if(hax == null)
 			return;
 		
@@ -92,6 +92,6 @@ public class AbstractBlockStateMixin extends State<Block, BlockState>
 		if(!handNoClipHack.isEnabled() || handNoClipHack.isBlockInList(pos))
 			return;
 		
-		cir.setReturnValue(VoxelShapes.empty());
+		cir.setReturnValue(VoxelShapes.empty());*/
 	}
 }

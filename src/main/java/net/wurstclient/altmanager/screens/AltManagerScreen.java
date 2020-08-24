@@ -24,7 +24,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.MathHelper;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.altmanager.Alt;
 import net.wurstclient.altmanager.AltManager;
 import net.wurstclient.altmanager.AltRenderer;
@@ -204,7 +204,7 @@ public final class AltManagerScreen extends Screen
 		{
 			Process process = MultiProcessingUtils.startProcessWithIO(
 				ImportAltsFileChooser.class,
-				WurstClient.INSTANCE.getWurstFolder().toString());
+				BurstClient.INSTANCE.getWurstFolder().toString());
 			
 			try(BufferedReader bf = new BufferedReader(new InputStreamReader(
 				process.getInputStream(), StandardCharsets.UTF_8)))

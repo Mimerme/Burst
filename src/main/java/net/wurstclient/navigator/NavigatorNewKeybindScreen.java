@@ -16,7 +16,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.keybinds.PossibleKeybind;
 import net.wurstclient.util.RenderUtils;
 
@@ -48,17 +48,17 @@ public class NavigatorNewKeybindScreen extends NavigatorScreen
 				{
 					String newCommands = selectedCommand.getCommand();
 					
-					String oldCommands = WurstClient.INSTANCE.getKeybinds()
+					String oldCommands = BurstClient.INSTANCE.getKeybinds()
 						.getCommands(selectedKey);
 					if(oldCommands != null)
 						newCommands = oldCommands + " ; " + newCommands;
 					
-					WurstClient.INSTANCE.getKeybinds().add(selectedKey,
+					BurstClient.INSTANCE.getKeybinds().add(selectedKey,
 						newCommands);
 					
-					WurstClient.INSTANCE.getNavigator()
+					BurstClient.INSTANCE.getNavigator()
 						.addPreference(parent.getFeature().getName());
-					WurstClient.MC.openScreen(parent);
+					BurstClient.MC.openScreen(parent);
 				}else
 				{
 					choosingKey = true;
@@ -70,7 +70,7 @@ public class NavigatorNewKeybindScreen extends NavigatorScreen
 		
 		// cancel button
 		addButton(new ButtonWidget(width / 2 + 2, height - 65, 149, 18,
-			new LiteralText("Cancel"), b -> WurstClient.MC.openScreen(parent)));
+			new LiteralText("Cancel"), b -> BurstClient.MC.openScreen(parent)));
 	}
 	
 	@Override
@@ -83,7 +83,7 @@ public class NavigatorNewKeybindScreen extends NavigatorScreen
 			okButton.active = !selectedKey.equals("key.keyboard.unknown");
 			
 		}else if(keyCode == 1)
-			WurstClient.MC.openScreen(parent);
+			BurstClient.MC.openScreen(parent);
 	}
 	
 	@Override
@@ -108,7 +108,7 @@ public class NavigatorNewKeybindScreen extends NavigatorScreen
 			{
 				text += "\n\nKey: " + selectedKey.replace("key.keyboard.", "");
 				String commands =
-					WurstClient.INSTANCE.getKeybinds().getCommands(selectedKey);
+					BurstClient.INSTANCE.getKeybinds().getCommands(selectedKey);
 				if(commands != null)
 				{
 					text +=

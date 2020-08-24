@@ -145,13 +145,13 @@ public final class ProtectHack extends Hack
 	public void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().fightBotHack.setEnabled(false);
 		WURST.getHax().killauraLegitHack.setEnabled(false);
 		WURST.getHax().killauraHack.setEnabled(false);
 		WURST.getHax().multiAuraHack.setEnabled(false);
 		WURST.getHax().triggerBotHack.setEnabled(false);
-		WURST.getHax().tpAuraHack.setEnabled(false);
+		WURST.getHax().tpAuraHack.setEnabled(false);*/
 		
 		// set friend
 		if(friend == null)
@@ -325,7 +325,7 @@ public final class ProtectHack extends Hack
 			// control height if flying
 			if(!MC.player.isOnGround()
 				&& (MC.player.abilities.flying
-					|| WURST.getHax().flightHack.isEnabled())
+					|| WURST.getHax().getFlightHack().isEnabled())
 				&& MC.player.squaredDistanceTo(target.getX(), MC.player.getY(),
 					target.getZ()) <= MC.player.squaredDistanceTo(
 						MC.player.getX(), target.getY(), MC.player.getZ()))
@@ -349,14 +349,14 @@ public final class ProtectHack extends Hack
 		
 		if(target == enemy)
 		{
-			WURST.getHax().autoSwordHack.setSlot();
+			//WURST.getHax().autoSwordHack.setSlot();
 			
 			// check cooldown
 			if(MC.player.getAttackCooldownProgress(0) < 1)
 				return;
 			
 			// attack enemy
-			WURST.getHax().criticalsHack.doCritical();
+			//WURST.getHax().criticalsHack.doCritical();
 			MC.interactionManager.attackEntity(MC.player, enemy);
 			MC.player.swingHand(Hand.MAIN_HAND);
 		}

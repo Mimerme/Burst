@@ -19,7 +19,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hacks.AutoReconnectHack;
 import net.wurstclient.util.LastServerRememberer;
 
@@ -37,7 +37,7 @@ public class DisconnectedScreenMixin extends Screen
 	@Shadow
 	private int reasonHeight;
 	
-	private DisconnectedScreenMixin(WurstClient wurst, Text text_1)
+	private DisconnectedScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -45,7 +45,7 @@ public class DisconnectedScreenMixin extends Screen
 	@Inject(at = {@At("TAIL")}, method = {"init()V"})
 	private void onInit(CallbackInfo ci)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		int backButtonX = width / 2 - 100;
@@ -60,14 +60,14 @@ public class DisconnectedScreenMixin extends Screen
 			addButton(new ButtonWidget(backButtonX, backButtonY + 48, 200, 20,
 				new LiteralText("AutoReconnect"), b -> pressAutoReconnect()));
 		
-		if(WurstClient.INSTANCE.getHax().autoReconnectHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getAutoReconnectHack().isEnabled())
 			autoReconnectTimer = 100;
 	}
 	
 	private void pressAutoReconnect()
 	{
 		AutoReconnectHack autoReconnect =
-			WurstClient.INSTANCE.getHax().autoReconnectHack;
+			BurstClient.INSTANCE.getHax().getAutoReconnectHack();
 		
 		autoReconnect.setEnabled(!autoReconnect.isEnabled());
 		
@@ -79,7 +79,7 @@ public class DisconnectedScreenMixin extends Screen
 	public void tick()
 	{
 		AutoReconnectHack autoReconnect =
-			WurstClient.INSTANCE.getHax().autoReconnectHack;
+			BurstClient.INSTANCE.getHax().getAutoReconnectHack();
 		
 		if(!autoReconnect.isEnabled())
 		{

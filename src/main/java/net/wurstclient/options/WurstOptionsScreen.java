@@ -20,7 +20,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.minecraft.util.Util.OperatingSystem;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.analytics.WurstAnalytics;
 import net.wurstclient.commands.FriendsCmd;
 import net.wurstclient.hacks.XRayHack;
@@ -49,9 +49,9 @@ public class WurstOptionsScreen extends Screen
 	
 	private void addSettingButtons()
 	{
-		FriendsCmd friendsCmd = WurstClient.INSTANCE.getCmds().friendsCmd;
+		FriendsCmd friendsCmd = BurstClient.INSTANCE.getCmds().friendsCmd;
 		CheckboxSetting middleClickFriends = friendsCmd.getMiddleClickFriends();
-		WurstAnalytics analytics = WurstClient.INSTANCE.getAnalytics();
+		WurstAnalytics analytics = BurstClient.INSTANCE.getAnalytics();
 		
 		new WurstOptionsButton(-154, 24,
 			() -> "Click Friends: "
@@ -68,7 +68,7 @@ public class WurstOptionsScreen extends Screen
 	
 	private void addManagerButtons()
 	{
-		XRayHack xRayHack = WurstClient.INSTANCE.getHax().xRayHack;
+		XRayHack xRayHack = BurstClient.INSTANCE.getHax().getXRayHack();
 		
 		new WurstOptionsButton(-50, 24, () -> "Keybinds",
 			"Keybinds allow you to toggle any hack\n"

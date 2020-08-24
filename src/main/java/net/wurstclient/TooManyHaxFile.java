@@ -68,7 +68,7 @@ public final class TooManyHaxFile
 		
 		for(String name : wson.getAllStrings())
 		{
-			Feature feature = WurstClient.INSTANCE.getFeatureByName(name);
+			Feature feature = BurstClient.INSTANCE.getFeatureByName(name);
 			
 			if(feature != null && feature.isSafeToBlock())
 				blockedFeatures.add(feature);

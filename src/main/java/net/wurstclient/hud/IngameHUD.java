@@ -10,7 +10,7 @@ package net.wurstclient.hud;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.screens.ClickGuiScreen;
 import net.wurstclient.events.GUIRenderListener;
@@ -24,14 +24,14 @@ public final class IngameHUD implements GUIRenderListener
 	@Override
 	public void onRenderGUI(MatrixStack matrixStack, float partialTicks)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		if(tabGui == null)
 			tabGui = new TabGui();
 		
 		boolean blend = GL11.glGetBoolean(GL11.GL_BLEND);
-		ClickGui clickGui = WurstClient.INSTANCE.getGui();
+		ClickGui clickGui = BurstClient.INSTANCE.getGui();
 		
 		// GL settings
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -44,7 +44,7 @@ public final class IngameHUD implements GUIRenderListener
 		tabGui.render(matrixStack, partialTicks);
 		
 		// pinned windows
-		if(!(WurstClient.MC.currentScreen instanceof ClickGuiScreen))
+		if(!(BurstClient.MC.currentScreen instanceof ClickGuiScreen))
 			clickGui.renderPinnedWindows(matrixStack, partialTicks);
 		
 		// GL resets

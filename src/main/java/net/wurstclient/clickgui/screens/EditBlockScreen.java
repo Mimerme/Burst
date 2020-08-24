@@ -20,7 +20,7 @@ import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.settings.BlockSetting;
 import net.wurstclient.util.BlockUtils;
 
@@ -161,7 +161,7 @@ public final class EditBlockScreen extends Screen
 		DiffuseLighting.enable();
 		ItemStack grass = new ItemStack(Blocks.GRASS_BLOCK);
 		ItemStack renderStack = !stack.isEmpty() ? stack : grass;
-		WurstClient.MC.getItemRenderer().renderInGuiWithOverrides(renderStack,
+		BurstClient.MC.getItemRenderer().renderInGuiWithOverrides(renderStack,
 			0, 0);
 		DiffuseLighting.disable();
 		
@@ -181,7 +181,7 @@ public final class EditBlockScreen extends Screen
 			GL11.glScaled(2, 2, 2);
 		
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		tr.drawWithShadow(matrixStack, "?", 3, 2, 0xf0f0f0);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		

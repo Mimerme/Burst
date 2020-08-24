@@ -26,7 +26,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.snooper.SnooperListener;
 import net.minecraft.util.thread.ReentrantThreadExecutor;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.LeftClickListener.LeftClickEvent;
 import net.wurstclient.events.RightClickListener.RightClickEvent;
 import net.wurstclient.mixinterface.IClientPlayerEntity;
@@ -49,7 +49,7 @@ public abstract class MinecraftClientMixin
 	
 	private Session wurstSession;
 	
-	private MinecraftClientMixin(WurstClient wurst, String string_1)
+	private MinecraftClientMixin(BurstClient wurst, String string_1)
 	{
 		super(string_1);
 	}
@@ -60,7 +60,7 @@ public abstract class MinecraftClientMixin
 	private void onDoAttack(CallbackInfo ci)
 	{
 		LeftClickEvent event = new LeftClickEvent();
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		
 		if(event.isCancelled())
 			ci.cancel();
@@ -72,7 +72,7 @@ public abstract class MinecraftClientMixin
 	private void onDoItemUse(CallbackInfo ci)
 	{
 		RightClickEvent event = new RightClickEvent();
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		
 		if(event.isCancelled())
 			ci.cancel();
@@ -81,15 +81,15 @@ public abstract class MinecraftClientMixin
 	@Inject(at = {@At("HEAD")}, method = {"doItemPick()V"})
 	private void onDoItemPick(CallbackInfo ci)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
-		HitResult hitResult = WurstClient.MC.crosshairTarget;
+		HitResult hitResult = BurstClient.MC.crosshairTarget;
 		if(hitResult == null || hitResult.getType() != HitResult.Type.ENTITY)
 			return;
 		
 		Entity entity = ((EntityHitResult)hitResult).getEntity();
-		WurstClient.INSTANCE.getFriends().middleClick(entity);
+		BurstClient.INSTANCE.getFriends().middleClick(entity);
 	}
 	
 	@Inject(at = {@At("HEAD")},

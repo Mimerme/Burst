@@ -130,13 +130,13 @@ public final class KillauraLegitHack extends Hack
 	protected void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().fightBotHack.setEnabled(false);
 		WURST.getHax().killauraHack.setEnabled(false);
 		WURST.getHax().multiAuraHack.setEnabled(false);
 		WURST.getHax().protectHack.setEnabled(false);
 		WURST.getHax().triggerBotHack.setEnabled(false);
-		WURST.getHax().tpAuraHack.setEnabled(false);
+		WURST.getHax().tpAuraHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 		EVENTS.add(RenderListener.class, this);
@@ -228,14 +228,14 @@ public final class KillauraLegitHack extends Hack
 		if(target == null)
 			return;
 		
-		WURST.getHax().autoSwordHack.setSlot();
+		//WURST.getHax().autoSwordHack.setSlot();
 		
 		// face entity
 		if(!faceEntityClient(target))
 			return;
 		
 		// attack entity
-		WURST.getHax().criticalsHack.doCritical();
+		//WURST.getHax().criticalsHack.doCritical();
 		MC.interactionManager.attackEntity(player, target);
 		player.swingHand(Hand.MAIN_HAND);
 	}

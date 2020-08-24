@@ -21,7 +21,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.SynchronousResourceReloadListener;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.CameraTransformViewBobbingListener.CameraTransformViewBobbingEvent;
 import net.wurstclient.events.HitResultRayTraceListener.HitResultRayTraceEvent;
 import net.wurstclient.events.RenderListener.RenderEvent;
@@ -41,7 +41,7 @@ public abstract class GameRendererMixin
 	{
 		CameraTransformViewBobbingEvent event =
 			new CameraTransformViewBobbingEvent();
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		
 		if(event.isCancelled())
 			return;
@@ -60,7 +60,7 @@ public abstract class GameRendererMixin
 		MatrixStack matrixStack, CallbackInfo ci)
 	{
 		RenderEvent event = new RenderEvent(partialTicks);
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 	}
 	
 	@Redirect(
@@ -71,7 +71,7 @@ public abstract class GameRendererMixin
 		method = {"getFov(Lnet/minecraft/client/render/Camera;FZ)D"})
 	private double getFov(GameOptions options)
 	{
-		return WurstClient.INSTANCE.getOtfs().zoomOtf
+		return BurstClient.INSTANCE.getOtfs().zoomOtf
 			.changeFovBasedOnZoom(options.fov);
 	}
 	
@@ -82,7 +82,7 @@ public abstract class GameRendererMixin
 	private void onHitResultRayTrace(float float_1, CallbackInfo ci)
 	{
 		HitResultRayTraceEvent event = new HitResultRayTraceEvent(float_1);
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 	}
 	
 	@Redirect(
@@ -93,8 +93,8 @@ public abstract class GameRendererMixin
 			"renderWorld(FJLnet/minecraft/client/util/math/MatrixStack;)V"})
 	private float wurstNauseaLerp(float delta, float first, float second)
 	{
-		if(!WurstClient.INSTANCE.getHax().antiWobbleHack.isEnabled())
-			return MathHelper.lerp(delta, first, second);
+/*		if(!BurstClient.INSTANCE.getHax().antiWobbleHack.isEnabled())
+			return MathHelper.lerp(delta, first, second);*/
 		
 		return 0;
 	}
@@ -106,8 +106,8 @@ public abstract class GameRendererMixin
 	private void onBobViewWhenHurt(MatrixStack matrixStack, float f,
 		CallbackInfo ci)
 	{
-		if(WurstClient.INSTANCE.getHax().noHurtcamHack.isEnabled())
-			ci.cancel();
+/*		if(BurstClient.INSTANCE.getHax().noHurtcamHack.isEnabled())
+			ci.cancel();*/
 	}
 	
 	@Shadow

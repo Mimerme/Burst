@@ -13,9 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import net.wurstclient.hacks.RainbowUiHack;
 import org.lwjgl.glfw.GLFW;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -49,7 +51,7 @@ import net.wurstclient.settings.SettingsFile;
 import net.wurstclient.update.WurstUpdater;
 import net.wurstclient.util.json.JsonException;
 
-public enum WurstClient
+public enum BurstClient
 {
 	INSTANCE;
 	
@@ -81,7 +83,9 @@ public enum WurstClient
 	private Path wurstFolder;
 	
 	private KeyBinding zoomKey;
-	
+
+
+
 	public void initialize()
 	{
 		System.out.println("Starting Wurst Client...");
@@ -106,7 +110,7 @@ public enum WurstClient
 		settingsProfileFolder = wurstFolder.resolve("settings");
 		this.settingsFile = new SettingsFile(settingsFile, hax, cmds, otfs);
 		this.settingsFile.load();
-		hax.tooManyHaxHack.loadBlockedHacksFile();
+		hax.getTooManyHaxHack().loadBlockedHacksFile();
 		
 		Path keybindsFile = wurstFolder.resolve("keybinds.json");
 		keybinds = new KeybindList(keybindsFile);
@@ -327,8 +331,8 @@ public enum WurstClient
 		
 		if(!enabled)
 		{
-			hax.panicHack.setEnabled(true);
-			hax.panicHack.onUpdate();
+			hax.getPanicHack().setEnabled(true);
+			hax.getPanicHack().onUpdate();
 		}
 	}
 	
@@ -351,4 +355,5 @@ public enum WurstClient
 	{
 		return altManager;
 	}
+
 }

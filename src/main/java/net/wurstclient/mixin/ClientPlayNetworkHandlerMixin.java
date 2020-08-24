@@ -19,7 +19,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.*;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.PacketOutputListener.PacketOutputEvent;
 
 @Mixin(ClientPlayNetworkHandler.class)
@@ -31,7 +31,7 @@ public class ClientPlayNetworkHandlerMixin implements ClientPlayPacketListener
 	private void onSendPacket(Packet<?> packet, CallbackInfo ci)
 	{
 		PacketOutputEvent event = new PacketOutputEvent(packet);
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		
 		if(event.isCancelled())
 			ci.cancel();

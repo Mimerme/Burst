@@ -105,11 +105,11 @@ public final class TunnellerHack extends Hack
 	@Override
 	public void onEnable()
 	{
-		WURST.getHax().autoMineHack.setEnabled(false);
+/*		WURST.getHax().autoMineHack.setEnabled(false);
 		WURST.getHax().excavatorHack.setEnabled(false);
 		WURST.getHax().nukerHack.setEnabled(false);
 		WURST.getHax().nukerLegitHack.setEnabled(false);
-		WURST.getHax().speedNukerHack.setEnabled(false);
+		WURST.getHax().speedNukerHack.setEnabled(false);*/
 		
 		// add listeners
 		EVENTS.add(UpdateListener.class, this);
@@ -151,7 +151,7 @@ public final class TunnellerHack extends Hack
 	public void onUpdate()
 	{
 		HackList hax = WURST.getHax();
-		Hack[] incompatibleHax = {hax.autoToolHack, hax.autoWalkHack,
+/*		Hack[] incompatibleHax = {hax.autoToolHack, hax.autoWalkHack,
 			hax.blinkHack, hax.flightHack, hax.nukerHack,
 			// TODO:
 			// hax.nukerLegitHack,
@@ -161,7 +161,7 @@ public final class TunnellerHack extends Hack
 			hack.setEnabled(false);
 		
 		if(hax.freecamHack.isEnabled())
-			return;
+			return;*/
 		
 		GameOptions gs = MC.options;
 		KeyBinding[] bindings = {gs.keyForward, gs.keyBack, gs.keyLeft,
@@ -340,8 +340,8 @@ public final class TunnellerHack extends Hack
 				return;
 			}
 			
-			WURST.getHax().autoToolHack.equipBestTool(currentBlock, false, true,
-				false);
+/*			WURST.getHax().autoToolHack.equipBestTool(currentBlock, false, true,
+				false);*/
 			breakBlockSimple(currentBlock);
 			
 			if(MC.player.abilities.creativeMode
@@ -445,8 +445,8 @@ public final class TunnellerHack extends Hack
 				placeBlockSimple(pos);
 			else
 			{
-				WURST.getHax().autoToolHack.equipBestTool(pos, false, true,
-					false);
+/*				WURST.getHax().autoToolHack.equipBestTool(pos, false, true,
+					false);*/
 				breakBlockSimple(pos);
 			}
 		}

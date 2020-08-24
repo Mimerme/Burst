@@ -10,7 +10,7 @@ package net.wurstclient.clickgui;
 import java.util.ArrayList;
 
 import net.minecraft.client.font.TextRenderer;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public class Window
 {
@@ -115,7 +115,7 @@ public class Window
 				maxChildWidth = c.getDefaultWidth();
 		maxChildWidth += 4;
 		
-		TextRenderer tr = WurstClient.MC.textRenderer;
+		TextRenderer tr = BurstClient.MC.textRenderer;
 		int titleBarWidth = tr.getWidth(title) + 4;
 		if(minimizable)
 			titleBarWidth += 11;

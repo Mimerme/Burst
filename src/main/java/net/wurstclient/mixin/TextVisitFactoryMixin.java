@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import net.minecraft.client.font.TextVisitFactory;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(TextVisitFactory.class)
 public abstract class TextVisitFactoryMixin
@@ -25,6 +25,7 @@ public abstract class TextVisitFactoryMixin
 		index = 0)
 	private static String adjustText(String text)
 	{
-		return WurstClient.INSTANCE.getHax().nameProtectHack.protect(text);
+/*		return BurstClient.INSTANCE.getHax().nameProtectHack.protect(text);*/
+		return text;
 	}
 }
