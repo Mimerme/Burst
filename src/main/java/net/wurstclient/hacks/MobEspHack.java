@@ -17,7 +17,6 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.CameraTransformViewBobbingListener;
 import net.wurstclient.events.RenderListener;
@@ -51,7 +50,7 @@ public final class MobEspHack extends Hack implements UpdateListener,
 	public MobEspHack()
 	{
 		super("MobESP", "Highlights nearby mobs.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(style);
 		addSetting(boxSize);
 		addSetting(filterInvisible);

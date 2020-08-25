@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.client.options.KeyBinding;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -28,7 +27,7 @@ public final class MileyCyrusHack extends Hack implements UpdateListener
 	public MileyCyrusHack()
 	{
 		super("MileyCyrus", "Makes you twerk.");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 		addSetting(twerkSpeed);
 	}
 	

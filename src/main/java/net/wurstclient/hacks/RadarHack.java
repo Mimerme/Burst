@@ -22,7 +22,6 @@ import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.clickgui.Window;
 import net.wurstclient.clickgui.components.RadarComponent;
@@ -64,7 +63,7 @@ public final class RadarHack extends Hack implements UpdateListener
 				+ "\u00a7agreen\u00a7r - animals\n"
 				+ "\u00a77gray\u00a7r - others\n");
 		
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(radius);
 		addSetting(rotate);
 		addSetting(filterPlayers);

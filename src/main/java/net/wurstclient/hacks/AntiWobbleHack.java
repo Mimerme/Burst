@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -19,6 +18,6 @@ public final class AntiWobbleHack extends Hack
 	{
 		super("AntiWobble",
 			"Disables the wobble effect caused\n" + "by nausea and portals.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

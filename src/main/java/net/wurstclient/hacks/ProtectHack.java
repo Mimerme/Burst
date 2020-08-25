@@ -31,7 +31,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.ai.PathFinder;
 import net.wurstclient.ai.PathPos;
 import net.wurstclient.ai.PathProcessor;
@@ -114,7 +113,7 @@ public final class ProtectHack extends Hack
 			"A bot that follows the closest entity and protects it from other entities.\n"
 				+ "Use .protect to protect a specific entity instead of the closest one.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(useAi);
 		
 		addSetting(filterPlayers);

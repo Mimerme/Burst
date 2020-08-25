@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -21,6 +20,6 @@ public final class InfiniChatHack extends Hack
 			+ "\u00a76\u00a7lNOTICE:\u00a7r Not recommended for talking to people.\n"
 			+ "Most servers will cut messages to 256\n"
 			+ "characters on their end.");
-		setCategory(Category.CHAT);
+		setCategory("Chat");
 	}
 }

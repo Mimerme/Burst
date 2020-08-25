@@ -17,7 +17,6 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.StringRenderable;
 import net.minecraft.text.StringRenderable.Visitor;
 import net.minecraft.util.math.MathHelper;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.ChatInputListener;
 import net.wurstclient.hack.Hack;
@@ -30,7 +29,7 @@ public final class AntiSpamHack extends Hack implements ChatInputListener
 	{
 		super("AntiSpam",
 			"Blocks chat spam by adding a counter to repeated\n" + "messages.");
-		setCategory(Category.CHAT);
+		setCategory("Chat");
 	}
 	
 	@Override

@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RayTraceContext;
-import net.wurstclient.Category;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.RightClickListener;
 import net.wurstclient.events.UpdateListener;
@@ -82,7 +81,7 @@ public final class AutoBuildHack extends Hack
 	{
 		super("AutoBuild", "Builds things automatically.\n"
 			+ "Place a single block to start building.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(templateSetting);
 		addSetting(range);
 		addSetting(checkLOS);

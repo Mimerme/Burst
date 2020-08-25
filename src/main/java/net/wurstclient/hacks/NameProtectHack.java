@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -19,7 +18,7 @@ public final class NameProtectHack extends Hack
 	public NameProtectHack()
 	{
 		super("NameProtect", "Hides all player names.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 	
 	public String protect(String string)

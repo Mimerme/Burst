@@ -35,7 +35,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.RayTraceContext;
-import net.wurstclient.Category;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.DontSaveState;
@@ -87,7 +86,7 @@ public final class TunnellerHack extends Hack
 			+ "that it won't die. Only send it out with gear\n"
 			+ "that you don't mind losing.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(size);
 		addSetting(limit);
 		addSetting(torches);

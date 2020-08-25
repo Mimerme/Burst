@@ -29,7 +29,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -88,7 +87,7 @@ public final class TriggerBotHack extends Hack implements UpdateListener
 	{
 		super("TriggerBot",
 			"Automatically attacks the entity you're looking at.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(filterPlayers);
 		addSetting(filterSleeping);

@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.util.ChatUtils;
@@ -30,7 +29,7 @@ public final class CrashChestHack extends Hack
 			+ "who opens the chest will be kicked from the\n"
 			+ "server (just once).");
 		
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 	}
 	
 	@Override

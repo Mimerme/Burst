@@ -12,7 +12,6 @@ import java.util.Arrays;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -26,7 +25,7 @@ public final class AutoMineHack extends Hack implements UpdateListener
 	public AutoMineHack()
 	{
 		super("AutoMine", "Automatically mines any block that you look at.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override

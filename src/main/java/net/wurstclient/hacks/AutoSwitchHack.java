@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.entity.player.PlayerInventory;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -22,7 +21,7 @@ public final class AutoSwitchHack extends Hack implements UpdateListener
 			+ "\u00a7lProTip:\u00a7r Use this in combination with BuildRandom while\n"
 			+ "having a lot of different colored wool or concrete\n"
 			+ "blocks in your hotbar.");
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 	}
 	
 	@Override

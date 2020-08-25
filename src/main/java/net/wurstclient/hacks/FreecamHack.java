@@ -15,7 +15,6 @@ import net.minecraft.client.options.KeyBinding;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.*;
 import net.wurstclient.hack.DontSaveState;
@@ -48,7 +47,7 @@ public final class FreecamHack extends Hack
 	{
 		super("Freecam",
 			"Allows you to move the camera without moving your character.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(speed);
 		addSetting(tracer);
 	}

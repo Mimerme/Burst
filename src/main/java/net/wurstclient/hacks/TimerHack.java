@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.SliderSetting;
 import net.wurstclient.settings.SliderSetting.ValueDisplay;
@@ -20,7 +19,7 @@ public final class TimerHack extends Hack
 	public TimerHack()
 	{
 		super("Timer", "Changes the speed of almost everything.");
-		setCategory(Category.OTHER);
+		setCategory("Other");
 		addSetting(speed);
 	}
 	

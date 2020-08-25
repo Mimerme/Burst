@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.IsNormalCubeListener;
 import net.wurstclient.events.PlayerMoveListener;
@@ -26,7 +25,7 @@ public final class NoClipHack extends Hack implements UpdateListener,
 		super("NoClip", "Allows you to freely move through blocks.\n"
 			+ "A block (e.g. sand) must fall on your head to activate it.\n\n"
 			+ "\u00a7c\u00a7lWARNING:\u00a7r You will take damage while moving through blocks!");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

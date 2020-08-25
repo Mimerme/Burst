@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.DontBlock;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
@@ -21,7 +20,7 @@ public final class PanicHack extends Hack implements UpdateListener
 	{
 		super("Panic", "Instantly turns off all enabled hacks.\n"
 			+ "Be careful with this one!");
-		setCategory(Category.OTHER);
+		setCategory("Other");
 	}
 	
 	@Override

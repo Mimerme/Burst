@@ -29,7 +29,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketOutputListener;
 import net.wurstclient.events.UpdateListener;
@@ -101,7 +100,7 @@ public final class RemoteViewHack extends Hack
 	{
 		super("RemoteView", "Allows you to see the world as someone else.\n"
 			+ "Use the .rv command to make it target a specific entity.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		
 		addSetting(filterPlayers);
 		addSetting(filterSleeping);

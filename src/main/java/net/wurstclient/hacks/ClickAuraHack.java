@@ -31,7 +31,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.LeftClickListener;
 import net.wurstclient.events.UpdateListener;
@@ -107,7 +106,7 @@ public final class ClickAuraHack extends Hack
 			+ "than Killauras and are easier for plugins to detect.\n"
 			+ "It is recommended to use Killaura or TriggerBot instead.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(priority);
 		addSetting(filterPlayers);

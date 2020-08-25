@@ -14,7 +14,6 @@ import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -50,7 +49,7 @@ public final class AutoSwordHack extends Hack implements UpdateListener
 			"Automatically uses the best weapon in your hotbar to attack entities.\n"
 				+ "Tip: This works with Killaura.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		
 		addSetting(priority);
 		addSetting(switchBack);

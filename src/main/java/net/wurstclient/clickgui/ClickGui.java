@@ -28,7 +28,6 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.Category;
 import net.wurstclient.Feature;
 import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.components.FeatureButton;
@@ -62,18 +61,24 @@ public final class ClickGui
 	{
 		updateColors();
 		
-		LinkedHashMap<Category, Window> windowMap = new LinkedHashMap<>();
-		for(Category category : Category.values())
-			windowMap.put(category, new Window(category.getName()));
+		LinkedHashMap<String, Window> windowMap = new LinkedHashMap<>();
 		
 		ArrayList<Feature> features = new ArrayList<>();
 		features.addAll(WURST.getHax().getAllHax());
 		features.addAll(WURST.getCmds().getAllCmds());
 		features.addAll(WURST.getOtfs().getAllOtfs());
 		
-		for(Feature f : features)
-			if(f.getCategory() != null)
+		for(Feature f : features) {
+			String category = f.getCategory();
+			if (category != null) {
+				//Initialize click gui windows here
+				//Since the Category enum was removed initialize the windows based on the initialized hax
+				if (!windowMap.containsKey(category))
+					windowMap.put(category, new Window(category));
+
 				windowMap.get(f.getCategory()).add(new FeatureButton(f));
+			}
+		}
 			
 		windows.addAll(windowMap.values());
 		

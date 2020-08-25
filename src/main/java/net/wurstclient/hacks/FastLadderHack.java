@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -20,7 +19,7 @@ public final class FastLadderHack extends Hack implements UpdateListener
 	public FastLadderHack()
 	{
 		super("FastLadder", "Allows you to climb up ladders faster.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

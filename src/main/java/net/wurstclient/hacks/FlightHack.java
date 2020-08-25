@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.IsPlayerInWaterListener;
 import net.wurstclient.events.UpdateListener;
@@ -29,7 +28,7 @@ public final class FlightHack extends Hack
 		super("Flight",
 			"Allows you to you fly.\n\n" + "\u00a7c\u00a7lWARNING:\u00a7r"
 				+ " You will take fall damage if you don't use NoFall.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(speed);
 	}
 	

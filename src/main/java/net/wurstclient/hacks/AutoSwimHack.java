@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -19,7 +18,7 @@ public final class AutoSwimHack extends Hack implements UpdateListener
 	public AutoSwimHack()
 	{
 		super("AutoSwim", "Triggers the swimming animation automatically.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

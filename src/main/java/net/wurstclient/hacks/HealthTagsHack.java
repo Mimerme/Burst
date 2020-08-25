@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.entity.LivingEntity;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -18,7 +17,7 @@ public final class HealthTagsHack extends Hack
 	public HealthTagsHack()
 	{
 		super("HealthTags", "Shows the health of players in their nametags.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 	
 	public String addHealth(LivingEntity entity, String nametag)

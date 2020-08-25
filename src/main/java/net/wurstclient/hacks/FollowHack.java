@@ -31,7 +31,6 @@ import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.ai.PathFinder;
 import net.wurstclient.ai.PathPos;
 import net.wurstclient.ai.PathProcessor;
@@ -117,7 +116,7 @@ public final class FollowHack extends Hack
 			"A bot that follows the closest entity.\n" + "Very annoying.\n\n"
 				+ "Use .follow to follow a specific entity.");
 		
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(distance);
 		addSetting(useAi);
 		

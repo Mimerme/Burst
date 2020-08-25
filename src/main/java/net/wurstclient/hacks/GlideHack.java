@@ -16,7 +16,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.SliderSetting;
@@ -42,7 +41,7 @@ public final class GlideHack extends Hack implements UpdateListener
 		super("Glide", "Makes you glide down slowly when falling.\n\n"
 			+ "\u00a7c\u00a7lWARNING:\u00a7r You will take fall damage if you don't use NoFall.");
 		
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(fallSpeed);
 		addSetting(moveSpeed);
 		addSetting(minHeight);

@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.text.Text;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.DontSaveState;
 import net.wurstclient.hack.Hack;
@@ -25,7 +24,7 @@ public final class AutoSignHack extends Hack
 			"Instantly writes whatever text you want on every sign\n"
 				+ "you place. Once activated, you can write normally on\n"
 				+ "the first sign to specify the text for all other signs.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override

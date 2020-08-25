@@ -33,7 +33,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.events.PostMotionListener;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -122,7 +121,7 @@ public final class KillauraHack extends Hack
 	public KillauraHack()
 	{
 		super("Killaura", "Automatically attacks entities around you.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(priority);
 		addSetting(filterPlayers);

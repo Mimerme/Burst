@@ -13,7 +13,6 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.wurstclient.Category;
 import net.wurstclient.command.CmdException;
 import net.wurstclient.command.CmdSyntaxError;
 import net.wurstclient.command.Command;
@@ -36,7 +35,7 @@ public final class TacoCmd extends Command
 	{
 		super("taco", "Spawns a dancing taco on your hotbar.\n"
 			+ "\"I love that little guy. So cute!\" -WiZARD");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 	}
 	
 	@Override

@@ -31,7 +31,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -68,7 +67,7 @@ public final class AutoFarmHack extends Hack
 				+ "Works with wheat, carrots, potatoes, beetroots,\n"
 				+ "pumpkins, melons, cacti, sugar canes, kelp and\n"
 				+ "nether warts.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(range);
 	}
 	

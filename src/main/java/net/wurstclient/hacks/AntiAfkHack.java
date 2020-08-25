@@ -12,7 +12,6 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.ai.PathFinder;
 import net.wurstclient.ai.PathPos;
@@ -47,7 +46,7 @@ public final class AntiAfkHack extends Hack
 			"Walks around randomly to hide you from AFK detectors.\n"
 				+ "Needs at least 3x3 blocks of free space.");
 		
-		setCategory(Category.OTHER);
+		setCategory("Other");
 		addSetting(useAi);
 	}
 	

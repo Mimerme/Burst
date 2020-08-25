@@ -31,7 +31,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.ai.PathFinder;
 import net.wurstclient.ai.PathPos;
@@ -118,7 +117,7 @@ public final class FightBotHack extends Hack
 			"A bot that automatically walks around and kills everything.\n"
 				+ "Good for MobArena.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(distance);
 		addSetting(useAi);

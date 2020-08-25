@@ -20,7 +20,6 @@ import net.minecraft.block.Material;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.LeftClickListener;
 import net.wurstclient.events.UpdateListener;
@@ -75,7 +74,7 @@ public final class SpeedNukerHack extends Hack
 		super("SpeedNuker",
 			"Faster version of Nuker that cannot bypass NoCheat+.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(range);
 		addSetting(mode);
 		addSetting(id);

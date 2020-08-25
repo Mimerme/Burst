@@ -10,12 +10,12 @@ package net.wurstclient.hud;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import net.wurstclient.clickgui.components.FeatureButton;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.Category;
 import net.wurstclient.Feature;
 import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
@@ -40,18 +40,26 @@ public final class TabGui implements KeyPressListener
 		BurstClient.INSTANCE.getEventManager().add(KeyPressListener.class,
 			this);
 		
-		LinkedHashMap<Category, Tab> tabMap = new LinkedHashMap<>();
-		for(Category category : Category.values())
-			tabMap.put(category, new Tab(category.getName()));
+		LinkedHashMap<String, Tab> tabMap = new LinkedHashMap<>();
+
 		
 		ArrayList<Feature> features = new ArrayList<>();
 		features.addAll(BurstClient.INSTANCE.getHax().getAllHax());
 		features.addAll(BurstClient.INSTANCE.getCmds().getAllCmds());
 		features.addAll(BurstClient.INSTANCE.getOtfs().getAllOtfs());
-		
-		for(Feature feature : features)
-			if(feature.getCategory() != null)
-				tabMap.get(feature.getCategory()).add(feature);
+
+		//Changed from Wurst, similar to ClickGUI
+		for(Feature f : features) {
+			String category = f.getCategory();
+			if (category != null) {
+				//Initialize tab gui windows here
+				//Since the Category enum was removed initialize the windows based on the initialized hax
+				if (!tabMap.containsKey(category))
+					tabMap.put(category, new Tab(category));
+
+				tabMap.get(f.getCategory()).add(f);
+			}
+		}
 			
 		tabs.addAll(tabMap.values());
 		tabs.forEach(tab -> tab.updateSize());

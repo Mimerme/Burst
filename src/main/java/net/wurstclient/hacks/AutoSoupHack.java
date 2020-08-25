@@ -20,7 +20,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -44,7 +43,7 @@ public final class AutoSoupHack extends Hack implements UpdateListener
 			+ "soup directly refills your health. If the server you are\n"
 			+ "playing on is not configured to do that, use AutoEat instead.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(health);
 	}
 	

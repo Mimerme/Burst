@@ -9,7 +9,6 @@ import net.minecraft.item.*;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RayTraceContext;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.hack.Hack;
@@ -24,7 +23,7 @@ public final class TrajectoriesHack extends Hack implements RenderListener
 	{
 		super("Trajectories",
 			"Predicts the flight path of arrows and throwable items.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 	
 	@Override

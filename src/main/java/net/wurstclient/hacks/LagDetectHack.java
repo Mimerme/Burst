@@ -2,7 +2,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.client.toast.TutorialToast;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.Category;
 import net.wurstclient.events.PacketInputListener;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -19,7 +18,7 @@ public class LagDetectHack extends Hack implements PacketInputListener, UpdateLi
 
     public LagDetectHack() {
         super("LagDetect", "Notifies you when you're lagging");
-        setCategory(Category.OTHER);
+        setCategory("Other");
 
         addSetting(timeoutThresh);
     }

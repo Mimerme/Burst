@@ -15,7 +15,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.EnumSetting;
@@ -37,7 +36,7 @@ public final class StepHack extends Hack implements UpdateListener
 	public StepHack()
 	{
 		super("Step", "Allows you to step up full blocks.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(mode);
 		addSetting(height);
 	}

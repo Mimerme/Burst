@@ -42,7 +42,7 @@ public abstract class Feature
 	
 	public abstract String getDescription();
 	
-	public Category getCategory()
+	public String getCategory()
 	{
 		return null;
 	}

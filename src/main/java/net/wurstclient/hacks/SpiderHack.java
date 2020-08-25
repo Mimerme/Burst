@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 
@@ -18,7 +17,7 @@ public final class SpiderHack extends Hack implements UpdateListener
 	public SpiderHack()
 	{
 		super("Spider", "Allows you to climb up walls like a spider.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

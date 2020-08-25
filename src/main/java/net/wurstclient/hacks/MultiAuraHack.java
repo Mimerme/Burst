@@ -32,7 +32,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.BurstClient;
 import net.wurstclient.events.UpdateListener;
@@ -106,7 +105,7 @@ public final class MultiAuraHack extends Hack implements UpdateListener
 	{
 		super("MultiAura",
 			"Faster Killaura that attacks multiple entities at once.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		
 		addSetting(useCooldown);
 		addSetting(speed);

@@ -35,7 +35,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -108,7 +107,7 @@ public final class KillauraLegitHack extends Hack
 	{
 		super("KillauraLegit", "Slower Killaura that is harder to detect.\n"
 			+ "Not required on normal NoCheat+ servers!");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(priority);
 		addSetting(filterPlayers);

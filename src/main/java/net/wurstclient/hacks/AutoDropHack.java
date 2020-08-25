@@ -12,7 +12,6 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.registry.Registry;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -38,7 +37,7 @@ public final class AutoDropHack extends Hack implements UpdateListener
 	public AutoDropHack()
 	{
 		super("AutoDrop", "Automatically drops unwanted items.");
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 		addSetting(items);
 	}
 	

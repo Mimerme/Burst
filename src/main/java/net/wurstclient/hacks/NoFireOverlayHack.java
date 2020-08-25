@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -21,6 +20,6 @@ public final class NoFireOverlayHack extends Hack
 				+ "\u00a7c\u00a7lWARNING:\u00a7r This can cause you to burn\n"
 				+ "to death without noticing.");
 		
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

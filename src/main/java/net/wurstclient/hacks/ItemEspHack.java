@@ -15,7 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.CameraTransformViewBobbingListener;
 import net.wurstclient.events.RenderListener;
@@ -52,7 +51,7 @@ public final class ItemEspHack extends Hack implements UpdateListener,
 	public ItemEspHack()
 	{
 		super("ItemESP", "Highlights nearby items.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		
 		addSetting(names);
 		addSetting(style);

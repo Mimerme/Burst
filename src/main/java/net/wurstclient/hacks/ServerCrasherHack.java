@@ -16,7 +16,6 @@ import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.util.ChatUtils;
@@ -30,7 +29,7 @@ public final class ServerCrasherHack extends Hack
 		super("ServerCrasher", "Generates an item that can\n"
 			+ "crash 1.15.x servers.\n" + "\u00a7oCreative mode only.\u00a7r");
 		
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 	}
 	
 	@Override

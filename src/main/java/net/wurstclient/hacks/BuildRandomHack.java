@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RayTraceContext;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -60,7 +59,7 @@ public final class BuildRandomHack extends Hack
 	public BuildRandomHack()
 	{
 		super("BuildRandom", "Randomly places blocks around you.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(mode);
 		addSetting(checkItem);
 		addSetting(fastPlace);

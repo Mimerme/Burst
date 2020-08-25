@@ -20,7 +20,6 @@ import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketInputListener;
 import net.wurstclient.events.RenderListener;
@@ -67,7 +66,7 @@ public final class AutoFishHack extends Hack
 			+ "best fishing rod. If it finds a better\n"
 			+ "rod while fishing, it will automatically\n" + "switch to it.");
 		
-		setCategory(Category.OTHER);
+		setCategory("Other");
 		addSetting(validRange);
 		addSetting(debugDraw);
 	}

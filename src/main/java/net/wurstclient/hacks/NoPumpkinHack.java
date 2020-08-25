@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -18,6 +17,6 @@ public final class NoPumpkinHack extends Hack
 	{
 		super("NoPumpkin",
 			"Blocks the overlay when wearing a pumpkin on your head.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

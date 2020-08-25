@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -17,6 +16,6 @@ public final class NoOverlayHack extends Hack
 	public NoOverlayHack()
 	{
 		super("NoOverlay", "Blocks the overlays of water and lava.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

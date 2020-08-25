@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.wurstclient.Category;
 import net.wurstclient.DontBlock;
 import net.wurstclient.Feature;
 import net.wurstclient.SearchTags;
@@ -44,7 +43,7 @@ public final class TooManyHaxHack extends Hack
 				+ "Use the \u00a76.toomanyhax\u00a7r command to choose\n"
 				+ "which features to block.\n"
 				+ "Type \u00a76.help toomanyhax\u00a7r for more info.");
-		setCategory(Category.OTHER);
+		setCategory("Other");
 		
 		Path wurstFolder = WURST.getWurstFolder();
 		profilesFolder = wurstFolder.resolve("toomanyhax");

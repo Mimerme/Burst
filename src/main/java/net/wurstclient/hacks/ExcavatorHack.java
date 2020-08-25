@@ -25,7 +25,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.ai.PathFinder;
 import net.wurstclient.ai.PathProcessor;
 import net.wurstclient.commands.PathCmd;
@@ -62,7 +61,7 @@ public final class ExcavatorHack extends Hack
 		super("Excavator",
 			"Automatically breaks all blocks in the selected area.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(range);
 		addSetting(mode);
 	}

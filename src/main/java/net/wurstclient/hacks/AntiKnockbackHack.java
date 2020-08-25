@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.KnockbackListener;
 import net.wurstclient.hack.Hack;
@@ -33,7 +32,7 @@ public final class AntiKnockbackHack extends Hack implements KnockbackListener
 		super("AntiKnockback",
 			"Prevents you from getting pushed by players and mobs.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(hStrength);
 		addSetting(vStrength);
 	}

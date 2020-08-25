@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.DeathListener;
 import net.wurstclient.hack.Hack;
@@ -18,7 +17,7 @@ public final class AutoRespawnHack extends Hack implements DeathListener
 	public AutoRespawnHack()
 	{
 		super("AutoRespawn", "Automatically respawns you whenever you die.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 	}
 	
 	@Override

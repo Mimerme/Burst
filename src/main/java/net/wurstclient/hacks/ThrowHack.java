@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.wurstclient.Category;
 import net.wurstclient.events.RightClickListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.SliderSetting;
@@ -28,7 +27,7 @@ public final class ThrowHack extends Hack implements RightClickListener
 				+ "in very large quantities.\n\n"
 				+ "This can cause a lot of lag and even crash a server.");
 		
-		setCategory(Category.OTHER);
+		setCategory("Other");
 		addSetting(amount);
 	}
 	

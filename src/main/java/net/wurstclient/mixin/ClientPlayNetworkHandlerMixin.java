@@ -32,7 +32,7 @@ public class ClientPlayNetworkHandlerMixin implements ClientPlayPacketListener
 	{
 		PacketOutputEvent event = new PacketOutputEvent(packet);
 		BurstClient.INSTANCE.getEventManager().fire(event);
-		
+
 		if(event.isCancelled())
 			ci.cancel();
 	}

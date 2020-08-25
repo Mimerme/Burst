@@ -32,7 +32,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.BurstClient;
 import net.wurstclient.events.UpdateListener;
@@ -104,7 +103,7 @@ public final class TpAuraHack extends Hack implements UpdateListener
 	{
 		super("TP-Aura", "Automatically attacks the closest valid entity\n"
 			+ "while teleporting around it.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		
 		addSetting(range);
 		addSetting(priority);
