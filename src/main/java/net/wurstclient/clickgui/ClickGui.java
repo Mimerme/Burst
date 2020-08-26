@@ -136,6 +136,8 @@ public final class ClickGui
 		for(Window window : windows)
 		{
 			JsonElement jsonWindow = json.get(window.getTitle());
+
+			//If the window exists and is properly formated continue, otherwise skip
 			if(jsonWindow == null || !jsonWindow.isJsonObject())
 				continue;
 			
@@ -575,7 +577,7 @@ public final class ClickGui
 			GL11.glPopMatrix();
 		}
 	}
-	
+
 	public void renderPinnedWindows(MatrixStack matrixStack, float partialTicks)
 	{
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -584,9 +586,10 @@ public final class ClickGui
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glShadeModel(GL11.GL_SMOOTH);
 		GL11.glLineWidth(1);
-		
-		for(Window window : windows)
-			if(window.isPinned() && !window.isInvisible())
+
+		//TODO: move pined windows to a seperate arraylist for perfomance
+		for(Window window : pinnedWindows)
+			if(!window.isInvisible())
 				renderWindow(matrixStack, window, Integer.MIN_VALUE,
 					Integer.MIN_VALUE, partialTicks);
 			
