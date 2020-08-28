@@ -69,7 +69,6 @@ public enum BurstClient
 	public static final String VERSION = "7.5";
 	public static final String MC_VERSION = "1.16.2";
 	
-	private WurstAnalytics analytics;
 	private EventManager eventManager;
 	private AltManager altManager;
 	private HackList hax;
@@ -213,12 +212,7 @@ public enum BurstClient
 		
 		return encFolder;
 	}
-	
-	public WurstAnalytics getAnalytics()
-	{
-		return analytics;
-	}
-	
+
 	public EventManager getEventManager()
 	{
 		return eventManager;

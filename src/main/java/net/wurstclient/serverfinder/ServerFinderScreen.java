@@ -73,9 +73,6 @@ public class ServerFinderScreen extends Screen
 		
 		setInitialFocus(ipBox);
 		state = ServerFinderState.NOT_RUNNING;
-		
-		BurstClient.INSTANCE.getAnalytics()
-			.trackPageView("/multiplayer/server-finder", "Server Finder");
 	}
 	
 	private void searchOrCancel()

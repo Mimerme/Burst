@@ -51,19 +51,12 @@ public class WurstOptionsScreen extends Screen
 	{
 		FriendsCmd friendsCmd = (FriendsCmd) BurstClient.INSTANCE.getCmds().get("friends");
 		CheckboxSetting middleClickFriends = friendsCmd.getMiddleClickFriends();
-		WurstAnalytics analytics = BurstClient.INSTANCE.getAnalytics();
-		
+
 		new WurstOptionsButton(-154, 24,
 			() -> "Click Friends: "
 				+ (middleClickFriends.isChecked() ? "ON" : "OFF"),
 			middleClickFriends.getDescription(), b -> middleClickFriends
 				.setChecked(!middleClickFriends.isChecked()));
-		
-		new WurstOptionsButton(-154, 48,
-			() -> "Analytics: " + (analytics.isEnabled() ? "ON" : "OFF"),
-			"Allows us to measure the popularity of Wurst\n"
-				+ "by sending anonymous usage statistics.",
-			b -> analytics.setEnabled(!analytics.isEnabled()));
 	}
 	
 	private void addManagerButtons()

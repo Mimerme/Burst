@@ -93,9 +93,6 @@ public class CleanUpScreen extends Screen
 			"Renames your servers to \"Grief me #1\",\n"
 				+ "\"Grief me #2\", etc.",
 			b -> cleanupRename = !cleanupRename));
-		
-		BurstClient.INSTANCE.getAnalytics()
-			.trackPageView("/multiplayer/clean-up", "Clean Up");
 	}
 	
 	private String yesOrNo(boolean b)
@@ -110,8 +107,6 @@ public class CleanUpScreen extends Screen
 	
 	private void cleanUp()
 	{
-		BurstClient.INSTANCE.getAnalytics().trackEvent("clean up", "start");
-		
 		if(removeAll)
 		{
 			((IServerList)prevScreen.getServerList()).clear();
