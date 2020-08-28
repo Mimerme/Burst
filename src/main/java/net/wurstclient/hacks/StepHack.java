@@ -15,6 +15,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
+import net.wurstclient.commands.GoToCmd;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.EnumSetting;
@@ -118,7 +119,7 @@ public final class StepHack extends Hack implements UpdateListener
 	
 	public boolean isAutoJumpAllowed()
 	{
-		return !isEnabled() && !WURST.getCmds().goToCmd.isActive();
+		return !isEnabled() && !((GoToCmd)WURST.getCmds().get("goto")).isActive();
 	}
 	
 	private enum Mode

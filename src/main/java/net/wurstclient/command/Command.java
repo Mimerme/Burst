@@ -18,12 +18,16 @@ public abstract class Command extends Feature
 	private final String description;
 	private final String[] syntax;
 	private String category;
-	
+
+	public Command(){
+		this("", "", "");
+	}
+
 	public Command(String name, String description, String... syntax)
 	{
 		this.name = Objects.requireNonNull(name);
 		this.description = Objects.requireNonNull(description);
-		
+
 		Objects.requireNonNull(syntax);
 		if(syntax.length > 0)
 			syntax[0] = "Syntax: " + syntax[0];

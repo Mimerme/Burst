@@ -53,7 +53,7 @@ public final class GoToCmd extends Command
 		// set PathFinder
 		if(args.length == 1 && args[0].equals("-path"))
 		{
-			BlockPos goal = WURST.getCmds().pathCmd.getLastGoal();
+			BlockPos goal = ((PathCmd)WURST.getCmds().get("path")).getLastGoal();
 			if(goal != null)
 				pathFinder = new PathFinder(goal);
 			else
@@ -173,7 +173,8 @@ public final class GoToCmd extends Command
 	@Override
 	public void onRender(float partialTicks)
 	{
-		PathCmd pathCmd = WURST.getCmds().pathCmd;
+		PathCmd pathCmd = ((PathCmd)WURST.getCmds().get("path"));
+
 		pathFinder.renderPath(pathCmd.isDebugMode(), pathCmd.isDepthTest());
 	}
 	

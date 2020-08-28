@@ -12,13 +12,14 @@ import java.util.stream.StreamSupport;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.wurstclient.command.CmdError;
-import net.wurstclient.command.CmdException;
-import net.wurstclient.command.CmdSyntaxError;
-import net.wurstclient.command.Command;
+import net.wurstclient.BurstFeature;
+import net.wurstclient.command.*;
 import net.wurstclient.hacks.ProtectHack;
 import net.wurstclient.util.FakePlayerEntity;
 
+@BurstFeature(name="protect", description = "Protects the given entity from other entities.",
+category = "cmd")
+@BurstCmd(syntax = ".protect <entity>")
 public final class ProtectCmd extends Command
 {
 	public ProtectCmd()
@@ -26,7 +27,7 @@ public final class ProtectCmd extends Command
 		super("protect", "Protects the given entity from other entities.",
 			".protect <entity>");
 	}
-	
+
 	@Override
 	public void call(String[] args) throws CmdException
 	{

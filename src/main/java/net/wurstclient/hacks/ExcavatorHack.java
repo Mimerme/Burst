@@ -136,7 +136,7 @@ public final class ExcavatorHack extends Hack
 	{
 		if(pathFinder != null)
 		{
-			PathCmd pathCmd = WURST.getCmds().pathCmd;
+			PathCmd pathCmd = (PathCmd) WURST.getCmds().get("path");
 			pathFinder.renderPath(pathCmd.isDebugMode(), pathCmd.isDepthTest());
 		}
 		

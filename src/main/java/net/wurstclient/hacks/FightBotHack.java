@@ -334,7 +334,7 @@ public final class FightBotHack extends Hack
 	@Override
 	public void onRender(float partialTicks)
 	{
-		PathCmd pathCmd = WURST.getCmds().pathCmd;
+		PathCmd pathCmd = ((PathCmd)WURST.getCmds().get("path"));
 		pathFinder.renderPath(pathCmd.isDebugMode(), pathCmd.isDepthTest());
 	}
 	

@@ -49,7 +49,7 @@ public class WurstOptionsScreen extends Screen
 	
 	private void addSettingButtons()
 	{
-		FriendsCmd friendsCmd = BurstClient.INSTANCE.getCmds().friendsCmd;
+		FriendsCmd friendsCmd = (FriendsCmd) BurstClient.INSTANCE.getCmds().get("friends");
 		CheckboxSetting middleClickFriends = friendsCmd.getMiddleClickFriends();
 		WurstAnalytics analytics = BurstClient.INSTANCE.getAnalytics();
 		

@@ -171,8 +171,8 @@ public final class AntiAfkHack extends Hack
 	{
 		if(!useAi.isChecked())
 			return;
-		
-		PathCmd pathCmd = WURST.getCmds().pathCmd;
+
+		PathCmd pathCmd = ((PathCmd)WURST.getCmds().get("path"));
 		pathFinder.renderPath(pathCmd.isDebugMode(), pathCmd.isDepthTest());
 	}
 	

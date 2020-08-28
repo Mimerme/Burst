@@ -55,7 +55,7 @@ public class FriendsList
 		if(entity == null || !(entity instanceof PlayerEntity))
 			return;
 		
-		FriendsCmd friendsCmd = BurstClient.INSTANCE.getCmds().friendsCmd;
+		FriendsCmd friendsCmd = (FriendsCmd) BurstClient.INSTANCE.getCmds().get("friends");
 		CheckboxSetting middleClickFriends = friendsCmd.getMiddleClickFriends();
 		if(!middleClickFriends.isChecked())
 			return;
