@@ -37,7 +37,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -113,7 +112,7 @@ public final class KillauraLegitHack extends Hack
 	{
 		super("KillauraLegit", "Slower Killaura that is harder to detect.\n"
 			+ "Not required on normal NoCheat+ servers!");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(priority);
 		addSetting(filterPlayers);
@@ -136,13 +135,13 @@ public final class KillauraLegitHack extends Hack
 	protected void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().fightBotHack.setEnabled(false);
 		WURST.getHax().killauraHack.setEnabled(false);
 		WURST.getHax().multiAuraHack.setEnabled(false);
 		WURST.getHax().protectHack.setEnabled(false);
 		WURST.getHax().triggerBotHack.setEnabled(false);
-		WURST.getHax().tpAuraHack.setEnabled(false);
+		WURST.getHax().tpAuraHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 		EVENTS.add(RenderListener.class, this);
@@ -239,14 +238,14 @@ public final class KillauraLegitHack extends Hack
 		if(target == null)
 			return;
 		
-		WURST.getHax().autoSwordHack.setSlot();
+		//WURST.getHax().autoSwordHack.setSlot();
 		
 		// face entity
 		if(!faceEntityClient(target))
 			return;
 		
 		// attack entity
-		WURST.getHax().criticalsHack.doCritical();
+		//WURST.getHax().criticalsHack.doCritical();
 		MC.interactionManager.attackEntity(player, target);
 		player.swingHand(Hand.MAIN_HAND);
 	}

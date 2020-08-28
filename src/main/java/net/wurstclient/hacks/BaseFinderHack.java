@@ -14,7 +14,6 @@ import java.util.HashSet;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -75,7 +74,7 @@ public final class BaseFinderHack extends Hack
 			"Finds player bases by searching for man-made blocks.\n"
 				+ "The blocks that it finds will be highlighted in red.\n"
 				+ "Good for finding faction bases.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(naturalBlocks);
 	}
 	

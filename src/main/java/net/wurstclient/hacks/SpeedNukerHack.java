@@ -20,7 +20,6 @@ import net.minecraft.block.Material;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.LeftClickListener;
 import net.wurstclient.events.UpdateListener;
@@ -75,7 +74,7 @@ public final class SpeedNukerHack extends Hack
 		super("SpeedNuker",
 			"Faster version of Nuker that cannot bypass NoCheat+.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(range);
 		addSetting(mode);
 		addSetting(id);
@@ -93,11 +92,11 @@ public final class SpeedNukerHack extends Hack
 	public void onEnable()
 	{
 		// disable other nukers
-		WURST.getHax().autoMineHack.setEnabled(false);
+/*		WURST.getHax().autoMineHack.setEnabled(false);
 		WURST.getHax().excavatorHack.setEnabled(false);
 		WURST.getHax().nukerHack.setEnabled(false);
 		WURST.getHax().nukerLegitHack.setEnabled(false);
-		WURST.getHax().tunnellerHack.setEnabled(false);
+		WURST.getHax().tunnellerHack.setEnabled(false);*/
 		
 		// add listeners
 		EVENTS.add(LeftClickListener.class, this);
@@ -128,8 +127,8 @@ public final class SpeedNukerHack extends Hack
 			pos -> mode.getSelected().validator.test(this, pos));
 		
 		Iterator<BlockPos> autoToolIterator = validBlocks.iterator();
-		if(autoToolIterator.hasNext())
-			WURST.getHax().autoToolHack.equipIfEnabled(autoToolIterator.next());
+/*		if(autoToolIterator.hasNext())
+			WURST.getHax().autoToolHack.equipIfEnabled(autoToolIterator.next());*/
 		
 		// break all blocks
 		BlockBreaker.breakBlocksWithPacketSpam(validBlocks);

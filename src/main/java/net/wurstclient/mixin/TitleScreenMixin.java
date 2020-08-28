@@ -19,13 +19,13 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.altmanager.screens.AltManagerScreen;
 
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen
 {
-	private TitleScreenMixin(WurstClient wurst, Text text_1)
+	private TitleScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -33,13 +33,13 @@ public abstract class TitleScreenMixin extends Screen
 	@Inject(at = {@At("RETURN")}, method = {"initWidgetsNormal(II)V"})
 	private void onInitWidgetsNormal(int y, int spacingY, CallbackInfo ci)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		addButton(new ButtonWidget(width / 2 + 2, y + spacingY * 2, 98, 20,
 			new LiteralText("Alt Manager"),
 			b -> client.openScreen(new AltManagerScreen(this,
-				WurstClient.INSTANCE.getAltManager()))));
+				BurstClient.INSTANCE.getAltManager()))));
 		
 		for(AbstractButtonWidget button : buttons)
 		{

@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.IsPlayerInWaterListener;
 import net.wurstclient.events.UpdateListener;
@@ -27,7 +26,7 @@ public final class AntiWaterPushHack extends Hack implements UpdateListener,
 	public AntiWaterPushHack()
 	{
 		super("AntiWaterPush", "Prevents you from getting pushed by water.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(preventSlowdown);
 	}
 	

@@ -13,7 +13,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.util.ChatUtils;
@@ -29,7 +28,7 @@ public final class KillPotionHack extends Hack
 				+ "work on undead mobs, since they are\n" + "already dead.\n\n"
 				+ "Requires Creative mode.");
 		
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 	}
 	
 	@Override

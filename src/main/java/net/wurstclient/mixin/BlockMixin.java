@@ -18,7 +18,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.ShouldDrawSideListener.ShouldDrawSideEvent;
 import net.wurstclient.hack.HackList;
 
@@ -33,7 +33,7 @@ public abstract class BlockMixin implements ItemConvertible
 		BlockPos blockPos, Direction side, CallbackInfoReturnable<Boolean> cir)
 	{
 		ShouldDrawSideEvent event = new ShouldDrawSideEvent(state);
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		
 		if(event.isRendered() != null)
 			cir.setReturnValue(event.isRendered());
@@ -44,9 +44,9 @@ public abstract class BlockMixin implements ItemConvertible
 		cancellable = true)
 	private void onGetVelocityMultiplier(CallbackInfoReturnable<Float> cir)
 	{
-		HackList hax = WurstClient.INSTANCE.getHax();
-		if(hax == null || !hax.noSlowdownHack.isEnabled())
-			return;
+		HackList hax = BurstClient.INSTANCE.getHax();
+/*		if(hax == null || !hax.noSlowdownHack.isEnabled())
+			return;*/
 		
 		if(cir.getReturnValueF() < 1)
 			cir.setReturnValue(1F);

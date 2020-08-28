@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.ChatInputListener;
 import net.wurstclient.hack.Hack;
@@ -37,7 +36,7 @@ public final class ChatTranslatorHack extends Hack implements ChatInputListener
 	{
 		super("ChatTranslator",
 			"Translates incoming chat messages using Google Translate.");
-		setCategory(Category.CHAT);
+		setCategory("Chat");
 		
 		addSetting(langFrom);
 		addSetting(langTo);

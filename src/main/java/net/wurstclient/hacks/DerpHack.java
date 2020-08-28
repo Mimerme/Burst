@@ -10,7 +10,6 @@ package net.wurstclient.hacks;
 import java.util.Random;
 
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -24,15 +23,15 @@ public final class DerpHack extends Hack implements UpdateListener
 	{
 		super("Derp", "Randomly moves your head around.\n"
 			+ "Only visible to other players.");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 	}
 	
 	@Override
 	public void onEnable()
 	{
 		// disable incompatible derps
-		WURST.getHax().headRollHack.setEnabled(false);
-		WURST.getHax().tiredHack.setEnabled(false);
+/*		WURST.getHax().headRollHack.setEnabled(false);
+		WURST.getHax().tiredHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 	}

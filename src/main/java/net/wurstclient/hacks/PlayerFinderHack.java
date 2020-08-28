@@ -14,7 +14,6 @@ import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketInputListener;
 import net.wurstclient.events.RenderListener;
@@ -34,7 +33,7 @@ public final class PlayerFinderHack extends Hack
 	public PlayerFinderHack()
 	{
 		super("PlayerFinder", "Finds far away players during thunderstorms.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 	
 	@Override

@@ -24,7 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.LeftClickListener;
 import net.wurstclient.events.RenderListener;
@@ -83,7 +82,7 @@ public final class NukerLegitHack extends Hack
 			"Slower Nuker that bypasses all AntiCheat plugins.\n"
 				+ "Not required on normal NoCheat+ servers!");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(range);
 		addSetting(mode);
 		addSetting(id);
@@ -101,11 +100,11 @@ public final class NukerLegitHack extends Hack
 	public void onEnable()
 	{
 		// disable other nukers
-		WURST.getHax().autoMineHack.setEnabled(false);
+/*		WURST.getHax().autoMineHack.setEnabled(false);
 		WURST.getHax().excavatorHack.setEnabled(false);
 		WURST.getHax().nukerHack.setEnabled(false);
 		WURST.getHax().speedNukerHack.setEnabled(false);
-		WURST.getHax().tunnellerHack.setEnabled(false);
+		WURST.getHax().tunnellerHack.setEnabled(false);*/
 		
 		// add listeners
 		EVENTS.add(LeftClickListener.class, this);
@@ -232,8 +231,8 @@ public final class NukerLegitHack extends Hack
 			// face block
 			WURST.getRotationFaker().faceVectorClient(hitVec);
 			
-			if(currentBlock != null)
-				WURST.getHax().autoToolHack.equipIfEnabled(currentBlock);
+/*			if(currentBlock != null)
+				WURST.getHax().autoToolHack.equipIfEnabled(currentBlock);*/
 				
 			// if attack key is down but nothing happens, release it for one
 			// tick

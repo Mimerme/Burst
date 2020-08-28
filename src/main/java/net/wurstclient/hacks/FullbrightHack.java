@@ -10,7 +10,6 @@ package net.wurstclient.hacks;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -40,7 +39,7 @@ public final class FullbrightHack extends Hack implements UpdateListener
 	public FullbrightHack()
 	{
 		super("Fullbright", "Allows you to see in the dark.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(method);
 		addSetting(fade);
 		

@@ -12,7 +12,6 @@ import java.util.Arrays;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -26,17 +25,17 @@ public final class AutoMineHack extends Hack implements UpdateListener
 	public AutoMineHack()
 	{
 		super("AutoMine", "Automatically mines any block that you look at.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override
 	public void onEnable()
 	{
-		WURST.getHax().excavatorHack.setEnabled(false);
+/*		WURST.getHax().excavatorHack.setEnabled(false);
 		WURST.getHax().nukerHack.setEnabled(false);
 		WURST.getHax().nukerLegitHack.setEnabled(false);
 		WURST.getHax().speedNukerHack.setEnabled(false);
-		WURST.getHax().tunnellerHack.setEnabled(false);
+		WURST.getHax().tunnellerHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 	}

@@ -15,15 +15,15 @@ import java.util.Objects;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.crash.CrashReportSection;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public final class EventManager
 {
-	private final WurstClient wurst;
+	private final BurstClient wurst;
 	private final HashMap<Class<? extends Listener>, ArrayList<? extends Listener>> listenerMap =
 		new HashMap<>();
 	
-	public EventManager(WurstClient wurst)
+	public EventManager(BurstClient wurst)
 	{
 		this.wurst = wurst;
 	}

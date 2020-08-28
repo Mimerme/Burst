@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.explosion.Explosion;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.SliderSetting;
@@ -37,7 +36,7 @@ public final class KaboomHack extends Hack implements UpdateListener
 				+ "It works best with fast tools and weak blocks.\n"
 				+ "Note: This is not an actual explosion.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(power);
 	}
 	

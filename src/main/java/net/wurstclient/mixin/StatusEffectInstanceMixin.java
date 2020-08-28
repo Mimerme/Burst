@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(StatusEffectInstance.class)
 public abstract class StatusEffectInstanceMixin
@@ -28,7 +28,7 @@ public abstract class StatusEffectInstanceMixin
 		cancellable = true)
 	private void onUpdateDuration(CallbackInfoReturnable<Integer> cir)
 	{
-		if(WurstClient.INSTANCE.getHax().potionSaverHack.isFrozen())
-			cir.setReturnValue(duration);
+/*		if(BurstClient.INSTANCE.getHax().potionSaverHack.isFrozen())
+			cir.setReturnValue(duration);*/
 	}
 }

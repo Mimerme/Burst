@@ -9,7 +9,6 @@ package net.wurstclient.hack;
 
 import java.util.Objects;
 
-import net.wurstclient.Category;
 import net.wurstclient.Feature;
 import net.wurstclient.hacks.NavigatorHack;
 import net.wurstclient.hacks.TooManyHaxHack;
@@ -18,7 +17,7 @@ public abstract class Hack extends Feature
 {
 	private final String name;
 	private final String description;
-	private Category category;
+	private String category;
 	
 	private boolean enabled;
 	private final boolean stateSaved =
@@ -29,8 +28,12 @@ public abstract class Hack extends Feature
 		this.name = Objects.requireNonNull(name);
 		this.description = Objects.requireNonNull(description);
 		addPossibleKeybind(name, "Toggle " + name);
+
+		//Initialize hack settings and category annotations here
 	}
-	
+
+
+	//Hack names and descriptions can now be set via annotations or directly in the code
 	@Override
 	public final String getName()
 	{
@@ -49,12 +52,12 @@ public abstract class Hack extends Feature
 	}
 	
 	@Override
-	public final Category getCategory()
+	public final String getCategory()
 	{
 		return category;
 	}
 	
-	protected final void setCategory(Category category)
+	protected final void setCategory(String category)
 	{
 		this.category = category;
 	}
@@ -70,7 +73,7 @@ public abstract class Hack extends Feature
 		if(this.enabled == enabled)
 			return;
 		
-		TooManyHaxHack tooManyHax = WURST.getHax().tooManyHaxHack;
+		TooManyHaxHack tooManyHax = WURST.getHax().getTooManyHaxHack();
 		if(enabled && tooManyHax.isEnabled() && tooManyHax.isBlocked(this))
 			return;
 		

@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketOutputListener;
 import net.wurstclient.hack.Hack;
@@ -20,7 +19,7 @@ public final class PotionSaverHack extends Hack implements PacketOutputListener
 	{
 		super("PotionSaver",
 			"Freezes all potion effects while you are standing still.");
-		setCategory(Category.OTHER);
+		setCategory("Other");
 	}
 	
 	@Override

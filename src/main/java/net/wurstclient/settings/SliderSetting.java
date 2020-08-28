@@ -12,7 +12,7 @@ import java.util.LinkedHashSet;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.components.SliderComponent;
 import net.wurstclient.keybinds.PossibleKeybind;
@@ -99,7 +99,7 @@ public class SliderSetting extends Setting implements SliderLock
 		this.value = value;
 		update();
 		
-		WurstClient.INSTANCE.saveSettings();
+		BurstClient.INSTANCE.saveSettings();
 	}
 	
 	public final void increaseValue()

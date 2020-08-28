@@ -11,7 +11,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.LeftClickListener;
 import net.wurstclient.hack.Hack;
@@ -31,7 +30,7 @@ public final class CriticalsHack extends Hack implements LeftClickListener
 	public CriticalsHack()
 	{
 		super("Criticals", "Changes all your hits to critical hits.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(mode);
 	}
 	

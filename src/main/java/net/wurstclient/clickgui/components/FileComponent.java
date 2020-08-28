@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.screens.SelectFileScreen;
@@ -35,26 +35,26 @@ public final class FileComponent extends Component
 		if(mouseButton != 0)
 			return;
 		
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		int buttonWidth = fr.getWidth(setting.getSelectedFileName());
 		
 		if(mouseX < getX() + getWidth() - buttonWidth - 4)
 			return;
 		
-		WurstClient.MC.openScreen(
-			new SelectFileScreen(WurstClient.MC.currentScreen, setting));
+		BurstClient.MC.openScreen(
+			new SelectFileScreen(BurstClient.MC.currentScreen, setting));
 	}
 	
 	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY,
 		float partialTicks)
 	{
-		ClickGui gui = WurstClient.INSTANCE.getGui();
+		ClickGui gui = BurstClient.INSTANCE.getGui();
 		float[] bgColor = gui.getBgColor();
 		float[] acColor = gui.getAcColor();
 		float opacity = gui.getOpacity();
 		
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		int buttonWidth = fr.getWidth(setting.getSelectedFileName());
 		
 		int x1 = getX();
@@ -120,7 +120,7 @@ public final class FileComponent extends Component
 	@Override
 	public int getDefaultWidth()
 	{
-		TextRenderer fr = WurstClient.MC.textRenderer;
+		TextRenderer fr = BurstClient.MC.textRenderer;
 		
 		String text = setting.getName() + ": ";
 		int buttonWidth = fr.getWidth(setting.getSelectedFileName());

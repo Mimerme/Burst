@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.SliderSetting;
@@ -26,7 +25,7 @@ public final class HighJumpHack extends Hack
 		super("HighJump", "Allows you to jump higher.\n\n"
 			+ "\u00a7c\u00a7lWARNING:\u00a7r You will take fall damage if you don't use NoFall.");
 		
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(height);
 	}
 	

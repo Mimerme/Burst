@@ -36,7 +36,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.chunk.Chunk;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketInputListener;
 import net.wurstclient.events.RenderListener;
@@ -83,7 +82,7 @@ public final class CaveFinderHack extends Hack
 	{
 		super("CaveFinder",
 			"Helps you to find caves by\n" + "highlighting them in red.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(area);
 		addSetting(limit);
 	}

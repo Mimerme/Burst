@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -20,6 +19,6 @@ public final class NameTagsHack extends Hack
 			+ "always read them.\n" + "Also allows you to see the nametags of\n"
 			+ "sneaking players.");
 		
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

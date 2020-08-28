@@ -12,7 +12,6 @@ import java.util.Collections;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.screen.Screen;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.clickgui.screens.EditBlockListScreen;
 import net.wurstclient.events.GetAmbientOcclusionLightLevelListener;
@@ -57,7 +56,7 @@ public final class XRayHack extends Hack implements UpdateListener,
 	public XRayHack()
 	{
 		super("X-Ray", "Allows you to see ores through walls.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(ores);
 	}
 	
@@ -92,8 +91,8 @@ public final class XRayHack extends Hack implements UpdateListener,
 		EVENTS.remove(RenderBlockEntityListener.class, this);
 		MC.worldRenderer.reload();
 		
-		if(!WURST.getHax().fullbrightHack.isEnabled())
-			MC.options.gamma = 0.5F;
+/*		if(!WURST.getHax().fullbrightHack.isEnabled())
+			MC.options.gamma = 0.5F;*/
 	}
 	
 	@Override

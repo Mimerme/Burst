@@ -11,7 +11,6 @@ import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.client.render.entity.PlayerModelPart;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -24,7 +23,7 @@ public final class SkinDerpHack extends Hack implements UpdateListener
 	public SkinDerpHack()
 	{
 		super("SkinDerp", "Randomly toggles parts of your skin.");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 	}
 	
 	@Override

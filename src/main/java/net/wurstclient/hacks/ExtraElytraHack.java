@@ -14,7 +14,6 @@ import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -45,7 +44,7 @@ public final class ExtraElytraHack extends Hack implements UpdateListener
 	public ExtraElytraHack()
 	{
 		super("ExtraElytra", "Makes the Elytra easier to use.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(instantFly);
 		addSetting(speedCtrl);
 		addSetting(heightCtrl);

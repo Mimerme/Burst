@@ -20,7 +20,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.IMultiplayerScreen;
 import net.wurstclient.serverfinder.CleanUpScreen;
 import net.wurstclient.serverfinder.ServerFinderScreen;
@@ -34,7 +34,7 @@ public class MultiplayerScreenMixin extends Screen implements IMultiplayerScreen
 	
 	private ButtonWidget lastServerButton;
 	
-	private MultiplayerScreenMixin(WurstClient wurst, Text text_1)
+	private MultiplayerScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -54,7 +54,7 @@ public class MultiplayerScreenMixin extends Screen implements IMultiplayerScreen
 	@Inject(at = {@At("TAIL")}, method = {"init()V"})
 	private void onInit(CallbackInfo ci)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		lastServerButton = addButton(new ButtonWidget(width / 2 - 154, 10, 100,

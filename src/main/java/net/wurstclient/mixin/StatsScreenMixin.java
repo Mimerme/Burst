@@ -20,12 +20,12 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(StatsScreen.class)
 public abstract class StatsScreenMixin extends Screen implements StatsListener
 {
-	private StatsScreenMixin(WurstClient wurst, Text text_1)
+	private StatsScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -52,7 +52,7 @@ public abstract class StatsScreenMixin extends Screen implements StatsListener
 	
 	private void toggleWurst(ButtonWidget button)
 	{
-		WurstClient wurst = WurstClient.INSTANCE;
+		BurstClient wurst = BurstClient.INSTANCE;
 		wurst.setEnabled(!wurst.isEnabled());
 		
 		updateWurstButtonText(button);
@@ -60,7 +60,7 @@ public abstract class StatsScreenMixin extends Screen implements StatsListener
 	
 	private void updateWurstButtonText(ButtonWidget button)
 	{
-		WurstClient wurst = WurstClient.INSTANCE;
+		BurstClient wurst = BurstClient.INSTANCE;
 		String text = (wurst.isEnabled() ? "Disable" : "Enable") + " Wurst";
 		button.setMessage(new LiteralText(text));
 	}

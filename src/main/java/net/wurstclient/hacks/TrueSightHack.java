@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -17,6 +16,6 @@ public final class TrueSightHack extends Hack
 	public TrueSightHack()
 	{
 		super("TrueSight", "Allows you to see invisible entities.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

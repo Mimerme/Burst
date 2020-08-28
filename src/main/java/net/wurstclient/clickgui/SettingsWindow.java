@@ -10,7 +10,7 @@ package net.wurstclient.clickgui;
 import java.util.stream.Stream;
 
 import net.wurstclient.Feature;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.settings.Setting;
 
 public final class SettingsWindow extends Window
@@ -35,7 +35,7 @@ public final class SettingsWindow extends Window
 		int x = parent.getX() + parent.getWidth() + 5;
 		int y = parent.getY() + 12 + buttonY + scroll;
 		
-		net.minecraft.client.util.Window mcWindow = WurstClient.MC.getWindow();
+		net.minecraft.client.util.Window mcWindow = BurstClient.MC.getWindow();
 		if(x + getWidth() > mcWindow.getScaledWidth())
 			x = parent.getX() - getWidth() - 5;
 		if(y + getHeight() > mcWindow.getScaledHeight())

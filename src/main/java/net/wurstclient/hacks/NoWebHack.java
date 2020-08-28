@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 
@@ -17,7 +16,7 @@ public final class NoWebHack extends Hack implements UpdateListener
 	public NoWebHack()
 	{
 		super("NoWeb", "Prevents you from getting slowed down by cobwebs.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

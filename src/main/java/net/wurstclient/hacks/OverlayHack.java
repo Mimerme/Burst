@@ -12,7 +12,6 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.util.RenderUtils;
@@ -23,7 +22,7 @@ public final class OverlayHack extends Hack implements RenderListener
 	{
 		super("Overlay",
 			"Renders the Nuker animation whenever you mine a block.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 	
 	@Override

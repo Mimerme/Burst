@@ -15,7 +15,7 @@ import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin
@@ -29,9 +29,9 @@ public class BackgroundRendererMixin
 	private static boolean wurstHasStatusEffect(LivingEntity entity,
 		StatusEffect effect)
 	{
-		if(effect == StatusEffects.BLINDNESS
-			&& WurstClient.INSTANCE.getHax().antiBlindHack.isEnabled())
-			return false;
+/*		if(effect == StatusEffects.BLINDNESS
+			&& BurstClient.INSTANCE.getHax().antiBlindHack.isEnabled())
+			return false;*/
 		
 		return entity.hasStatusEffect(effect);
 	}

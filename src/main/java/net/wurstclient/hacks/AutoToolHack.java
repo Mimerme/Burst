@@ -15,7 +15,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.BlockBreakingProgressListener;
 import net.wurstclient.events.UpdateListener;
@@ -51,7 +50,7 @@ public final class AutoToolHack extends Hack
 		super("AutoTool", "Automatically equips the fastest applicable tool\n"
 			+ "in your hotbar when you try to break a block.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(useSwords);
 		addSetting(useHands);
 		addSetting(repairMode);

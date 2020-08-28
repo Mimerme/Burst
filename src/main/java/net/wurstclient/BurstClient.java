@@ -7,15 +7,20 @@
  */
 package net.wurstclient;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import net.wurstclient.hacks.RainbowUiHack;
 import org.lwjgl.glfw.GLFW;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -49,7 +54,9 @@ import net.wurstclient.settings.SettingsFile;
 import net.wurstclient.update.WurstUpdater;
 import net.wurstclient.util.json.JsonException;
 
-public enum WurstClient
+import javax.script.ScriptException;
+
+public enum BurstClient
 {
 	INSTANCE;
 	
@@ -81,17 +88,19 @@ public enum WurstClient
 	private Path wurstFolder;
 	
 	private KeyBinding zoomKey;
-	
+
+
+
 	public void initialize()
 	{
 		System.out.println("Starting Wurst Client...");
 		
 		wurstFolder = createWurstFolder();
 		
-		String trackingID = "UA-52838431-5";
+/*		String trackingID = "UA-52838431-5";
 		String hostname = "client.wurstclient.net";
 		Path analyticsFile = wurstFolder.resolve("analytics.json");
-		analytics = new WurstAnalytics(trackingID, hostname, analyticsFile);
+		analytics = new WurstAnalytics(trackingID, hostname, analyticsFile);*/
 		
 		eventManager = new EventManager(this);
 		
@@ -106,13 +115,20 @@ public enum WurstClient
 		settingsProfileFolder = wurstFolder.resolve("settings");
 		this.settingsFile = new SettingsFile(settingsFile, hax, cmds, otfs);
 		this.settingsFile.load();
-		hax.tooManyHaxHack.loadBlockedHacksFile();
+		hax.getTooManyHaxHack().loadBlockedHacksFile();
 		
 		Path keybindsFile = wurstFolder.resolve("keybinds.json");
 		keybinds = new KeybindList(keybindsFile);
 		
 		Path guiFile = wurstFolder.resolve("windows.json");
-		gui = new ClickGui(guiFile);
+
+
+		//Load the clickGui object if there exists one
+		Path clickGuiObject = wurstFolder.resolve("clickgui.js");
+		if (clickGuiObject.exists())
+			gui = loadClickGui("clickgui.js");
+		else
+			gui = new ClickGui(guiFile);
 		
 		Path preferencesFile = wurstFolder.resolve("preferences.json");
 		navigator = new Navigator(preferencesFile, hax, cmds, otfs);
@@ -290,7 +306,31 @@ public enum WurstClient
 		
 		return gui;
 	}
-	
+
+	public void loadClickGui(String jsDirectory){
+		System.out.println("Loading new clickGui from \'" + System.getProperty("user.dir") + "/" + jsDirectory + "\' via Nashorn");
+
+		File folder = new File(jsDirectory);
+		for (final File fileEntry : folder.listFiles()) {
+			if (!fileEntry.isDirectory()) {
+				//TODO: error handling is a little harsh rn. Loosen it up
+				try {
+					engine.eval(new FileReader(fileEntry));
+					ClickGui modObj = (ClickGui) invoker.invokeFunction("gui");
+					System.out.println("Successfully new click gui \'" + fileEntry.getName() + "\' module");
+					return modObj;
+				} catch (ScriptException e) {
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
 	public Navigator getNavigator()
 	{
 		return navigator;
@@ -327,8 +367,8 @@ public enum WurstClient
 		
 		if(!enabled)
 		{
-			hax.panicHack.setEnabled(true);
-			hax.panicHack.onUpdate();
+			hax.getPanicHack().setEnabled(true);
+			hax.getPanicHack().onUpdate();
 		}
 	}
 	
@@ -351,4 +391,5 @@ public enum WurstClient
 	{
 		return altManager;
 	}
+
 }

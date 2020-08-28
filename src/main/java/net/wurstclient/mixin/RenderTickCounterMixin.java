@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.client.render.RenderTickCounter;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hacks.TimerHack;
 
 @Mixin(RenderTickCounter.class)
@@ -31,7 +31,7 @@ public abstract class RenderTickCounterMixin
 	public void onBeginRenderTick(long long_1,
 		CallbackInfoReturnable<Integer> cir)
 	{
-		TimerHack timerHack = WurstClient.INSTANCE.getHax().timerHack;
-		lastFrameDuration *= timerHack.getTimerSpeed();
+/*		TimerHack timerHack = BurstClient.INSTANCE.getHax().timerHack;
+		lastFrameDuration *= timerHack.getTimerSpeed();*/
 	}
 }

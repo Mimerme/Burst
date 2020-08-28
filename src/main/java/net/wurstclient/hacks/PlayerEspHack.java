@@ -18,7 +18,6 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.CameraTransformViewBobbingListener;
 import net.wurstclient.events.RenderListener;
@@ -57,7 +56,7 @@ public final class PlayerEspHack extends Hack implements UpdateListener,
 	{
 		super("PlayerESP", "Highlights nearby players.\n"
 			+ "ESP boxes of friends will appear in blue.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		
 		addSetting(style);
 		addSetting(boxSize);

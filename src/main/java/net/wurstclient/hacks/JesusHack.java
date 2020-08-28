@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketOutputListener;
 import net.wurstclient.events.UpdateListener;
@@ -41,7 +40,7 @@ public final class JesusHack extends Hack
 	{
 		super("Jesus", "Allows you to walk on water.\n"
 			+ "Jesus used this hack ~2000 years ago.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(bypass);
 	}
 	

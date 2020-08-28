@@ -27,7 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -63,7 +62,7 @@ public final class BonemealAuraHack extends Hack implements UpdateListener
 			"Automatically uses bone meal on specific types of plants.\n"
 				+ "Use the checkboxes to specify the types of plants.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(range);
 		addSetting(mode);
 		

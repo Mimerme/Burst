@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -20,7 +19,7 @@ public final class BoatFlyHack extends Hack implements UpdateListener
 	public BoatFlyHack()
 	{
 		super("BoatFly", "Allows you to fly with boats");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

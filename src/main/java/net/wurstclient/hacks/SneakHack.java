@@ -11,7 +11,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket.Mode;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PostMotionListener;
 import net.wurstclient.events.PreMotionListener;
@@ -32,7 +31,7 @@ public final class SneakHack extends Hack
 	public SneakHack()
 	{
 		super("Sneak", "Makes you sneak automatically.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(mode);
 	}
 	

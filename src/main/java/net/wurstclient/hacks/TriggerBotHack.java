@@ -30,7 +30,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -92,7 +91,7 @@ public final class TriggerBotHack extends Hack implements UpdateListener
 	{
 		super("TriggerBot",
 			"Automatically attacks the entity you're looking at.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(filterPlayers);
 		addSetting(filterSleeping);
@@ -114,13 +113,13 @@ public final class TriggerBotHack extends Hack implements UpdateListener
 	public void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().fightBotHack.setEnabled(false);
 		WURST.getHax().killauraLegitHack.setEnabled(false);
 		WURST.getHax().killauraHack.setEnabled(false);
 		WURST.getHax().multiAuraHack.setEnabled(false);
 		WURST.getHax().protectHack.setEnabled(false);
-		WURST.getHax().tpAuraHack.setEnabled(false);
+		WURST.getHax().tpAuraHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 	}
@@ -146,9 +145,9 @@ public final class TriggerBotHack extends Hack implements UpdateListener
 		if(!isCorrectEntity(target))
 			return;
 		
-		WURST.getHax().autoSwordHack.setSlot();
+/*		WURST.getHax().autoSwordHack.setSlot();
 		
-		WURST.getHax().criticalsHack.doCritical();
+		WURST.getHax().criticalsHack.doCritical();*/
 		MC.interactionManager.attackEntity(player, target);
 		player.swingHand(Hand.MAIN_HAND);
 	}

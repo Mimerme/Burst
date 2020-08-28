@@ -10,7 +10,7 @@ package net.wurstclient.update;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.util.ChatUtils;
 import net.wurstclient.util.json.JsonException;
@@ -40,13 +40,13 @@ public final class WurstUpdater implements UpdateListener
 		if(component != null)
 			ChatUtils.component(component);
 		
-		WurstClient.INSTANCE.getEventManager().remove(UpdateListener.class,
+		BurstClient.INSTANCE.getEventManager().remove(UpdateListener.class,
 			this);
 	}
 	
 	public void checkForUpdates()
 	{
-		Version currentVersion = new Version(WurstClient.VERSION);
+		Version currentVersion = new Version(BurstClient.VERSION);
 		Version latestVersion = null;
 		
 		try
@@ -110,7 +110,7 @@ public final class WurstUpdater implements UpdateListener
 	private boolean containsCompatibleAsset(WsonArray wsonArray)
 		throws JsonException
 	{
-		String compatibleSuffix = "MC" + WurstClient.MC_VERSION + ".jar";
+		String compatibleSuffix = "MC" + BurstClient.MC_VERSION + ".jar";
 		
 		for(WsonObject asset : wsonArray.getAllObjects())
 		{

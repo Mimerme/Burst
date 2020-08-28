@@ -13,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.util.registry.Registry;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -42,7 +41,7 @@ public final class ItemGeneratorHack extends Hack implements UpdateListener
 			"Generates random items and drops them on the ground.\n"
 				+ "\u00a7oCreative mode only.\u00a7r");
 		
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 		addSetting(speed);
 		addSetting(stackSize);
 	}

@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.util.shape.VoxelShapes;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.CactusCollisionShapeListener;
 import net.wurstclient.hack.Hack;
@@ -20,7 +19,7 @@ public final class AntiCactusHack extends Hack
 	public AntiCactusHack()
 	{
 		super("AntiCactus", "Protects you from cactus damage.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override

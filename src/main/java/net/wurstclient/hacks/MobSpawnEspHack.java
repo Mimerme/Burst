@@ -31,7 +31,6 @@ import net.minecraft.network.packet.s2c.play.ChunkDeltaUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.chunk.Chunk;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketInputListener;
 import net.wurstclient.events.RenderListener;
@@ -62,7 +61,7 @@ public final class MobSpawnEspHack extends Hack
 			"Highlights areas where mobs can spawn.\n" + "\u00a7eyellow\u00a7r"
 				+ " - mobs can spawn at night\n" + "\u00a7cred\u00a7r"
 				+ " - mobs can always spawn");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(drawDistance);
 		addSetting(loadingSpeed);
 	}

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.GUIRenderListener.GUIRenderEvent;
 
 @Mixin(InGameHud.class)
@@ -29,11 +29,11 @@ public class IngameHudMixin extends DrawableHelper
 	private void onRender(MatrixStack matrixStack, float partialTicks,
 		CallbackInfo ci)
 	{
-		if(WurstClient.MC.options.debugEnabled)
+		if(BurstClient.MC.options.debugEnabled)
 			return;
 		
 		GUIRenderEvent event = new GUIRenderEvent(matrixStack, partialTicks);
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 	}
 	
 	@Inject(at = {@At("HEAD")},
@@ -41,7 +41,7 @@ public class IngameHudMixin extends DrawableHelper
 		cancellable = true)
 	private void onRenderPumpkinOverlay(CallbackInfo ci)
 	{
-		if(WurstClient.INSTANCE.getHax().noPumpkinHack.isEnabled())
+		if(BurstClient.INSTANCE.getHax().getNoPumpkinHack().isEnabled())
 			ci.cancel();
 	}
 }

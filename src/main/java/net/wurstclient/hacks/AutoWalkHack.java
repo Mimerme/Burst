@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.client.options.KeyBinding;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -20,7 +19,7 @@ public final class AutoWalkHack extends Hack implements UpdateListener
 	public AutoWalkHack()
 	{
 		super("AutoWalk", "Makes you walk automatically.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

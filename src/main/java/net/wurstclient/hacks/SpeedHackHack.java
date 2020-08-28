@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -23,7 +22,7 @@ public final class SpeedHackHack extends Hack implements UpdateListener
 				+ "\u00a76\u00a7lWARNING:\u00a7r Patched in NoCheat+ version 3.13.2.\n"
 				+ "Will only bypass older versions of NoCheat+.\n"
 				+ "Type \u00a7l/ncp version\u00a7r to check a server's NoCheat+ version.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override

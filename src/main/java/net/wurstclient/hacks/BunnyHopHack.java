@@ -10,7 +10,6 @@ package net.wurstclient.hacks;
 import java.util.function.Predicate;
 
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -25,7 +24,7 @@ public final class BunnyHopHack extends Hack implements UpdateListener
 	public BunnyHopHack()
 	{
 		super("BunnyHop", "Makes you jump automatically.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(jumpIf);
 	}
 	

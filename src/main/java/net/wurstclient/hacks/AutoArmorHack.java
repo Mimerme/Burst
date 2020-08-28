@@ -23,7 +23,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketOutputListener;
 import net.wurstclient.events.UpdateListener;
@@ -61,7 +60,7 @@ public final class AutoArmorHack extends Hack
 	public AutoArmorHack()
 	{
 		super("AutoArmor", "Manages your armor automatically.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(useEnchantments);
 		addSetting(swapWhileMoving);
 		addSetting(delay);

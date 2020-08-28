@@ -13,7 +13,6 @@ import java.util.Random;
 
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.util.ChatUtil;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.ChatInputListener;
 import net.wurstclient.events.UpdateListener;
@@ -36,7 +35,7 @@ public final class MassTpaHack extends Hack
 	{
 		super("MassTPA", "Sends a TPA request to all players.\n"
 			+ "Stops if someone accepts.");
-		setCategory(Category.CHAT);
+		setCategory("Chat");
 	}
 	
 	@Override

@@ -27,7 +27,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -67,7 +66,7 @@ public final class AutoEatHack extends Hack implements UpdateListener
 	public AutoEatHack()
 	{
 		super("AutoEat", "Automatically eats food when necessary.");
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 		addSetting(eatWhileWalking);
 		addSetting(foodPriority);
 		addSetting(allowHunger);

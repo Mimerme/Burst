@@ -11,7 +11,7 @@ import net.minecraft.client.gui.screen.ConnectScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.network.ServerInfo;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.IMultiplayerScreen;
 
 /**
@@ -47,7 +47,7 @@ public enum LastServerRememberer
 		if(lastServer == null)
 			return;
 		
-		WurstClient.MC.openScreen(
-			new ConnectScreen(prevScreen, WurstClient.MC, lastServer));
+		BurstClient.MC.openScreen(
+			new ConnectScreen(prevScreen, BurstClient.MC, lastServer));
 	}
 }

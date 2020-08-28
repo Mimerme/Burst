@@ -14,7 +14,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public enum RenderUtils
 {
@@ -26,8 +26,8 @@ public enum RenderUtils
 	{
 		int width = endX - startX;
 		int height = endY - startY;
-		int bottomY = WurstClient.MC.currentScreen.height - endY;
-		double factor = WurstClient.MC.getWindow().getScaleFactor();
+		int bottomY = BurstClient.MC.currentScreen.height - endY;
+		double factor = BurstClient.MC.getWindow().getScaleFactor();
 		
 		int scissorX = (int)(startX * factor);
 		int scissorY = (int)(bottomY * factor);

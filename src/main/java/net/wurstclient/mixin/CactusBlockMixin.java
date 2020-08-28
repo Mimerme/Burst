@@ -19,14 +19,14 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.event.EventManager;
 import net.wurstclient.events.CactusCollisionShapeListener.CactusCollisionShapeEvent;
 
 @Mixin(CactusBlock.class)
 public abstract class CactusBlockMixin extends Block
 {
-	private CactusBlockMixin(WurstClient wurst, Settings block$Settings_1)
+	private CactusBlockMixin(BurstClient wurst, Settings block$Settings_1)
 	{
 		super(block$Settings_1);
 	}
@@ -39,7 +39,7 @@ public abstract class CactusBlockMixin extends Block
 		BlockView blockView_1, BlockPos blockPos_1,
 		ShapeContext entityContext_1, CallbackInfoReturnable<VoxelShape> cir)
 	{
-		EventManager events = WurstClient.INSTANCE.getEventManager();
+		EventManager events = BurstClient.INSTANCE.getEventManager();
 		if(events == null)
 			return;
 		

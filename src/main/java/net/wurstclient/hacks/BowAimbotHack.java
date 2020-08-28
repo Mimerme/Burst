@@ -38,7 +38,6 @@ import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.GUIRenderListener;
 import net.wurstclient.events.RenderListener;
@@ -117,7 +116,7 @@ public final class BowAimbotHack extends Hack
 	{
 		super("BowAimbot", "Automatically aims your bow or crossbow.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(priority);
 		
 		addSetting(filterPlayers);

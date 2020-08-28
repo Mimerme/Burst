@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.DontBlock;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
@@ -20,6 +19,6 @@ public final class AutoReconnectHack extends Hack
 	{
 		super("AutoReconnect", "Automatically reconnects when you get\n"
 			+ "kicked from the server.");
-		setCategory(Category.OTHER);
+		setCategory("Other");
 	}
 }

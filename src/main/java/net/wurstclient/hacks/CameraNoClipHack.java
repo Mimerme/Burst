@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -19,6 +18,6 @@ public final class CameraNoClipHack extends Hack
 		super("CameraNoClip",
 			"Allows the camera in 3rd person to go through walls.");
 		
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.potion.PotionUtil;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -38,7 +37,7 @@ public final class AutoPotionHack extends Hack implements UpdateListener
 		super("AutoPotion", "Automatically throws splash potions of\n"
 			+ "instant health when your health is low.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(health);
 	}
 	

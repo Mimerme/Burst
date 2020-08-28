@@ -10,7 +10,6 @@ package net.wurstclient.hacks;
 import java.util.ArrayDeque;
 
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.wurstclient.Category;
 import net.wurstclient.events.PacketOutputListener;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.DontSaveState;
@@ -33,7 +32,7 @@ public final class BlinkHack extends Hack
 	public BlinkHack()
 	{
 		super("Blink", "Suspends all motion updates while enabled.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 		addSetting(limit);
 	}
 	

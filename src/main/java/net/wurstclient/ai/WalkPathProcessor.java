@@ -15,7 +15,7 @@ import net.minecraft.block.VineBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.util.BlockUtils;
 import net.wurstclient.util.RotationUtils;
 
@@ -31,12 +31,12 @@ public class WalkPathProcessor extends PathProcessor
 	{
 		// get positions
 		BlockPos pos;
-		if(WurstClient.MC.player.isOnGround())
-			pos = new BlockPos(WurstClient.MC.player.getX(),
-				WurstClient.MC.player.getY() + 0.5,
-				WurstClient.MC.player.getZ());
+		if(BurstClient.MC.player.isOnGround())
+			pos = new BlockPos(BurstClient.MC.player.getX(),
+				BurstClient.MC.player.getY() + 0.5,
+				BurstClient.MC.player.getZ());
 		else
-			pos = new BlockPos(WurstClient.MC.player.getPos());
+			pos = new BlockPos(BurstClient.MC.player.getPos());
 		PathPos nextPos = path.get(index);
 		int posIndex = path.indexOf(pos);
 		
@@ -65,7 +65,7 @@ public class WalkPathProcessor extends PathProcessor
 		}
 		
 		lockControls();
-		WurstClient.MC.player.abilities.flying = false;
+		BurstClient.MC.player.abilities.flying = false;
 		
 		// face next position
 		facePosition(nextPos);
@@ -73,19 +73,19 @@ public class WalkPathProcessor extends PathProcessor
 			.getHorizontalAngleToLookVec(Vec3d.ofCenter(nextPos)))) > 90)
 			return;
 		
-		if(WURST.getHax().jesusHack.isEnabled())
+		if(WURST.getHax().getJesusHack().isEnabled())
 		{
 			// wait for Jesus to swim up
-			if(WurstClient.MC.player.getY() < nextPos.getY()
-				&& (WurstClient.MC.player.isTouchingWater()
-					|| WurstClient.MC.player.isInLava()))
+			if(BurstClient.MC.player.getY() < nextPos.getY()
+				&& (BurstClient.MC.player.isTouchingWater()
+					|| BurstClient.MC.player.isInLava()))
 				return;
 			
 			// manually swim down if using Jesus
-			if(WurstClient.MC.player.getY() - nextPos.getY() > 0.5
-				&& (WurstClient.MC.player.isTouchingWater()
-					|| WurstClient.MC.player.isInLava()
-					|| WURST.getHax().jesusHack.isOverLiquid()))
+			if(BurstClient.MC.player.getY() - nextPos.getY() > 0.5
+				&& (BurstClient.MC.player.isTouchingWater()
+					|| BurstClient.MC.player.isInLava()
+					|| WURST.getHax().getJesusHack().isOverLiquid()))
 				MC.options.keySneak.setPressed(true);
 		}
 		
@@ -133,7 +133,7 @@ public class WalkPathProcessor extends PathProcessor
 					index++;
 				
 				// walk off the edge
-				if(WurstClient.MC.player.isOnGround())
+				if(BurstClient.MC.player.isOnGround())
 					MC.options.keyForward.setPressed(true);
 			}
 	}

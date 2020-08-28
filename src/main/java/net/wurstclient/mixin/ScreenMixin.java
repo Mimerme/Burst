@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(Screen.class)
 public abstract class ScreenMixin
@@ -31,7 +31,7 @@ public abstract class ScreenMixin
 			return;
 		
 		ChatMessageC2SPacket packet = new ChatMessageC2SPacket(message);
-		WurstClient.MC.getNetworkHandler().sendPacket(packet);
+		BurstClient.MC.getNetworkHandler().sendPacket(packet);
 		ci.cancel();
 	}
 }

@@ -16,7 +16,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.Packet;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.events.PacketInputListener.PacketInputEvent;
 
 @Mixin(ClientConnection.class)
@@ -33,7 +33,7 @@ public abstract class ClientConnectionMixin
 		Packet<?> packet, CallbackInfo ci)
 	{
 		PacketInputEvent event = new PacketInputEvent(packet);
-		WurstClient.INSTANCE.getEventManager().fire(event);
+		BurstClient.INSTANCE.getEventManager().fire(event);
 		
 		if(event.isCancelled())
 			ci.cancel();

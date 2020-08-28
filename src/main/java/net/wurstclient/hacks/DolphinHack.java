@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -21,14 +20,14 @@ public final class DolphinHack extends Hack implements UpdateListener
 	{
 		super("Dolphin", "Makes you bob up in water automatically.\n"
 			+ "(just like a dolphin)");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override
 	public void onEnable()
 	{
 		EVENTS.add(UpdateListener.class, this);
-		WURST.getHax().fishHack.setEnabled(false);
+		//WURST.getHax().fishHack.setEnabled(false);
 	}
 	
 	@Override

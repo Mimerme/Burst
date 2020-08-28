@@ -9,7 +9,6 @@ package net.wurstclient.hacks;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.wurstclient.Category;
 import net.wurstclient.hack.DontSaveState;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.mixinterface.IGameRenderer;
@@ -20,7 +19,7 @@ public final class LsdHack extends Hack
 	public LsdHack()
 	{
 		super("LSD", "Causes hallucinations.");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 	}
 	
 	@Override

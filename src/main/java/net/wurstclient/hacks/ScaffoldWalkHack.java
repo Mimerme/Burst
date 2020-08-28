@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EmptyBlockView;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -33,7 +32,7 @@ public final class ScaffoldWalkHack extends Hack implements UpdateListener
 	public ScaffoldWalkHack()
 	{
 		super("ScaffoldWalk", "Automatically places blocks below your feet.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override

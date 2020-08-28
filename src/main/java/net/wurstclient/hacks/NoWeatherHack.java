@@ -1,6 +1,5 @@
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.CheckboxSetting;
 import net.wurstclient.settings.SliderSetting;
@@ -27,7 +26,7 @@ public final class NoWeatherHack extends Hack
 	{
 		super("NoWeather", "Allows you to alter the client-side weather,\n"
 			+ "time and moon phase.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		
 		addSetting(disableRain);
 		addSetting(changeTime);

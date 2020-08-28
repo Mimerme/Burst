@@ -13,7 +13,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.util.ChatUtils;
@@ -25,7 +24,7 @@ public final class TrollPotionHack extends Hack
 	{
 		super("TrollPotion",
 			"Generates a potion with many annoying effects on it.");
-		setCategory(Category.ITEMS);
+		setCategory("Items");
 	}
 	
 	@Override

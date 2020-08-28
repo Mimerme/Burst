@@ -18,14 +18,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public enum BlockBreaker
 {
 	;
 	
-	private static final WurstClient WURST = WurstClient.INSTANCE;
-	private static final MinecraftClient MC = WurstClient.MC;
+	private static final BurstClient WURST = BurstClient.INSTANCE;
+	private static final MinecraftClient MC = BurstClient.MC;
 	
 	public static boolean breakOneBlock(BlockPos pos)
 	{

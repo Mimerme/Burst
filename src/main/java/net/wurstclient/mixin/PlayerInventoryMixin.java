@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.entity.player.PlayerInventory;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(PlayerInventory.class)
 public class PlayerInventoryMixin
@@ -23,7 +23,7 @@ public class PlayerInventoryMixin
 		cancellable = true)
 	private void onScrollInHotbar(double scrollAmount, CallbackInfo ci)
 	{
-		if(WurstClient.INSTANCE.getZoomKey().isPressed())
+		if(BurstClient.INSTANCE.getZoomKey().isPressed())
 			ci.cancel();
 	}
 }

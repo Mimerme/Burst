@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -17,12 +16,12 @@ public final class SafeWalkHack extends Hack
 	public SafeWalkHack()
 	{
 		super("SafeWalk", "Prevents you from falling off edges.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override
 	protected void onEnable()
 	{
-		WURST.getHax().parkourHack.setEnabled(false);
+		//WURST.getHax().parkourHack.setEnabled(false);
 	}
 }

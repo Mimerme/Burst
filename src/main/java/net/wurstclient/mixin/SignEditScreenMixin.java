@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hacks.AutoSignHack;
 
 @Mixin(SignEditScreen.class)
@@ -27,7 +27,7 @@ public abstract class SignEditScreenMixin extends Screen
 	@Final
 	private String[] field_24285;
 	
-	private SignEditScreenMixin(WurstClient wurst, Text text_1)
+	private SignEditScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -35,7 +35,7 @@ public abstract class SignEditScreenMixin extends Screen
 	@Inject(at = {@At("HEAD")}, method = {"init()V"})
 	private void onInit(CallbackInfo ci)
 	{
-		AutoSignHack autoSignHack = WurstClient.INSTANCE.getHax().autoSignHack;
+		AutoSignHack autoSignHack = BurstClient.INSTANCE.getHax().getAutoSignHack();
 		
 		String[] autoSignText = autoSignHack.getSignText();
 		if(autoSignText == null)
@@ -48,7 +48,7 @@ public abstract class SignEditScreenMixin extends Screen
 	@Inject(at = {@At("HEAD")}, method = {"finishEditing()V"})
 	private void onFinishEditing(CallbackInfo ci)
 	{
-		WurstClient.INSTANCE.getHax().autoSignHack.setSignText(field_24285);
+		BurstClient.INSTANCE.getHax().getAutoSignHack().setSignText(field_24285);
 	}
 	
 	@Shadow

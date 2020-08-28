@@ -21,7 +21,7 @@ import com.google.gson.JsonElement;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.components.BlockListEditButton;
 import net.wurstclient.keybinds.PossibleKeybind;
@@ -59,7 +59,7 @@ public final class BlockListSetting extends Setting
 		
 		blockNames.add(name);
 		Collections.sort(blockNames);
-		WurstClient.INSTANCE.saveSettings();
+		BurstClient.INSTANCE.saveSettings();
 	}
 	
 	public void remove(int index)
@@ -68,14 +68,14 @@ public final class BlockListSetting extends Setting
 			return;
 		
 		blockNames.remove(index);
-		WurstClient.INSTANCE.saveSettings();
+		BurstClient.INSTANCE.saveSettings();
 	}
 	
 	public void resetToDefaults()
 	{
 		blockNames.clear();
 		blockNames.addAll(Arrays.asList(defaultNames));
-		WurstClient.INSTANCE.saveSettings();
+		BurstClient.INSTANCE.saveSettings();
 	}
 	
 	@Override

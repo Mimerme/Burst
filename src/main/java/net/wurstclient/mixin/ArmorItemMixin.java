@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.IArmorItem;
 
 @Mixin(ArmorItem.class)
@@ -21,7 +21,7 @@ public class ArmorItemMixin extends Item implements IArmorItem
 	@Shadow
 	protected float toughness;
 	
-	private ArmorItemMixin(WurstClient wurst, Settings item$Settings_1)
+	private ArmorItemMixin(BurstClient wurst, Settings item$Settings_1)
 	{
 		super(item$Settings_1);
 	}

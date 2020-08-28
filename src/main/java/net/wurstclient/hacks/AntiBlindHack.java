@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -17,6 +16,6 @@ public final class AntiBlindHack extends Hack
 	public AntiBlindHack()
 	{
 		super("AntiBlind", "Prevents blindness.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 }

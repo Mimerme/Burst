@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -20,13 +19,13 @@ public final class JetpackHack extends Hack implements UpdateListener
 		super("Jetpack", "Allows you to fly as if you had a jetpack.\n\n"
 			+ "\u00a7c\u00a7lWARNING:\u00a7r You will take fall damage if you don't use NoFall.");
 		
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override
 	public void onEnable()
 	{
-		WURST.getHax().flightHack.setEnabled(false);
+		WURST.getHax().getFlightHack().setEnabled(false);
 		EVENTS.add(UpdateListener.class, this);
 	}
 	

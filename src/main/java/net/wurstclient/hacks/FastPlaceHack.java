@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -19,7 +18,7 @@ public final class FastPlaceHack extends Hack implements UpdateListener
 	{
 		super("FastPlace", "Allows you to place blocks 5 times faster.\n"
 			+ "Tip: This can speed up other hacks like AutoBuild.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override

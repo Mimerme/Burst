@@ -14,7 +14,7 @@ import java.awt.Rectangle;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 public abstract class NavigatorScreen extends Screen
 {
@@ -242,7 +242,7 @@ public abstract class NavigatorScreen extends Screen
 	protected final void drawBoxShadow(int x1, int y1, int x2, int y2)
 	{
 		// color
-		float[] acColor = WurstClient.INSTANCE.getGui().getAcColor();
+		float[] acColor = BurstClient.INSTANCE.getGui().getAcColor();
 		
 		// outline positions
 		double xi1 = x1 - 0.1;
@@ -301,7 +301,7 @@ public abstract class NavigatorScreen extends Screen
 	protected final void drawInvertedBoxShadow(int x1, int y1, int x2, int y2)
 	{
 		// color
-		float[] acColor = WurstClient.INSTANCE.getGui().getAcColor();
+		float[] acColor = BurstClient.INSTANCE.getGui().getAcColor();
 		
 		// outline positions
 		double xi1 = x1 + 0.1;
@@ -360,7 +360,7 @@ public abstract class NavigatorScreen extends Screen
 	protected final void drawDownShadow(int x1, int y1, int x2, int y2)
 	{
 		// color
-		float[] acColor = WurstClient.INSTANCE.getGui().getAcColor();
+		float[] acColor = BurstClient.INSTANCE.getGui().getAcColor();
 		
 		// outline
 		double yi1 = y1 + 0.1;
@@ -400,17 +400,17 @@ public abstract class NavigatorScreen extends Screen
 	
 	protected final void setColorToBackground()
 	{
-		WurstClient.INSTANCE.getGui().updateColors();
-		float[] bgColor = WurstClient.INSTANCE.getGui().getBgColor();
-		float opacity = WurstClient.INSTANCE.getGui().getOpacity();
+		BurstClient.INSTANCE.getGui().updateColors();
+		float[] bgColor = BurstClient.INSTANCE.getGui().getBgColor();
+		float opacity = BurstClient.INSTANCE.getGui().getOpacity();
 		glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
 	}
 	
 	protected final void setColorToForeground()
 	{
-		WurstClient.INSTANCE.getGui().updateColors();
-		float[] bgColor = WurstClient.INSTANCE.getGui().getBgColor();
-		float opacity = WurstClient.INSTANCE.getGui().getOpacity();
+		BurstClient.INSTANCE.getGui().updateColors();
+		float[] bgColor = BurstClient.INSTANCE.getGui().getBgColor();
+		float opacity = BurstClient.INSTANCE.getGui().getOpacity();
 		glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
 	}
 	

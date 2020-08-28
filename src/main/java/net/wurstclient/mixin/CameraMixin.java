@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.client.render.Camera;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(Camera.class)
 public abstract class CameraMixin
@@ -26,8 +26,8 @@ public abstract class CameraMixin
 	private void onClipToSpace(double desiredCameraDistance,
 		CallbackInfoReturnable<Double> cir)
 	{
-		if(WurstClient.INSTANCE.getHax().cameraNoClipHack.isEnabled())
-			cir.setReturnValue(desiredCameraDistance);
+/*		if(BurstClient.INSTANCE.getHax().cameraNoClipHack.isEnabled())
+			cir.setReturnValue(desiredCameraDistance);*/
 	}
 	
 	@Inject(at = {@At("HEAD")},
@@ -35,7 +35,7 @@ public abstract class CameraMixin
 		cancellable = true)
 	private void getSubmergedFluidState(CallbackInfoReturnable<FluidState> cir)
 	{
-		if(WurstClient.INSTANCE.getHax().noOverlayHack.isEnabled())
-			cir.setReturnValue(Fluids.EMPTY.getDefaultState());
+/*		if(BurstClient.INSTANCE.getHax().noOverlayHack.isEnabled())
+			cir.setReturnValue(Fluids.EMPTY.getDefaultState());*/
 	}
 }

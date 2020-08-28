@@ -13,13 +13,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.mixinterface.IKeyBinding;
 
 public abstract class PathProcessor
 {
-	protected static final WurstClient WURST = WurstClient.INSTANCE;
-	protected static final MinecraftClient MC = WurstClient.MC;
+	protected static final BurstClient WURST = BurstClient.INSTANCE;
+	protected static final MinecraftClient MC = BurstClient.MC;
 	
 	private static final KeyBinding[] CONTROLS = new KeyBinding[]{
 		MC.options.keyForward, MC.options.keyBack, MC.options.keyRight,
@@ -68,7 +68,7 @@ public abstract class PathProcessor
 			key.setPressed(false);
 		
 		// disable sprinting
-		WurstClient.MC.player.setSprinting(false);
+		BurstClient.MC.player.setSprinting(false);
 	}
 	
 	public static final void releaseControls()

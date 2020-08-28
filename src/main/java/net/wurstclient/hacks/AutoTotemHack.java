@@ -12,7 +12,6 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -32,7 +31,7 @@ public final class AutoTotemHack extends Hack implements UpdateListener
 	{
 		super("AutoTotem",
 			"Automatically moves totems of undying to your off-hand.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(showCounter);
 	}
 	

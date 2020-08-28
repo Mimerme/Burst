@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.hacks.NoWeatherHack;
 
 @Mixin(World.class)
@@ -25,8 +25,8 @@ public abstract class WorldMixin implements WorldAccess, AutoCloseable
 		cancellable = true)
 	private void onGetRainGradient(float f, CallbackInfoReturnable<Float> cir)
 	{
-		if(WurstClient.INSTANCE.getHax().noWeatherHack.isRainDisabled())
-			cir.setReturnValue(0F);
+/*		if(BurstClient.INSTANCE.getHax().noWeatherHack.isRainDisabled())
+			cir.setReturnValue(0F);*/
 	}
 	
 	// getSkyAngle
@@ -34,7 +34,7 @@ public abstract class WorldMixin implements WorldAccess, AutoCloseable
 	public float method_30274(float tickDelta)
 	{
 		NoWeatherHack noWeatherHack =
-			WurstClient.INSTANCE.getHax().noWeatherHack;
+			BurstClient.INSTANCE.getHax().getNoWeatherHack();
 		
 		long timeOfDay =
 			noWeatherHack.isTimeChanged() ? noWeatherHack.getChangedTime()
@@ -47,7 +47,7 @@ public abstract class WorldMixin implements WorldAccess, AutoCloseable
 	public int getMoonPhase()
 	{
 		NoWeatherHack noWeatherHack =
-			WurstClient.INSTANCE.getHax().noWeatherHack;
+			BurstClient.INSTANCE.getHax().getNoWeatherHack();
 		
 		if(noWeatherHack.isMoonPhaseChanged())
 			return noWeatherHack.getChangedMoonPhase();

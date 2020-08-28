@@ -25,7 +25,6 @@ import net.minecraft.entity.vehicle.ChestMinecartEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wurstclient.Category;
 import net.wurstclient.events.CameraTransformViewBobbingListener;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -62,7 +61,7 @@ public class ChestEspHack extends Hack implements UpdateListener,
 				+ "\u00a7bcyan\u00a7r - ender chests\n"
 				+ "\u00a7dpurple\u00a7r - shulker boxes");
 		
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(style);
 	}
 	

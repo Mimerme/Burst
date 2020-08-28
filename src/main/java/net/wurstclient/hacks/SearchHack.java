@@ -36,7 +36,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.chunk.Chunk;
-import net.wurstclient.Category;
 import net.wurstclient.events.PacketInputListener;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -85,7 +84,7 @@ public final class SearchHack extends Hack
 	{
 		super("Search", "Helps you to find specific blocks by\n"
 			+ "highlighting them in rainbow color.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 		addSetting(block);
 		addSetting(area);
 		addSetting(limit);

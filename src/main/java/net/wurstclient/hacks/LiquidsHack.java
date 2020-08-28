@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.events.HitResultRayTraceListener;
 import net.wurstclient.hack.Hack;
 
@@ -16,7 +15,7 @@ public final class LiquidsHack extends Hack implements HitResultRayTraceListener
 	public LiquidsHack()
 	{
 		super("Liquids", "Allows you to place blocks in liquids.");
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 	}
 	
 	@Override

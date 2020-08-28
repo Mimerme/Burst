@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.ChatOutputListener;
 import net.wurstclient.hack.Hack;
@@ -23,7 +22,7 @@ public final class FancyChatHack extends Hack implements ChatOutputListener
 			+ "with fancier unicode characters. Can be used to\n"
 			+ "bypass curse word filters on some servers.\n"
 			+ "Does not work on servers that block unicode\n" + "characters.");
-		setCategory(Category.CHAT);
+		setCategory("Chat");
 	}
 	
 	@Override

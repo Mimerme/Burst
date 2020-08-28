@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.util.math.BlockPos;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.settings.BlockListSetting;
@@ -37,7 +36,7 @@ public final class HandNoClipHack extends Hack
 		super("HandNoClip",
 			"Allows you to reach specific blocks through walls.");
 		
-		setCategory(Category.BLOCKS);
+		setCategory("Blocks");
 		addSetting(blocks);
 	}
 	

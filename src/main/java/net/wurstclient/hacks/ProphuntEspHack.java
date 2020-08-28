@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.hack.Hack;
@@ -29,7 +28,7 @@ public final class ProphuntEspHack extends Hack implements RenderListener
 	{
 		super("ProphuntESP", "Allows you to see fake blocks in Prophunt.\n"
 			+ "Made for Mineplex Prophunt. Might not work on other servers.");
-		setCategory(Category.RENDER);
+		setCategory("Render");
 	}
 	
 	@Override

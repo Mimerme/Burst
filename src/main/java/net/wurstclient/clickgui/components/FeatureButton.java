@@ -15,7 +15,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.wurstclient.Feature;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.Component;
 import net.wurstclient.clickgui.SettingsWindow;
@@ -25,8 +25,8 @@ import net.wurstclient.util.ChatUtils;
 
 public final class FeatureButton extends Component
 {
-	private final MinecraftClient MC = WurstClient.MC;
-	private final ClickGui GUI = WurstClient.INSTANCE.getGui();
+	private final MinecraftClient MC = BurstClient.MC;
+	private final ClickGui GUI = BurstClient.INSTANCE.getGui();
 	
 	private final Feature feature;
 	private final boolean hasSettings;
@@ -59,7 +59,7 @@ public final class FeatureButton extends Component
 		}
 		
 		TooManyHaxHack tooManyHax =
-			WurstClient.INSTANCE.getHax().tooManyHaxHack;
+			BurstClient.INSTANCE.getHax().getTooManyHaxHack();
 		if(tooManyHax.isEnabled() && tooManyHax.isBlocked(feature))
 		{
 			ChatUtils.error(feature.getName() + " is blocked by TooManyHax.");

@@ -23,7 +23,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 import net.wurstclient.options.WurstOptionsScreen;
 
 @Mixin(GameMenuScreen.class)
@@ -34,7 +34,7 @@ public abstract class GameMenuScreenMixin extends Screen
 	
 	private ButtonWidget wurstOptionsButton;
 	
-	private GameMenuScreenMixin(WurstClient wurst, Text text_1)
+	private GameMenuScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -42,7 +42,7 @@ public abstract class GameMenuScreenMixin extends Screen
 	@Inject(at = {@At("TAIL")}, method = {"initWidgets()V"})
 	private void onInitWidgets(CallbackInfo ci)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		addWurstOptionsButton();
@@ -87,7 +87,7 @@ public abstract class GameMenuScreenMixin extends Screen
 	private void onRender(MatrixStack matrixStack, int mouseX, int mouseY,
 		float partialTicks, CallbackInfo ci)
 	{
-		if(!WurstClient.INSTANCE.isEnabled())
+		if(!BurstClient.INSTANCE.isEnabled())
 			return;
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);

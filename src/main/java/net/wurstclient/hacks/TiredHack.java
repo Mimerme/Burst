@@ -8,7 +8,6 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 
@@ -18,15 +17,15 @@ public final class TiredHack extends Hack implements UpdateListener
 	{
 		super("Tired", "Makes you look like Alexander\n"
 			+ "back in April 2015.\n" + "Only visible to other players.");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 	}
 	
 	@Override
 	public void onEnable()
 	{
 		// disable incompatible derps
-		WURST.getHax().derpHack.setEnabled(false);
-		WURST.getHax().headRollHack.setEnabled(false);
+/*		WURST.getHax().derpHack.setEnabled(false);
+		WURST.getHax().headRollHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 	}

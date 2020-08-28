@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -18,6 +17,6 @@ public final class NoSlowdownHack extends Hack
 	{
 		super("NoSlowdown", "Cancels slowness effects caused by\n"
 			+ "honey, soul sand and using items.");
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 }

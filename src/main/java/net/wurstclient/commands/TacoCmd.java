@@ -13,7 +13,6 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.wurstclient.Category;
 import net.wurstclient.command.CmdException;
 import net.wurstclient.command.CmdSyntaxError;
 import net.wurstclient.command.Command;
@@ -36,7 +35,7 @@ public final class TacoCmd extends Command
 	{
 		super("taco", "Spawns a dancing taco on your hotbar.\n"
 			+ "\"I love that little guy. So cute!\" -WiZARD");
-		setCategory(Category.FUN);
+		setCategory("Fun");
 	}
 	
 	@Override
@@ -88,7 +87,7 @@ public final class TacoCmd extends Command
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-		if(WURST.getHax().rainbowUiHack.isEnabled())
+		if(WURST.getHax().getRainbowUiHack().isEnabled())
 		{
 			float[] acColor = WURST.getGui().getAcColor();
 			GL11.glColor4f(acColor[0], acColor[1], acColor[2], 1);

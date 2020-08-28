@@ -17,7 +17,7 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
-import net.wurstclient.WurstClient;
+import net.wurstclient.BurstClient;
 
 @Mixin(ChatScreen.class)
 public class ChatScreenMixin extends Screen
@@ -25,7 +25,7 @@ public class ChatScreenMixin extends Screen
 	@Shadow
 	protected TextFieldWidget chatField;
 	
-	private ChatScreenMixin(WurstClient wurst, Text text_1)
+	private ChatScreenMixin(BurstClient wurst, Text text_1)
 	{
 		super(text_1);
 	}
@@ -33,7 +33,7 @@ public class ChatScreenMixin extends Screen
 	@Inject(at = {@At("TAIL")}, method = {"init()V"})
 	protected void onInit(CallbackInfo ci)
 	{
-		if(WurstClient.INSTANCE.getHax().infiniChatHack.isEnabled())
+/*		if(BurstClient.INSTANCE.getHax().infiniChatHack.isEnabled()) */
 			chatField.setMaxLength(Integer.MAX_VALUE);
 	}
 }

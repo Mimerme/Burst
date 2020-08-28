@@ -7,7 +7,6 @@
  */
 package net.wurstclient.hacks;
 
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.hack.Hack;
 
@@ -17,7 +16,7 @@ public final class ReachHack extends Hack
 	public ReachHack()
 	{
 		super("Reach", "Allows you to reach further.");
-		setCategory(Category.OTHER);
+		setCategory("Other");
 	}
 	
 	@Override

@@ -10,7 +10,6 @@ package net.wurstclient.hacks;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
@@ -48,7 +47,7 @@ public final class AutoLeaveHack extends Hack implements UpdateListener
 		super("AutoLeave",
 			"Automatically leaves the server\n" + "when your health is low.");
 		
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(health);
 		addSetting(mode);
 	}

@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
-import net.wurstclient.Category;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
 
@@ -24,13 +23,13 @@ public final class ParkourHack extends Hack implements UpdateListener
 				+ "the edge of a block.\n"
 				+ "Useful for parkours and jump'n'runs.");
 		
-		setCategory(Category.MOVEMENT);
+		setCategory("Movement");
 	}
 	
 	@Override
 	public void onEnable()
 	{
-		WURST.getHax().safeWalkHack.setEnabled(false);
+/*		WURST.getHax().safeWalkHack.setEnabled(false);*/
 		EVENTS.add(UpdateListener.class, this);
 	}
 	

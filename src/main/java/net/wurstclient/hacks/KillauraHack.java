@@ -35,7 +35,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.wurstclient.Category;
 import net.wurstclient.events.PostMotionListener;
 import net.wurstclient.events.RenderListener;
 import net.wurstclient.events.UpdateListener;
@@ -127,7 +126,7 @@ public final class KillauraHack extends Hack
 	public KillauraHack()
 	{
 		super("Killaura", "Automatically attacks entities around you.");
-		setCategory(Category.COMBAT);
+		setCategory("Combat");
 		addSetting(range);
 		addSetting(priority);
 		addSetting(filterPlayers);
@@ -150,13 +149,13 @@ public final class KillauraHack extends Hack
 	protected void onEnable()
 	{
 		// disable other killauras
-		WURST.getHax().clickAuraHack.setEnabled(false);
+/*		WURST.getHax().clickAuraHack.setEnabled(false);
 		WURST.getHax().fightBotHack.setEnabled(false);
 		WURST.getHax().killauraLegitHack.setEnabled(false);
 		WURST.getHax().multiAuraHack.setEnabled(false);
 		WURST.getHax().protectHack.setEnabled(false);
 		WURST.getHax().triggerBotHack.setEnabled(false);
-		WURST.getHax().tpAuraHack.setEnabled(false);
+		WURST.getHax().tpAuraHack.setEnabled(false);*/
 		
 		EVENTS.add(UpdateListener.class, this);
 		EVENTS.add(PostMotionListener.class, this);
@@ -258,7 +257,7 @@ public final class KillauraHack extends Hack
 		if(target == null)
 			return;
 		
-		WURST.getHax().autoSwordHack.setSlot();
+		//WURST.getHax().autoSwordHack.setSlot();
 		
 		WURST.getRotationFaker()
 			.faceVectorPacket(target.getBoundingBox().getCenter());
@@ -270,7 +269,7 @@ public final class KillauraHack extends Hack
 		if(target == null)
 			return;
 		
-		WURST.getHax().criticalsHack.doCritical();
+		//WURST.getHax().criticalsHack.doCritical();
 		ClientPlayerEntity player = MC.player;
 		MC.interactionManager.attackEntity(player, target);
 		player.swingHand(Hand.MAIN_HAND);
