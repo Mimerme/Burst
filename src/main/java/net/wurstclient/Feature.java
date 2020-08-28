@@ -25,6 +25,10 @@ public abstract class Feature
 	protected static final EventManager EVENTS = WURST.getEventManager();
 	protected static final MinecraftClient MC = BurstClient.MC;
 	protected static final IMinecraftClient IMC = BurstClient.IMC;
+
+	protected String name;
+	protected String description;
+	protected String category;
 	
 	private final LinkedHashMap<String, Setting> settings =
 		new LinkedHashMap<>();
@@ -38,17 +42,31 @@ public abstract class Feature
 	private final boolean safeToBlock =
 		!getClass().isAnnotationPresent(DontBlock.class);
 	
-	public abstract String getName();
+	public String getName(){
+		return name;
+	}
 	
-	public abstract String getDescription();
+	public String getDescription(){
+		return description;
+	}
 	
-	public String getCategory()
-	{
-		return null;
+	public String getCategory() {
+		return category;
 	}
 	
 	public abstract String getPrimaryAction();
-	
+
+	public void initAnotations(){
+		//Initialize hack settings and category annotations here
+		BurstFeature featureInfo = this.getClass().getAnnotation(BurstFeature.class);
+		if (featureInfo == null)
+			return;
+
+		this.name =  featureInfo.name();
+		this.description = featureInfo.description();
+		this.category = featureInfo.category();
+	}
+
 	public void doPrimaryAction()
 	{
 		

@@ -59,6 +59,7 @@ public final class HackList implements UpdateListener
 			//Create new instances of each mod
 			try {
 				Hack mod = (Hack) modClass.newInstance();
+				mod.initAnotations();
 
 				String modName = mod.getName();
 
@@ -86,6 +87,7 @@ public final class HackList implements UpdateListener
 				try {
 					BurstClient.engine.eval(new FileReader(fileEntry));
 					Hack modObj = (Hack) BurstClient.invoker.invokeFunction("hack");
+					modObj.initAnotations();
 					hax.put(modObj.getName(), modObj);
 					System.out.println("Successfully loaded \'" + fileEntry.getName() + "\' module");
 				} catch (ScriptException e) {

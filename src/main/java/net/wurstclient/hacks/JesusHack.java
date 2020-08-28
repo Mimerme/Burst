@@ -18,31 +18,28 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
+import net.wurstclient.BurstFeature;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.PacketOutputListener;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
+import net.wurstclient.hack.Setting;
 import net.wurstclient.settings.CheckboxSetting;
 import net.wurstclient.util.BlockUtils;
 
+@BurstFeature(name="Jesus", description="Allows you to walk on water.\n"
+		+ "Jesus used this hack ~2000 years ago.", category = "Movement")
 @SearchTags({"WaterWalking", "water walking"})
 public final class JesusHack extends Hack
 	implements UpdateListener, PacketOutputListener
 {
+	@Setting
 	private final CheckboxSetting bypass =
 		new CheckboxSetting("NoCheat+ bypass",
 			"Bypasses NoCheat+ but slows down your movement.", false);
 	
 	private int tickTimer = 10;
 	private int packetTimer = 0;
-	
-	public JesusHack()
-	{
-		super("Jesus", "Allows you to walk on water.\n"
-			+ "Jesus used this hack ~2000 years ago.");
-		setCategory("Movement");
-		addSetting(bypass);
-	}
 	
 	@Override
 	public void onEnable()

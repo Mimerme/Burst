@@ -7,6 +7,7 @@
  */
 package net.wurstclient.hack;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 import net.wurstclient.Feature;
@@ -15,46 +16,46 @@ import net.wurstclient.hacks.TooManyHaxHack;
 
 public abstract class Hack extends Feature
 {
-	private final String name;
-	private final String description;
-	private String category;
-	
 	private boolean enabled;
 	private final boolean stateSaved =
 		!getClass().isAnnotationPresent(DontSaveState.class);
-	
+
+	public Hack(){
+		this("","");
+	}
+
 	public Hack(String name, String description)
 	{
 		this.name = Objects.requireNonNull(name);
 		this.description = Objects.requireNonNull(description);
 		addPossibleKeybind(name, "Toggle " + name);
-
-		//Initialize hack settings and category annotations here
 	}
 
-
-	//Hack names and descriptions can now be set via annotations or directly in the code
 	@Override
-	public final String getName()
-	{
-		return name;
+	public void initAnotations() {
+		super.initAnotations();
+
+		//Initialize settings here
+		Field[] fields = this.getClass().getDeclaredFields();
+		for (Field f : fields){
+			if (f.getAnnotation(Setting.class) != null){
+				f.setAccessible(true);
+				try {
+					Object settingObj = f.get(this);
+					if (!(settingObj instanceof net.wurstclient.settings.Setting))
+						throw new RuntimeException("@Setting field on Non-Setting type");
+
+					addSetting((net.wurstclient.settings.Setting) settingObj);
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
-	
+
 	public String getRenderName()
 	{
 		return name;
-	}
-	
-	@Override
-	public final String getDescription()
-	{
-		return description;
-	}
-	
-	@Override
-	public final String getCategory()
-	{
-		return category;
 	}
 	
 	protected final void setCategory(String category)
