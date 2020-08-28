@@ -588,8 +588,8 @@ public final class ClickGui
 		GL11.glLineWidth(1);
 
 		//TODO: move pined windows to a seperate arraylist for perfomance
-		for(Window window : pinnedWindows)
-			if(!window.isInvisible())
+		for(Window window : windows)
+			if(!window.isInvisible() && window.isPinned())
 				renderWindow(matrixStack, window, Integer.MIN_VALUE,
 					Integer.MIN_VALUE, partialTicks);
 			

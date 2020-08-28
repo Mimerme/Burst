@@ -37,9 +37,6 @@ import javax.script.ScriptException;
 
 public final class HackList implements UpdateListener
 {
-	//JS engine stuff
-	private ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-	Invocable invoker = (Invocable) engine;
 
 	private final TreeMap<String, Hack> hax =
 		new TreeMap<>((o1, o2) -> o1.compareToIgnoreCase(o2));
@@ -87,8 +84,8 @@ public final class HackList implements UpdateListener
 			if (!fileEntry.isDirectory()) {
 				//TODO: error handling is a little harsh rn. Loosen it up
 				try {
-					engine.eval(new FileReader(fileEntry));
-					Hack modObj = (Hack) invoker.invokeFunction("hack");
+					BurstClient.engine.eval(new FileReader(fileEntry));
+					Hack modObj = (Hack) BurstClient.invoker.invokeFunction("hack");
 					hax.put(modObj.getName(), modObj);
 					System.out.println("Successfully loaded \'" + fileEntry.getName() + "\' module");
 				} catch (ScriptException e) {

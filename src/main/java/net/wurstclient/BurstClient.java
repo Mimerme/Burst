@@ -54,6 +54,9 @@ import net.wurstclient.settings.SettingsFile;
 import net.wurstclient.update.WurstUpdater;
 import net.wurstclient.util.json.JsonException;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 public enum BurstClient
@@ -89,19 +92,16 @@ public enum BurstClient
 	
 	private KeyBinding zoomKey;
 
-
+	//JS engine stuff
+	public static ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+	public static Invocable invoker = (Invocable) engine;
 
 	public void initialize()
 	{
 		System.out.println("Starting Wurst Client...");
 		
 		wurstFolder = createWurstFolder();
-		
-/*		String trackingID = "UA-52838431-5";
-		String hostname = "client.wurstclient.net";
-		Path analyticsFile = wurstFolder.resolve("analytics.json");
-		analytics = new WurstAnalytics(trackingID, hostname, analyticsFile);*/
-		
+
 		eventManager = new EventManager(this);
 		
 		Path enabledHacksFile = wurstFolder.resolve("enabled-hacks.json");
@@ -125,7 +125,8 @@ public enum BurstClient
 
 		//Load the clickGui object if there exists one
 		Path clickGuiObject = wurstFolder.resolve("clickgui.js");
-		if (clickGuiObject.exists())
+		File clickFile = new File("clickgui.js");
+		if (clickFile.exists())
 			gui = loadClickGui("clickgui.js");
 		else
 			gui = new ClickGui(guiFile);
@@ -161,9 +162,6 @@ public enum BurstClient
 		zoomKey = new KeyBinding("key.wurst.zoom", InputUtil.Type.KEYSYM,
 			GLFW.GLFW_KEY_V, "Zoom");
 		KeyBindingHelper.registerKeyBinding(zoomKey);
-		
-		analytics.trackPageView("/mc" + MC_VERSION + "/v" + VERSION,
-			"Wurst " + VERSION + " MC" + MC_VERSION);
 	}
 	
 	private Path createWurstFolder()
@@ -307,7 +305,7 @@ public enum BurstClient
 		return gui;
 	}
 
-	public void loadClickGui(String jsDirectory){
+	public ClickGui loadClickGui(String jsDirectory){
 		System.out.println("Loading new clickGui from \'" + System.getProperty("user.dir") + "/" + jsDirectory + "\' via Nashorn");
 
 		File folder = new File(jsDirectory);
@@ -328,6 +326,8 @@ public enum BurstClient
 				}
 			}
 		}
+
+		return null;
 	}
 
 
