@@ -19,7 +19,7 @@ import net.wurstclient.settings.EnumSetting;
 public final class WurstLogoOtf extends OtherFeature
 {
 	private final EnumSetting<Visibility> visibility =
-		new EnumSetting<>("Visibility", Visibility.values(), Visibility.ALWAYS);
+		new EnumSetting<>("Visibility", Visibility.values(), Visibility.NEVER);
 	
 	public WurstLogoOtf()
 	{
@@ -36,8 +36,7 @@ public final class WurstLogoOtf extends OtherFeature
 	{
 		ALWAYS("Always", () -> true),
 		
-		ONLY_OUTDATED("Only when outdated",
-			() -> WURST.getUpdater().isOutdated());
+		NEVER("Never",  () -> false);
 		
 		private final String name;
 		private final BooleanSupplier visible;

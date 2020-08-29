@@ -85,7 +85,10 @@ public enum BurstClient
 	private FriendsList friends;
 	
 	private boolean enabled = true;
-	private static boolean guiInitialized;
+
+	//Since we can't intialize clickGuis before the game initialize's its TextRenderer
+	//we need to initalize the gui whenever a value read occurs and it still isn't initialized
+	public static boolean guiInitialized;
 	private WurstUpdater updater;
 	private Path wurstFolder;
 	
@@ -95,6 +98,62 @@ public enum BurstClient
 	public static ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 	public static Invocable invoker = (Invocable) engine;
 
+	public void loadFeatures(){
+		Path enabledHacksFile = wurstFolder.resolve("enabled-hacks.json");
+		hax = new HackList(enabledHacksFile);
+		cmds = new CmdList();
+		otfs = new OtfList();
+
+		Path settingsFile = wurstFolder.resolve("settings.json");
+		settingsProfileFolder = wurstFolder.resolve("settings");
+		this.settingsFile = new SettingsFile(settingsFile, hax, cmds, otfs);
+		this.settingsFile.load();
+		hax.getTooManyHaxHack().loadBlockedHacksFile();
+
+		Path keybindsFile = wurstFolder.resolve("keybinds.json");
+		keybinds = new KeybindList(keybindsFile);
+
+		Path guiFile = wurstFolder.resolve("windows.json");
+
+		//Load the clickGui object if there exists one
+		File clickFile = new File("clickgui.js");
+		if (clickFile.exists())
+			gui = loadClickGui("clickgui.js");
+		else
+			gui = new ClickGui(guiFile);
+
+		Path preferencesFile = wurstFolder.resolve("preferences.json");
+		navigator = new Navigator(preferencesFile, hax, cmds, otfs);
+
+		Path friendsFile = wurstFolder.resolve("friends.json");
+		friends = new FriendsList(friendsFile);
+		friends.load();
+
+		cmdProcessor = new CmdProcessor(cmds);
+		eventManager.add(ChatOutputListener.class, cmdProcessor);
+
+		KeybindProcessor keybindProcessor =
+				new KeybindProcessor(hax, keybinds, cmdProcessor);
+		eventManager.add(KeyPressListener.class, keybindProcessor);
+
+		hud = new IngameHUD();
+		eventManager.add(GUIRenderListener.class, hud);
+
+/*		rotationFaker = new RotationFaker();
+		eventManager.add(PreMotionListener.class, rotationFaker);
+		eventManager.add(PostMotionListener.class, rotationFaker);*/
+
+		Path altsFile = wurstFolder.resolve("alts.encrypted_json");
+		Path encFolder = createEncryptionFolder();
+		altManager = new AltManager(altsFile, encFolder);
+	}
+
+	//Purge all the registered events associated with the current initialized features
+	public void purgeEvents(){
+		eventManager.remove(ChatOutputListener.class, cmdProcessor);
+		eventManager.remove(GUIRenderListener.class, hud);
+	}
+
 	public void initialize()
 	{
 		System.out.println("Starting Wurst Client...");
@@ -102,61 +161,8 @@ public enum BurstClient
 		wurstFolder = createWurstFolder();
 
 		eventManager = new EventManager(this);
-		
-		Path enabledHacksFile = wurstFolder.resolve("enabled-hacks.json");
-		hax = new HackList(enabledHacksFile);
-		
-		cmds = new CmdList();
-		
-		otfs = new OtfList();
-		
-		Path settingsFile = wurstFolder.resolve("settings.json");
-		settingsProfileFolder = wurstFolder.resolve("settings");
-		this.settingsFile = new SettingsFile(settingsFile, hax, cmds, otfs);
-		this.settingsFile.load();
-		hax.getTooManyHaxHack().loadBlockedHacksFile();
-		
-		Path keybindsFile = wurstFolder.resolve("keybinds.json");
-		keybinds = new KeybindList(keybindsFile);
-		
-		Path guiFile = wurstFolder.resolve("windows.json");
 
-
-		//Load the clickGui object if there exists one
-		Path clickGuiObject = wurstFolder.resolve("clickgui.js");
-		File clickFile = new File("clickgui.js");
-		if (clickFile.exists())
-			gui = loadClickGui("clickgui.js");
-		else
-			gui = new ClickGui(guiFile);
-		
-		Path preferencesFile = wurstFolder.resolve("preferences.json");
-		navigator = new Navigator(preferencesFile, hax, cmds, otfs);
-		
-		Path friendsFile = wurstFolder.resolve("friends.json");
-		friends = new FriendsList(friendsFile);
-		friends.load();
-		
-		cmdProcessor = new CmdProcessor(cmds);
-		eventManager.add(ChatOutputListener.class, cmdProcessor);
-		
-		KeybindProcessor keybindProcessor =
-			new KeybindProcessor(hax, keybinds, cmdProcessor);
-		eventManager.add(KeyPressListener.class, keybindProcessor);
-		
-		hud = new IngameHUD();
-		eventManager.add(GUIRenderListener.class, hud);
-		
-		rotationFaker = new RotationFaker();
-		eventManager.add(PreMotionListener.class, rotationFaker);
-		eventManager.add(PostMotionListener.class, rotationFaker);
-		
-		updater = new WurstUpdater();
-		eventManager.add(UpdateListener.class, updater);
-		
-		Path altsFile = wurstFolder.resolve("alts.encrypted_json");
-		Path encFolder = createEncryptionFolder();
-		altManager = new AltManager(altsFile, encFolder);
+		loadFeatures();
 		
 		zoomKey = new KeyBinding("key.wurst.zoom", InputUtil.Type.KEYSYM,
 			GLFW.GLFW_KEY_V, "Zoom");
@@ -287,7 +293,7 @@ public enum BurstClient
 	{
 		return keybinds;
 	}
-	
+
 	public ClickGui getGui()
 	{
 		if(!guiInitialized)
@@ -295,7 +301,7 @@ public enum BurstClient
 			guiInitialized = true;
 			gui.init();
 		}
-		
+
 		return gui;
 	}
 

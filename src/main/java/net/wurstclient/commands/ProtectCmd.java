@@ -22,11 +22,6 @@ category = "cmd")
 @BurstCmd(syntax = ".protect <entity>")
 public final class ProtectCmd extends Command
 {
-	public ProtectCmd()
-	{
-		super("protect", "Protects the given entity from other entities.",
-			".protect <entity>");
-	}
 
 	@Override
 	public void call(String[] args) throws CmdException

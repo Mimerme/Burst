@@ -9,14 +9,13 @@ package net.wurstclient.command;
 
 import java.util.Objects;
 
+import net.wurstclient.BurstFeature;
 import net.wurstclient.Feature;
 import net.wurstclient.util.ChatUtils;
 
 public abstract class Command extends Feature
 {
-	private final String name;
-	private final String description;
-	private final String[] syntax;
+	private String[] syntax;
 	private String category;
 
 	public Command(){
@@ -33,7 +32,18 @@ public abstract class Command extends Feature
 			syntax[0] = "Syntax: " + syntax[0];
 		this.syntax = syntax;
 	}
-	
+
+	@Override
+	public void initAnotations() {
+		//Initialize hack settings and category annotations here
+		BurstCmd cmdInfo = this.getClass().getAnnotation(BurstCmd.class);
+		if (cmdInfo == null)
+			return;
+
+		this.syntax =  cmdInfo.syntax();
+		super.initAnotations();
+	}
+
 	public abstract void call(String[] args) throws CmdException;
 	
 	@Override

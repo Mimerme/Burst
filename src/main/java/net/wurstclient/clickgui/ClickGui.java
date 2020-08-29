@@ -44,6 +44,7 @@ public final class ClickGui
 	private static final BurstClient WURST = BurstClient.INSTANCE;
 	private static final MinecraftClient MC = BurstClient.MC;
 
+
 	private final ArrayList<Window> windows = new ArrayList<>();
 	private final ArrayList<Popup> popups = new ArrayList<>();
 	private final Path windowsFile;
@@ -55,8 +56,6 @@ public final class ClickGui
 	private String tooltip = "";
 
 	private boolean leftMouseButtonPressed;
-
-	private long vg;
 
 	public ClickGui(Path windowsFile)
 	{
@@ -463,8 +462,8 @@ public final class ClickGui
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY,
 		float partialTicks)
 	{
+		//TODO: deprecate this
 		updateColors();
-
 
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
