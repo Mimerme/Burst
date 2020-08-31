@@ -22,6 +22,7 @@ import io.github.burstclient.EvalScreen;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.wurstclient.hacks.RainbowUiHack;
 import net.wurstclient.util.ForceOpDialog;
 import net.wurstclient.util.MultiProcessingUtils;
@@ -148,7 +149,20 @@ public enum BurstClient
 				new KeybindProcessor(hax, keybinds, cmdProcessor);
 		eventManager.add(KeyPressListener.class, keybindProcessor);
 
-		hud = new IngameHUD();
+
+		//Load the clickGui object if there exists one
+		File ingameFile = new File("ingamehud.js");
+		if (ingameFile.exists())
+			hud = loadInGameHud("ingamehud.js");
+		else
+			hud = new IngameHUD();
+
+		if(hud == null) {
+			System.out.println("ingamehud.js failed to initialize. Using fallback");
+			hud = new IngameHUD();
+		}
+
+
 		eventManager.add(GUIRenderListener.class, hud);
 
 		rotationFaker = new RotationFaker();
@@ -362,6 +376,37 @@ public enum BurstClient
 
 			System.out.println(sw);
 			System.out.println("failed to load clickgui.js. falling back to default");
+		}
+
+		//If loading the new gui fails just return the old gui
+		//TODO: this causes the guis to stack
+		return null;
+	}
+
+
+	public IngameHUD loadInGameHud(String filename){
+		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+		Invocable invoker = (Invocable) engine;
+
+		try {
+			engine.eval(new FileReader(filename));
+			IngameHUD hudObj = (IngameHUD) invoker.invokeFunction("hud");
+			System.out.println("Successfully loaded " + filename);
+			return hudObj;
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+
+			try {
+				Process process = MultiProcessingUtils.startProcessWithIO(
+						EvalError.class, sw.toString());
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
+
+			System.out.println(sw);
+			System.out.println("failed to load ingamehud.js. falling back to default");
 		}
 
 		//If loading the new gui fails just return the old gui

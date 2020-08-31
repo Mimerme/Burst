@@ -18,6 +18,15 @@ import net.wurstclient.events.GUIRenderListener;
 public final class IngameHUD implements GUIRenderListener
 {
 	private final WurstLogo wurstLogo = new WurstLogo();
+
+	public WurstLogo getWurstLogo() {
+		return wurstLogo;
+	}
+
+	public TabGui getTabGui() {
+		return tabGui;
+	}
+
 	private final HackListHUD hackList = new HackListHUD();
 	private TabGui tabGui;
 	
