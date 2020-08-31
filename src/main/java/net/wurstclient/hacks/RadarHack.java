@@ -23,6 +23,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.wurstclient.SearchTags;
+import net.wurstclient.clickgui.BurstWindow;
 import net.wurstclient.clickgui.Window;
 import net.wurstclient.clickgui.components.RadarComponent;
 import net.wurstclient.events.UpdateListener;
@@ -35,6 +36,7 @@ import net.wurstclient.util.FakePlayerEntity;
 @SearchTags({"MiniMap", "mini map"})
 public final class RadarHack extends Hack implements UpdateListener
 {
+	@BurstWindow
 	private final Window window;
 	private final ArrayList<Entity> entities = new ArrayList<>();
 	

@@ -101,7 +101,11 @@ public final class BlockComponent extends Component
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		TextRenderer fr = BurstClient.MC.textRenderer;
 		String text = setting.getName() + ":";
-		fr.draw(matrixStack, text, x1, y1 + 2, 0xf0f0f0);
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
+		fr.draw(matrixStack, text, x1, y1 + 2, rgb);
 		
 		renderIcon(matrixStack, stack, x3, y1, true);
 		
@@ -156,7 +160,11 @@ public final class BlockComponent extends Component
 		
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		TextRenderer tr = BurstClient.MC.textRenderer;
-		tr.drawWithShadow(matrixStack, "?", 3, 2, 0xf0f0f0);
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
+		tr.drawWithShadow(matrixStack, "?", 3, 2, rgb);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		

@@ -185,7 +185,13 @@ public final class CheckboxComponent extends Component
 		int tx = x3 + 2;
 		int ty = y1 + 2;
 		int color = setting.isLocked() ? 0xAAAAAA : 0xF0F0F0;
-		MC.textRenderer.draw(matrixStack, name, tx, ty, color);
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
+
+
+		MC.textRenderer.draw(matrixStack, name, tx, ty, rgb);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);

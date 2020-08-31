@@ -27,6 +27,7 @@ public final class BlockListEditButton extends Component
 		this.setting = setting;
 		
 		TextRenderer fr = BurstClient.MC.textRenderer;
+
 		buttonWidth = fr.getWidth("Edit...");
 		
 		setWidth(getDefaultWidth());

@@ -10,6 +10,7 @@ package net.wurstclient.clickgui.screens;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import net.wurstclient.BurstClient;
 import net.wurstclient.clickgui.ClickGui;
 
 public final class ClickGuiScreen extends Screen
@@ -54,6 +55,13 @@ public final class ClickGuiScreen extends Screen
 		float partialTicks)
 	{
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		gui.render(matrixStack, mouseX, mouseY, partialTicks);
+
+		try {
+			gui.render(matrixStack, mouseX, mouseY, partialTicks);
+		}
+		catch (Exception e){
+			//TODO: actually integrated script error handling
+			System.out.println(e);
+		}
 	}
 }

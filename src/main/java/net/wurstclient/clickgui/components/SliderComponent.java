@@ -278,9 +278,12 @@ public final class SliderComponent extends Component
 		String name = setting.getName();
 		String value = setting.getValueString();
 		int valueWidth = tr.getWidth(value);
-		int color = renderAsDisabled ? 0xAAAAAA : 0xF0F0F0;
-		tr.draw(matrixStack, name, x1, y1 + 2, color);
-		tr.draw(matrixStack, value, x2 - valueWidth, y1 + 2, color);
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
+		tr.draw(matrixStack, name, x1, y1 + 2, rgb);
+		tr.draw(matrixStack, value, x2 - valueWidth, y1 + 2, rgb);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);

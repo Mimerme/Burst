@@ -60,9 +60,6 @@ public final class WurstLogo
 		String version = "v" + BurstClient.VERSION;
 		version += " MC" + BurstClient.MC_VERSION;
 		
-		if(BurstClient.INSTANCE.getUpdater().isOutdated())
-			version += " (outdated)";
-		
 		return version;
 	}
 	

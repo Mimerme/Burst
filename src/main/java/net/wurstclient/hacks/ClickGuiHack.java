@@ -12,6 +12,7 @@ import net.wurstclient.SearchTags;
 import net.wurstclient.clickgui.screens.ClickGuiScreen;
 import net.wurstclient.hack.DontSaveState;
 import net.wurstclient.hack.Hack;
+import net.wurstclient.hack.Setting;
 import net.wurstclient.settings.SliderSetting;
 import net.wurstclient.settings.SliderSetting.ValueDisplay;
 
@@ -29,14 +30,26 @@ public final class ClickGuiHack extends Hack
 		"Background green", 64, 0, 255, 1, ValueDisplay.INTEGER);
 	private final SliderSetting bgBlue = new SliderSetting("BG blue",
 		"Background blue", 64, 0, 255, 1, ValueDisplay.INTEGER);
-	
+
+
+
 	private final SliderSetting acRed = new SliderSetting("AC red",
 		"Accent red", 16, 0, 255, 1, ValueDisplay.INTEGER);
 	private final SliderSetting acGreen = new SliderSetting("AC green",
 		"Accent green", 16, 0, 255, 1, ValueDisplay.INTEGER);
 	private final SliderSetting acBlue = new SliderSetting("AC blue",
 		"Accent blue", 16, 0, 255, 1, ValueDisplay.INTEGER);
-	
+
+	@Setting
+	private final SliderSetting txtRed = new SliderSetting("Txt red",
+			"Text red", 16, 0, 255, 1, ValueDisplay.INTEGER);
+	@Setting
+	private final SliderSetting txtGreen = new SliderSetting("Txt green",
+			"Text green", 16, 0, 255, 1, ValueDisplay.INTEGER);
+	@Setting
+	private final SliderSetting txtBlue = new SliderSetting("Txt blue",
+			"Text blue", 16, 0, 255, 1, ValueDisplay.INTEGER);
+
 	public ClickGuiHack()
 	{
 		super("ClickGUI", "Window-based ClickGUI.");
@@ -75,5 +88,13 @@ public final class ClickGuiHack extends Hack
 		float green = acGreen.getValueI() / 255F;
 		float blue = acBlue.getValueI() / 255F;
 		return new float[]{red, green, blue};
+	}
+
+	public int[] getTxtColor()
+	{
+		int red = txtRed.getValueI();
+		int green = txtGreen.getValueI();
+		int blue = txtBlue.getValueI();
+		return new int[]{red, green, blue};
 	}
 }

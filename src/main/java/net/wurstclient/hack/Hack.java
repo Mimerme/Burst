@@ -8,9 +8,13 @@
 package net.wurstclient.hack;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import net.wurstclient.Feature;
+import net.wurstclient.clickgui.BurstWindow;
+import net.wurstclient.clickgui.Window;
 import net.wurstclient.hacks.NavigatorHack;
 import net.wurstclient.hacks.TooManyHaxHack;
 
@@ -51,6 +55,22 @@ public abstract class Hack extends Feature
 				}
 			}
 		}
+	}
+
+	public List<Window> getWindows(){
+		ArrayList<Window> windows = new ArrayList<>();
+		for (Field f : this.getClass().getDeclaredFields()){
+			if (f.getAnnotation(BurstWindow.class) != null) {
+				f.setAccessible(true);
+				try {
+					windows.add((Window) f.get(this));
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return windows;
 	}
 
 	public String getRenderName()

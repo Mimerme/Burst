@@ -10,10 +10,12 @@ package net.wurstclient.clickgui;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -39,23 +41,54 @@ import net.wurstclient.util.json.JsonUtils;
 
 import static org.lwjgl.opengl.GL11.glEnable;
 
-public final class ClickGui
+public class ClickGui
 {
-	private static final BurstClient WURST = BurstClient.INSTANCE;
-	private static final MinecraftClient MC = BurstClient.MC;
+	protected static final BurstClient WURST = BurstClient.INSTANCE;
+	protected static final MinecraftClient MC = BurstClient.MC;
 
+	public static BurstClient getWURST() {
+		return WURST;
+	}
 
-	private final ArrayList<Window> windows = new ArrayList<>();
-	private final ArrayList<Popup> popups = new ArrayList<>();
-	private final Path windowsFile;
+	public static MinecraftClient getMC() {
+		return MC;
+	}
 
-	private float[] bgColor = new float[3];
-	private float[] acColor = new float[3];
-	private float opacity;
+	public Path getWindowsFile() {
+		return windowsFile;
+	}
 
-	private String tooltip = "";
+	public String getStatusline() {
+		return statusline;
+	}
 
-	private boolean leftMouseButtonPressed;
+	protected final ArrayList<Window> windows = new ArrayList<>();
+	protected final ArrayList<Popup> popups = new ArrayList<>();
+	protected final Path windowsFile;
+
+	protected float[] bgColor = new float[3];
+	protected float[] acColor = new float[3];
+	protected float opacity;
+
+	protected String tooltip = "";
+	protected String statusline = "";
+
+	protected boolean leftMouseButtonPressed;
+
+	public ClickGui(){
+		Path dotMinecraftFolder = MC.runDirectory.toPath().normalize();
+		Path wurstFolder = dotMinecraftFolder.resolve("wurst");
+
+		this.windowsFile = (wurstFolder.resolve("windows.json"));
+	}
+
+	public ArrayList<Popup> getPopups(){
+		return popups;
+	}
+
+	public ArrayList<Window> getWindows(){
+		return windows;
+	}
 
 	public ClickGui(Path windowsFile)
 	{
@@ -99,7 +132,7 @@ public final class ClickGui
 			window.setMinimized(true);
 
 		//TODO: radar hack is disabled because its shit
-		//windows.add(BurstClient.INSTANCE.getHax().radarHack.getWindow());
+		windows.add(BurstClient.INSTANCE.getHax().radarHack.getWindow());
 
 		int x = 5;
 		int y = 5;
@@ -155,21 +188,21 @@ public final class ClickGui
 				window.setY(jsonY.getAsInt());
 
 			JsonElement jsonMinimized =
-				jsonWindow.getAsJsonObject().get("minimized");
+					jsonWindow.getAsJsonObject().get("minimized");
 			if(jsonMinimized.isJsonPrimitive()
-				&& jsonMinimized.getAsJsonPrimitive().isBoolean())
+					&& jsonMinimized.getAsJsonPrimitive().isBoolean())
 				window.setMinimized(jsonMinimized.getAsBoolean());
 
 			JsonElement jsonPinned = jsonWindow.getAsJsonObject().get("pinned");
 			if(jsonPinned.isJsonPrimitive()
-				&& jsonPinned.getAsJsonPrimitive().isBoolean())
+					&& jsonPinned.getAsJsonPrimitive().isBoolean())
 				window.setPinned(jsonPinned.getAsBoolean());
 		}
 
 		saveWindows();
 	}
 
-	private void saveWindows()
+	protected void saveWindows()
 	{
 		JsonObject json = new JsonObject();
 
@@ -203,7 +236,7 @@ public final class ClickGui
 			leftMouseButtonPressed = true;
 
 		boolean popupClicked =
-			handlePopupMouseClick(mouseX, mouseY, mouseButton);
+				handlePopupMouseClick(mouseX, mouseY, mouseButton);
 
 		if(!popupClicked)
 			handleWindowMouseClick(mouseX, mouseY, mouseButton);
@@ -217,7 +250,7 @@ public final class ClickGui
 	}
 
 	public void handleMouseRelease(double mouseX, double mouseY,
-		int mouseButton)
+								   int mouseButton)
 	{
 		if(mouseButton == 0)
 			leftMouseButtonPressed = false;
@@ -234,29 +267,29 @@ public final class ClickGui
 			Window window = windows.get(i);
 
 			if(!window.isScrollingEnabled() || window.isMinimized()
-				|| window.isInvisible())
+					|| window.isInvisible())
 				continue;
 
 			if(mouseX < window.getX() || mouseY < window.getY() + 13)
 				continue;
 			if(mouseX >= window.getX() + window.getWidth()
-				|| mouseY >= window.getY() + window.getHeight())
+					|| mouseY >= window.getY() + window.getHeight())
 				continue;
 
 			int scroll = window.getScrollOffset() + dWheel;
 			scroll = Math.min(scroll, 0);
 			scroll = Math.max(scroll,
-				-window.getInnerHeight() + window.getHeight() - 13);
+					-window.getInnerHeight() + window.getHeight() - 13);
 			window.setScrollOffset(scroll);
 			break;
 		}
 	}
 
 	public boolean handleNavigatorPopupClick(double mouseX, double mouseY,
-		int mouseButton)
+											 int mouseButton)
 	{
 		boolean popupClicked =
-			handlePopupMouseClick(mouseX, mouseY, mouseButton);
+				handlePopupMouseClick(mouseX, mouseY, mouseButton);
 
 		if(popupClicked)
 		{
@@ -271,7 +304,7 @@ public final class ClickGui
 	}
 
 	public void handleNavigatorMouseClick(double cMouseX, double cMouseY,
-		int mouseButton, Window window)
+										  int mouseButton, Window window)
 	{
 		if(mouseButton == 0)
 			leftMouseButtonPressed = true;
@@ -285,8 +318,8 @@ public final class ClickGui
 		popups.removeIf(p -> p.isClosing());
 	}
 
-	private boolean handlePopupMouseClick(double mouseX, double mouseY,
-		int mouseButton)
+	protected boolean handlePopupMouseClick(double mouseX, double mouseY,
+										  int mouseButton)
 	{
 		for(int i = popups.size() - 1; i >= 0; i--)
 		{
@@ -296,7 +329,7 @@ public final class ClickGui
 
 			int x0 = parent.getX() + owner.getX();
 			int y0 =
-				parent.getY() + 13 + parent.getScrollOffset() + owner.getY();
+					parent.getY() + 13 + parent.getScrollOffset() + owner.getY();
 
 			int x1 = x0 + popup.getX();
 			int y1 = y0 + popup.getY();
@@ -320,7 +353,7 @@ public final class ClickGui
 		return false;
 	}
 
-	private void handleWindowMouseClick(int mouseX, int mouseY, int mouseButton)
+	protected void handleWindowMouseClick(int mouseX, int mouseY, int mouseButton)
 	{
 		for(int i = windows.size() - 1; i >= 0; i--)
 		{
@@ -350,14 +383,14 @@ public final class ClickGui
 
 				if(window.isScrollingEnabled() && mouseX >= x2 - 3)
 					handleScrollbarMouseClick(window, cMouseX, cMouseY,
-						mouseButton);
+							mouseButton);
 				else
 				{
 					if(window.isScrollingEnabled())
 						cMouseY -= window.getScrollOffset();
 
 					handleComponentMouseClick(window, cMouseX, cMouseY,
-						mouseButton);
+							mouseButton);
 				}
 
 			}else
@@ -369,8 +402,8 @@ public final class ClickGui
 		}
 	}
 
-	private void handleTitleBarMouseClick(Window window, int mouseX, int mouseY,
-		int mouseButton)
+	protected void handleTitleBarMouseClick(Window window, int mouseX, int mouseY,
+										  int mouseButton)
 	{
 		if(mouseButton != 0)
 			return;
@@ -418,8 +451,8 @@ public final class ClickGui
 		window.startDragging(mouseX, mouseY);
 	}
 
-	private void handleScrollbarMouseClick(Window window, int mouseX,
-		int mouseY, int mouseButton)
+	protected void handleScrollbarMouseClick(Window window, int mouseX,
+										   int mouseY, int mouseButton)
 	{
 		if(mouseButton != 0)
 			return;
@@ -431,9 +464,9 @@ public final class ClickGui
 		double innerHeight = window.getInnerHeight();
 		double maxScrollbarHeight = outerHeight - 2;
 		int scrollbarY =
-			(int)(outerHeight * (-window.getScrollOffset() / innerHeight) + 1);
+				(int)(outerHeight * (-window.getScrollOffset() / innerHeight) + 1);
 		int scrollbarHeight =
-			(int)(maxScrollbarHeight * outerHeight / innerHeight);
+				(int)(maxScrollbarHeight * outerHeight / innerHeight);
 
 		if(mouseY < scrollbarY || mouseY >= scrollbarY + scrollbarHeight)
 			return;
@@ -441,8 +474,8 @@ public final class ClickGui
 		window.startDraggingScrollbar(window.getY() + 13 + mouseY);
 	}
 
-	private void handleComponentMouseClick(Window window, double mouseX,
-		double mouseY, int mouseButton)
+	protected void handleComponentMouseClick(Window window, double mouseX,
+										   double mouseY, int mouseButton)
 	{
 		for(int i2 = window.countChildren() - 1; i2 >= 0; i2--)
 		{
@@ -451,7 +484,7 @@ public final class ClickGui
 			if(mouseX < c.getX() || mouseY < c.getY())
 				continue;
 			if(mouseX >= c.getX() + c.getWidth()
-				|| mouseY >= c.getY() + c.getHeight())
+					|| mouseY >= c.getY() + c.getHeight())
 				continue;
 
 			c.handleMouseClick(mouseX, mouseY, mouseButton);
@@ -460,7 +493,7 @@ public final class ClickGui
 	}
 
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY,
-		float partialTicks)
+					   float partialTicks)
 	{
 		//TODO: deprecate this
 		updateColors();
@@ -500,14 +533,77 @@ public final class ClickGui
 
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		renderPopupsAndTooltip(matrixStack, mouseX, mouseY);
+		renderStatusLine(matrixStack);
 
 		glEnable(GL11.GL_CULL_FACE);
 		glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 
+	public void setStatusLine(){
+
+	}
+
+	public void renderStatusLine(MatrixStack matrixStack){
+		{
+			String[] lines;
+			if (statusline.isEmpty())
+				lines = new String[]{"Burst InDev (how'd you get this?)"};
+			else
+				lines = statusline.split("\n");
+			TextRenderer fr = MC.textRenderer;
+
+			int tw = 0;
+			int th = lines.length * fr.fontHeight;
+			for(String line : lines)
+			{
+				int lw = fr.getWidth(line);
+				if(lw > tw)
+					tw = lw;
+			}
+			int sw = MC.currentScreen.width;
+			int sh = MC.currentScreen.height;
+
+			int xt1 = 0;
+			int xt2 = xt1 + tw + 3;
+			int yt1 = sh - th;
+			int yt2 = yt1 + th + 2;
+
+			GL11.glPushMatrix();
+			GL11.glTranslated(0, 0, 300);
+
+			// background
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], 0.75F);
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glVertex2i(xt1, yt1);
+			GL11.glVertex2i(xt1, yt2);
+			GL11.glVertex2i(xt2, yt2);
+			GL11.glVertex2i(xt2, yt1);
+			GL11.glEnd();
+
+			// outline
+			GL11.glColor4f(acColor[0], acColor[1], acColor[2], 0.5F);
+			GL11.glBegin(GL11.GL_LINE_LOOP);
+			GL11.glVertex2i(xt1, yt1);
+			GL11.glVertex2i(xt1, yt2);
+			GL11.glVertex2i(xt2, yt2);
+			GL11.glVertex2i(xt2, yt1);
+			GL11.glEnd();
+
+			// text
+			glEnable(GL11.GL_TEXTURE_2D);
+			for(int i = 0; i < lines.length; i++)
+				fr.draw(matrixStack, lines[i], xt1 + 2,
+						yt1 + 2 + i * fr.fontHeight, 0xffffff);
+			glEnable(GL11.GL_BLEND);
+
+			GL11.glPopMatrix();
+		}
+	}
+
 	public void renderPopupsAndTooltip(MatrixStack matrixStack, int mouseX,
-		int mouseY)
+									   int mouseY)
 	{
 		// popups
 		for(Popup popup : popups)
@@ -517,7 +613,7 @@ public final class ClickGui
 
 			int x1 = parent.getX() + owner.getX();
 			int y1 =
-				parent.getY() + 13 + parent.getScrollOffset() + owner.getY();
+					parent.getY() + 13 + parent.getScrollOffset() + owner.getY();
 
 			GL11.glPushMatrix();
 			GL11.glTranslated(x1, y1, 300);
@@ -577,7 +673,7 @@ public final class ClickGui
 			glEnable(GL11.GL_TEXTURE_2D);
 			for(int i = 0; i < lines.length; i++)
 				fr.draw(matrixStack, lines[i], xt1 + 2,
-					yt1 + 2 + i * fr.fontHeight, 0xffffff);
+						yt1 + 2 + i * fr.fontHeight, 0xffffff);
 			glEnable(GL11.GL_BLEND);
 
 			GL11.glPopMatrix();
@@ -596,8 +692,8 @@ public final class ClickGui
 		//TODO: move pined windows to a seperate arraylist for perfomance
 		for(Window window : windows)
 			if(!window.isInvisible() && window.isPinned())
-				renderWindow(matrixStack, window, Integer.MIN_VALUE,
-					Integer.MIN_VALUE, partialTicks);
+				renderWindowWithoutBorders(matrixStack, window, Integer.MIN_VALUE,
+						Integer.MIN_VALUE, partialTicks);
 
 		glEnable(GL11.GL_CULL_FACE);
 		glEnable(GL11.GL_TEXTURE_2D);
@@ -622,8 +718,8 @@ public final class ClickGui
 			acColor = clickGui.getAcColor();
 	}
 
-	private void renderWindow(MatrixStack matrixStack, Window window,
-		int mouseX, int mouseY, float partialTicks)
+	protected void renderWindow(MatrixStack matrixStack, Window window,
+							  int mouseX, int mouseY, float partialTicks)
 	{
 		int x1 = window.getX();
 		int y1 = window.getY();
@@ -655,9 +751,9 @@ public final class ClickGui
 				double innerHeight = window.getInnerHeight();
 				double maxScrollbarHeight = outerHeight - 2;
 				double scrollbarY =
-					outerHeight * (-window.getScrollOffset() / innerHeight) + 1;
+						outerHeight * (-window.getScrollOffset() / innerHeight) + 1;
 				double scrollbarHeight =
-					maxScrollbarHeight * outerHeight / innerHeight;
+						maxScrollbarHeight * outerHeight / innerHeight;
 
 				int ys1 = y3;
 				int ys2 = y2;
@@ -682,11 +778,11 @@ public final class ClickGui
 				GL11.glEnd();
 
 				boolean hovering = mouseX >= xs1 && mouseY >= ys3
-					&& mouseX < xs2 && mouseY < ys4;
+						&& mouseX < xs2 && mouseY < ys4;
 
 				// scrollbar
 				GL11.glColor4f(acColor[0], acColor[1], acColor[2],
-					hovering ? opacity * 1.5F : opacity);
+						hovering ? opacity * 1.5F : opacity);
 				GL11.glBegin(GL11.GL_QUADS);
 				GL11.glVertex2i(xs1, ys3);
 				GL11.glVertex2i(xs1, ys4);
@@ -726,7 +822,7 @@ public final class ClickGui
 			net.minecraft.client.util.Window sr = MC.getWindow();
 			int sf = (int)sr.getScaleFactor();
 			GL11.glScissor(x1 * sf, (sr.getScaledHeight() - y2) * sf,
-				window.getWidth() * sf, (y2 - y3) * sf);
+					window.getWidth() * sf, (y2 - y3) * sf);
 			glEnable(GL11.GL_SCISSOR_TEST);
 			GL11.glPushMatrix();
 			GL11.glTranslated(x1, y4, 0);
@@ -756,7 +852,7 @@ public final class ClickGui
 			else
 			{
 				Component lastChild =
-					window.getChild(window.countChildren() - 1);
+						window.getChild(window.countChildren() - 1);
 				yc1 = lastChild.getY() + lastChild.getHeight();
 			}
 			int yc2 = yc1 + 2;
@@ -772,7 +868,7 @@ public final class ClickGui
 			int cMouseY = mouseY - y4;
 			for(int i = 0; i < window.countChildren(); i++)
 				window.getChild(i).render(matrixStack, cMouseX, cMouseY,
-					partialTicks);
+						partialTicks);
 
 			GL11.glPopMatrix();
 			GL11.glDisable(GL11.GL_SCISSOR_TEST);
@@ -824,7 +920,7 @@ public final class ClickGui
 			int x4 = x3 + 9;
 			boolean hovering = hoveringY && mouseX >= x3 && mouseX < x4;
 			renderMinimizeButton(x3, y4, x4, y5, hovering,
-				window.isMinimized());
+					window.isMinimized());
 		}
 
 		// title bar background
@@ -855,20 +951,184 @@ public final class ClickGui
 		GL11.glColor4f(1, 1, 1, 1);
 		TextRenderer fr = MC.textRenderer;
 		String title =
-			((Text)fr.trimToWidth(new LiteralText(window.getTitle()), x3 - x1))
-				.getString();
+				((Text)fr.trimToWidth(new LiteralText(window.getTitle()), x3 - x1))
+						.getString();
 		fr.draw(matrixStack, title, x1 + 2, y1 + 3, 0xf0f0f0);
 		glEnable(GL11.GL_BLEND);
 	}
+	protected void renderWindowWithoutBorders(MatrixStack matrixStack, Window window,
+								int mouseX, int mouseY, float partialTicks)
+	{
+		int x1 = window.getX();
+		int y1 = window.getY();
+		int x2 = x1 + window.getWidth();
+		int y2 = y1 + window.getHeight();
+		int y3 = y1 + 13;
 
-	private void renderTitleBarButton(int x1, int y1, int x2, int y2,
-		boolean hovering)
+		if(window.isMinimized())
+			y2 = y3;
+
+		if(mouseX >= x1 && mouseY >= y1 && mouseX < x2 && mouseY < y2)
+			tooltip = "";
+
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+		if(!window.isMinimized())
+		{
+			window.setMaxHeight(187);
+			window.validate();
+
+			// scrollbar
+			if(window.isScrollingEnabled())
+			{
+				int xs1 = x2 - 3;
+				int xs2 = xs1 + 2;
+				int xs3 = x2;
+
+				double outerHeight = y2 - y3;
+				double innerHeight = window.getInnerHeight();
+				double maxScrollbarHeight = outerHeight - 2;
+				double scrollbarY =
+						outerHeight * (-window.getScrollOffset() / innerHeight) + 1;
+				double scrollbarHeight =
+						maxScrollbarHeight * outerHeight / innerHeight;
+
+				int ys1 = y3;
+				int ys2 = y2;
+				int ys3 = ys1 + (int)scrollbarY;
+				int ys4 = ys3 + (int)scrollbarHeight;
+
+				// window background
+				GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
+				GL11.glBegin(GL11.GL_QUADS);
+				GL11.glVertex2i(xs2, ys1);
+				GL11.glVertex2i(xs2, ys2);
+				GL11.glVertex2i(xs3, ys2);
+				GL11.glVertex2i(xs3, ys1);
+				GL11.glVertex2i(xs1, ys1);
+				GL11.glVertex2i(xs1, ys3);
+				GL11.glVertex2i(xs2, ys3);
+				GL11.glVertex2i(xs2, ys1);
+				GL11.glVertex2i(xs1, ys4);
+				GL11.glVertex2i(xs1, ys2);
+				GL11.glVertex2i(xs2, ys2);
+				GL11.glVertex2i(xs2, ys4);
+				GL11.glEnd();
+
+				boolean hovering = mouseX >= xs1 && mouseY >= ys3
+						&& mouseX < xs2 && mouseY < ys4;
+
+				// scrollbar
+				GL11.glColor4f(acColor[0], acColor[1], acColor[2],
+						hovering ? opacity * 1.5F : opacity);
+				GL11.glBegin(GL11.GL_QUADS);
+				GL11.glVertex2i(xs1, ys3);
+				GL11.glVertex2i(xs1, ys4);
+				GL11.glVertex2i(xs2, ys4);
+				GL11.glVertex2i(xs2, ys3);
+				GL11.glEnd();
+
+				// outline
+				GL11.glColor4f(acColor[0], acColor[1], acColor[2], 0.5F);
+				GL11.glBegin(GL11.GL_LINE_LOOP);
+				GL11.glVertex2i(xs1, ys3);
+				GL11.glVertex2i(xs1, ys4);
+				GL11.glVertex2i(xs2, ys4);
+				GL11.glVertex2i(xs2, ys3);
+				GL11.glEnd();
+			}
+
+			int x3 = x1 + 2;
+			int x4 = window.isScrollingEnabled() ? x2 - 3 : x2;
+			int x5 = x4 - 2;
+			int y4 = y3 + window.getScrollOffset();
+
+			// window background
+			// left & right
+			GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glVertex2i(x1, y3);
+			GL11.glVertex2i(x1, y2);
+			GL11.glVertex2i(x3, y2);
+			GL11.glVertex2i(x3, y3);
+			GL11.glVertex2i(x5, y3);
+			GL11.glVertex2i(x5, y2);
+			GL11.glVertex2i(x4, y2);
+			GL11.glVertex2i(x4, y3);
+			GL11.glEnd();
+
+			net.minecraft.client.util.Window sr = MC.getWindow();
+			int sf = (int)sr.getScaleFactor();
+			GL11.glScissor(x1 * sf, (sr.getScaledHeight() - y2) * sf,
+					window.getWidth() * sf, (y2 - y3) * sf);
+			glEnable(GL11.GL_SCISSOR_TEST);
+			GL11.glPushMatrix();
+			GL11.glTranslated(x1, y4, 0);
+
+			GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
+			GL11.glBegin(GL11.GL_QUADS);
+
+			// window background
+			// between children
+			int xc1 = 2;
+			int xc2 = x5 - x1;
+			for(int i = 0; i < window.countChildren(); i++)
+			{
+				int yc1 = window.getChild(i).getY();
+				int yc2 = yc1 - 2;
+				GL11.glVertex2i(xc1, yc2);
+				GL11.glVertex2i(xc1, yc1);
+				GL11.glVertex2i(xc2, yc1);
+				GL11.glVertex2i(xc2, yc2);
+			}
+
+			// window background
+			// bottom
+			int yc1;
+			if(window.countChildren() == 0)
+				yc1 = 0;
+			else
+			{
+				Component lastChild =
+						window.getChild(window.countChildren() - 1);
+				yc1 = lastChild.getY() + lastChild.getHeight();
+			}
+			int yc2 = yc1 + 2;
+			GL11.glVertex2i(xc1, yc2);
+			GL11.glVertex2i(xc1, yc1);
+			GL11.glVertex2i(xc2, yc1);
+			GL11.glVertex2i(xc2, yc2);
+
+			GL11.glEnd();
+
+			// render children
+			int cMouseX = mouseX - x1;
+			int cMouseY = mouseY - y4;
+			for(int i = 0; i < window.countChildren(); i++)
+				window.getChild(i).render(matrixStack, cMouseX, cMouseY,
+						partialTicks);
+
+			GL11.glPopMatrix();
+			GL11.glDisable(GL11.GL_SCISSOR_TEST);
+		}
+
+
+	}
+
+
+
+	public String getTooltip(){
+		return tooltip;
+	}
+
+	protected void renderTitleBarButton(int x1, int y1, int x2, int y2,
+									  boolean hovering)
 	{
 		int x3 = x2 + 2;
 
 		// button background
 		GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2],
-			hovering ? opacity * 1.5F : opacity);
+				hovering ? opacity * 1.5F : opacity);
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glVertex2i(x1, y1);
 		GL11.glVertex2i(x1, y2);
@@ -895,8 +1155,8 @@ public final class ClickGui
 		GL11.glEnd();
 	}
 
-	private void renderMinimizeButton(int x1, int y1, int x2, int y2,
-		boolean hovering, boolean minimized)
+	protected void renderMinimizeButton(int x1, int y1, int x2, int y2,
+									  boolean hovering, boolean minimized)
 	{
 		renderTitleBarButton(x1, y1, x2, y2, hovering);
 
@@ -935,8 +1195,8 @@ public final class ClickGui
 		GL11.glEnd();
 	}
 
-	private void renderPinButton(int x1, int y1, int x2, int y2,
-		boolean hovering, boolean pinned)
+	protected void renderPinButton(int x1, int y1, int x2, int y2,
+								 boolean hovering, boolean pinned)
 	{
 		renderTitleBarButton(x1, y1, x2, y2, hovering);
 		float h = hovering ? 1 : 0.85F;
@@ -1066,8 +1326,8 @@ public final class ClickGui
 		}
 	}
 
-	private void renderCloseButton(int x1, int y1, int x2, int y2,
-		boolean hovering)
+	protected void renderCloseButton(int x1, int y1, int x2, int y2,
+								   boolean hovering)
 	{
 		renderTitleBarButton(x1, y1, x2, y2, hovering);
 
@@ -1154,5 +1414,22 @@ public final class ClickGui
 	public boolean isLeftMouseButtonPressed()
 	{
 		return leftMouseButtonPressed;
+	}
+
+	//So nashorn doesn't give a way to access fields of super classes so here we are
+	//xd ¯\_(ツ)_/¯
+	public Object getField(String fieldname){
+		Field f = null; //NoSuchFieldException
+		ClickGui me = (ClickGui) this;
+		try {
+			Field[] fs = me.getClass().getDeclaredFields();
+			f = me.getClass().getDeclaredField(fieldname);
+			f.setAccessible(true);
+			return f.get(me);
+		} catch (NoSuchFieldException e) {
+			return null;
+		} catch (IllegalAccessException e) {
+			return null;
+		}
 	}
 }

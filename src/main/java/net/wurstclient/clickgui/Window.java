@@ -19,7 +19,7 @@ public class Window
 	private int y;
 	private int width;
 	private int height;
-	
+
 	private boolean valid;
 	private final ArrayList<Component> children = new ArrayList<>();
 	
@@ -110,6 +110,7 @@ public class Window
 	public final void pack()
 	{
 		int maxChildWidth = 0;
+
 		for(Component c : children)
 			if(c.getDefaultWidth() > maxChildWidth)
 				maxChildWidth = c.getDefaultWidth();
@@ -131,6 +132,7 @@ public class Window
 		
 		if(childrenHeight > maxHeight + 13 && maxHeight > 0)
 		{
+			setWidth(100);
 			setWidth(Math.max(maxChildWidth + 3, titleBarWidth));
 			setHeight(maxHeight + 13);
 			

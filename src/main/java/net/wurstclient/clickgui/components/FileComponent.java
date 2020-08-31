@@ -36,6 +36,9 @@ public final class FileComponent extends Component
 			return;
 		
 		TextRenderer fr = BurstClient.MC.textRenderer;
+
+
+
 		int buttonWidth = fr.getWidth(setting.getSelectedFileName());
 		
 		if(mouseX < getX() + getWidth() - buttonWidth - 4)
@@ -55,6 +58,10 @@ public final class FileComponent extends Component
 		float opacity = gui.getOpacity();
 		
 		TextRenderer fr = BurstClient.MC.textRenderer;
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
 		int buttonWidth = fr.getWidth(setting.getSelectedFileName());
 		
 		int x1 = getX();
@@ -110,9 +117,9 @@ public final class FileComponent extends Component
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		String text = setting.getName() + ": ";
-		fr.draw(matrixStack, text, x1, y1 + 2, 0xf0f0f0);
+		fr.draw(matrixStack, text, x1, y1 + 2, rgb);
 		fr.draw(matrixStack, setting.getSelectedFileName(), x3 + 2, y1 + 2,
-			0xf0f0f0);
+			rgb);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 	}

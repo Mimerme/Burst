@@ -225,10 +225,13 @@ public final class ComboBoxComponent<T extends Enum<T>> extends Component
 		
 		String name = setting.getName();
 		String value = "" + setting.getSelected();
-		int color = 0xF0F0F0;
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
 		
-		tr.draw(matrixStack, name, x1, y1 + 2, color);
-		tr.draw(matrixStack, value, x4 + 2, y1 + 2, color);
+		tr.draw(matrixStack, name, x1, y1 + 2, rgb);
+		tr.draw(matrixStack, value, x4 + 2, y1 + 2, rgb);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);

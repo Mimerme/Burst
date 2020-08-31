@@ -7,10 +7,7 @@
  */
 package net.wurstclient;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,7 +17,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.github.burstclient.EvalError;
+import io.github.burstclient.EvalScreen;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import net.wurstclient.hacks.RainbowUiHack;
+import net.wurstclient.util.ForceOpDialog;
+import net.wurstclient.util.MultiProcessingUtils;
 import org.lwjgl.glfw.GLFW;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -58,17 +62,18 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.swing.*;
 
 public enum BurstClient
 {
 	INSTANCE;
-	
+
 	public static final MinecraftClient MC = MinecraftClient.getInstance();
 	public static final IMinecraftClient IMC = (IMinecraftClient)MC;
-	
+
 	public static final String VERSION = "7.5";
 	public static final String MC_VERSION = "1.16.2";
-	
+
 	private EventManager eventManager;
 	private AltManager altManager;
 	private HackList hax;
@@ -83,7 +88,7 @@ public enum BurstClient
 	private IngameHUD hud;
 	private RotationFaker rotationFaker;
 	private FriendsList friends;
-	
+
 	private boolean enabled = true;
 
 	//Since we can't intialize clickGuis before the game initialize's its TextRenderer
@@ -91,12 +96,14 @@ public enum BurstClient
 	public static boolean guiInitialized;
 	private WurstUpdater updater;
 	private Path wurstFolder;
-	
+
 	private KeyBinding zoomKey;
 
 	//JS engine stuff
+/*
 	public static ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 	public static Invocable invoker = (Invocable) engine;
+*/
 
 	public void loadFeatures(){
 		Path enabledHacksFile = wurstFolder.resolve("enabled-hacks.json");
@@ -122,6 +129,11 @@ public enum BurstClient
 		else
 			gui = new ClickGui(guiFile);
 
+		if(gui == null) {
+			System.out.println("clickgui.js failed to initialize. Using fallback");
+			gui = new ClickGui(guiFile);
+		}
+
 		Path preferencesFile = wurstFolder.resolve("preferences.json");
 		navigator = new Navigator(preferencesFile, hax, cmds, otfs);
 
@@ -139,9 +151,9 @@ public enum BurstClient
 		hud = new IngameHUD();
 		eventManager.add(GUIRenderListener.class, hud);
 
-/*		rotationFaker = new RotationFaker();
+		rotationFaker = new RotationFaker();
 		eventManager.add(PreMotionListener.class, rotationFaker);
-		eventManager.add(PostMotionListener.class, rotationFaker);*/
+		eventManager.add(PostMotionListener.class, rotationFaker);
 
 		Path altsFile = wurstFolder.resolve("alts.encrypted_json");
 		Path encFolder = createEncryptionFolder();
@@ -152,70 +164,73 @@ public enum BurstClient
 	public void purgeEvents(){
 		eventManager.remove(ChatOutputListener.class, cmdProcessor);
 		eventManager.remove(GUIRenderListener.class, hud);
+
+		eventManager.remove(PreMotionListener.class, rotationFaker);
+		eventManager.remove(PostMotionListener.class, rotationFaker);
 	}
 
 	public void initialize()
 	{
 		System.out.println("Starting Wurst Client...");
-		
+
 		wurstFolder = createWurstFolder();
 
 		eventManager = new EventManager(this);
 
 		loadFeatures();
-		
+
 		zoomKey = new KeyBinding("key.wurst.zoom", InputUtil.Type.KEYSYM,
-			GLFW.GLFW_KEY_V, "Zoom");
+				GLFW.GLFW_KEY_V, "Zoom");
 		KeyBindingHelper.registerKeyBinding(zoomKey);
 	}
-	
+
 	private Path createWurstFolder()
 	{
 		Path dotMinecraftFolder = MC.runDirectory.toPath().normalize();
 		Path wurstFolder = dotMinecraftFolder.resolve("wurst");
-		
+
 		try
 		{
 			Files.createDirectories(wurstFolder);
-			
+
 		}catch(IOException e)
 		{
 			throw new RuntimeException(
-				"Couldn't create .minecraft/wurst folder.", e);
+					"Couldn't create .minecraft/wurst folder.", e);
 		}
-		
+
 		return wurstFolder;
 	}
-	
+
 	private Path createEncryptionFolder()
 	{
 		Path encFolder =
-			Paths.get(System.getProperty("user.home"), ".Wurst encryption")
-				.normalize();
-		
+				Paths.get(System.getProperty("user.home"), ".Wurst encryption")
+						.normalize();
+
 		try
 		{
 			Files.createDirectories(encFolder);
 			if(Util.getOperatingSystem() == Util.OperatingSystem.WINDOWS)
 				Files.setAttribute(encFolder, "dos:hidden", true);
-			
+
 			Path readme = encFolder.resolve("READ ME I AM VERY IMPORTANT.txt");
 			String readmeText = "DO NOT SHARE THESE FILES WITH ANYONE!\r\n"
-				+ "They are encryption keys that protect your alt list file from being read by someone else.\r\n"
-				+ "If someone is asking you to send these files, they are 100% trying to scam you.\r\n"
-				+ "\r\n"
-				+ "DO NOT EDIT, RENAME OR DELETE THESE FILES! (unless you know what you're doing)\r\n"
-				+ "If you do, Wurst's Alt Manager can no longer read your alt list and will replace it with a blank one.\r\n"
-				+ "In other words, YOUR ALT LIST WILL BE DELETED.";
+					+ "They are encryption keys that protect your alt list file from being read by someone else.\r\n"
+					+ "If someone is asking you to send these files, they are 100% trying to scam you.\r\n"
+					+ "\r\n"
+					+ "DO NOT EDIT, RENAME OR DELETE THESE FILES! (unless you know what you're doing)\r\n"
+					+ "If you do, Wurst's Alt Manager can no longer read your alt list and will replace it with a blank one.\r\n"
+					+ "In other words, YOUR ALT LIST WILL BE DELETED.";
 			Files.write(readme, readmeText.getBytes("UTF-8"),
-				StandardOpenOption.CREATE);
-			
+					StandardOpenOption.CREATE);
+
 		}catch(IOException e)
 		{
 			throw new RuntimeException(
-				"Couldn't create '.Wurst encryption' folder.", e);
+					"Couldn't create '.Wurst encryption' folder.", e);
 		}
-		
+
 		return encFolder;
 	}
 
@@ -223,72 +238,72 @@ public enum BurstClient
 	{
 		return eventManager;
 	}
-	
+
 	public void saveSettings()
 	{
 		settingsFile.save();
 	}
-	
+
 	public ArrayList<Path> listSettingsProfiles()
 	{
 		if(!Files.isDirectory(settingsProfileFolder))
 			return new ArrayList<>();
-		
+
 		try(Stream<Path> files = Files.list(settingsProfileFolder))
 		{
 			return files.filter(Files::isRegularFile)
-				.collect(Collectors.toCollection(() -> new ArrayList<>()));
-			
+					.collect(Collectors.toCollection(() -> new ArrayList<>()));
+
 		}catch(IOException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public void loadSettingsProfile(String fileName)
-		throws IOException, JsonException
+			throws IOException, JsonException
 	{
 		settingsFile.loadProfile(settingsProfileFolder.resolve(fileName));
 	}
-	
+
 	public void saveSettingsProfile(String fileName)
-		throws IOException, JsonException
+			throws IOException, JsonException
 	{
 		settingsFile.saveProfile(settingsProfileFolder.resolve(fileName));
 	}
-	
+
 	public HackList getHax()
 	{
 		return hax;
 	}
-	
+
 	public CmdList getCmds()
 	{
 		return cmds;
 	}
-	
+
 	public OtfList getOtfs()
 	{
 		return otfs;
 	}
-	
+
 	public Feature getFeatureByName(String name)
 	{
 		Hack hack = getHax().getHackByName(name);
 		if(hack != null)
 			return hack;
-		
+
 		Command cmd = getCmds().getCmdByName(name.substring(1));
 		if(cmd != null)
 			return cmd;
-		
+
 		OtherFeature otf = getOtfs().getOtfByName(name);
 		if(otf != null)
 			return otf;
-		
+
 		return null;
 	}
-	
+
 	public KeybindList getKeybinds()
 	{
 		return keybinds;
@@ -298,95 +313,120 @@ public enum BurstClient
 	{
 		if(!guiInitialized)
 		{
-			guiInitialized = true;
-			gui.init();
+			try {
+				guiInitialized = true;
+				gui.init();
+			} catch (Exception e) {
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+				guiInitialized = false;
+				System.out.println(sw.toString());
+
+				try {
+					Process process = MultiProcessingUtils.startProcessWithIO(
+							EvalError.class, sw.toString());
+				} catch (IOException ioException) {
+					ioException.printStackTrace();
+				}
+
+
+				gui = new ClickGui();
+				System.out.println("clickgui.js exception. falling back to default");
+			}
 		}
 
 		return gui;
 	}
 
-	public ClickGui loadClickGui(String jsDirectory){
-		System.out.println("Loading new clickGui from \'" + System.getProperty("user.dir") + "/" + jsDirectory + "\' via Nashorn");
+	public ClickGui loadClickGui(String filename){
+		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+		Invocable invoker = (Invocable) engine;
 
-		File folder = new File(jsDirectory);
-		for (final File fileEntry : folder.listFiles()) {
-			if (!fileEntry.isDirectory()) {
-				//TODO: error handling is a little harsh rn. Loosen it up
-				try {
-					engine.eval(new FileReader(fileEntry));
-					ClickGui modObj = (ClickGui) invoker.invokeFunction("gui");
-					System.out.println("Successfully new click gui \'" + fileEntry.getName() + "\' module");
-					return modObj;
-				} catch (ScriptException e) {
-					e.printStackTrace();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				}
+		try {
+			engine.eval(new FileReader(filename));
+			ClickGui modObj = (ClickGui) invoker.invokeFunction("gui");
+			System.out.println("Successfully loaded " + filename);
+			return modObj;
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+
+			try {
+				Process process = MultiProcessingUtils.startProcessWithIO(
+						EvalError.class, sw.toString());
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
 			}
+
+			System.out.println(sw);
+			System.out.println("failed to load clickgui.js. falling back to default");
 		}
 
+		//If loading the new gui fails just return the old gui
+		//TODO: this causes the guis to stack
 		return null;
 	}
+
 
 
 	public Navigator getNavigator()
 	{
 		return navigator;
 	}
-	
+
 	public CmdProcessor getCmdProcessor()
 	{
 		return cmdProcessor;
 	}
-	
+
 	public IngameHUD getHud()
 	{
 		return hud;
 	}
-	
+
 	public RotationFaker getRotationFaker()
 	{
 		return rotationFaker;
 	}
-	
+
 	public FriendsList getFriends()
 	{
 		return friends;
 	}
-	
+
 	public boolean isEnabled()
 	{
 		return enabled;
 	}
-	
+
 	public void setEnabled(boolean enabled)
 	{
 		this.enabled = enabled;
-		
+
 		if(!enabled)
 		{
 			hax.getPanicHack().setEnabled(true);
 			hax.getPanicHack().onUpdate();
 		}
 	}
-	
+
 	public WurstUpdater getUpdater()
 	{
 		return updater;
 	}
-	
+
 	public Path getWurstFolder()
 	{
 		return wurstFolder;
 	}
-	
+
 	public KeyBinding getZoomKey()
 	{
 		return zoomKey;
 	}
-	
+
 	public AltManager getAltManager()
 	{
 		return altManager;

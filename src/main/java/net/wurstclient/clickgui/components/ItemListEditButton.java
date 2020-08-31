@@ -104,8 +104,12 @@ public final class ItemListEditButton extends Component
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		TextRenderer fr = BurstClient.MC.textRenderer;
 		String text = setting.getName() + ": " + setting.getItemNames().size();
-		fr.draw(matrixStack, text, x1, y1 + 2, 0xf0f0f0);
-		fr.draw(matrixStack, "Edit...", x3 + 2, y1 + 2, 0xf0f0f0);
+		int[] txtColor = BurstClient.INSTANCE.getHax().getClickGuiHack().getTxtColor();
+		int rgb = txtColor[0];
+		rgb = (rgb << 8) + txtColor[1];
+		rgb = (rgb << 8) + txtColor[2];
+		fr.draw(matrixStack, text, x1, y1 + 2, rgb);
+		fr.draw(matrixStack, "Edit...", x3 + 2, y1 + 2, rgb);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 	}
 	
