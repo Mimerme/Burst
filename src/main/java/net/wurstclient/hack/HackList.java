@@ -7,10 +7,7 @@
  */
 package net.wurstclient.hack;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.github.burstclient.EvalError;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.wurstclient.BurstClient;
@@ -25,6 +23,7 @@ import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.event.EventManager;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hacks.*;
+import net.wurstclient.util.MultiProcessingUtils;
 import net.wurstclient.util.json.JsonException;
 import org.reflections.Reflections;
 
@@ -224,12 +223,17 @@ public final class HackList implements UpdateListener
 					modObj.initAnotations();
 					hax.put(modObj.getName(), modObj);
 					System.out.println("Successfully loaded \'" + fileEntry.getName() + "\' module");
-				} catch (ScriptException e) {
-					e.printStackTrace();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+
+					try {
+						Process process = MultiProcessingUtils.startProcessWithIO(
+								EvalError.class, sw.toString());
+					} catch (IOException ioException) {
+						ioException.printStackTrace();
+					}
 				}
 			}
 		}
@@ -242,7 +246,7 @@ public final class HackList implements UpdateListener
 		try
 		{
 			loadJava("net.wurstclient.hacks");
-			//loadJs("hacks");
+			loadJs("hacks");
 
 		}catch(Exception e)
 		{
