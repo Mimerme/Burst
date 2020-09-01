@@ -129,14 +129,14 @@ public enum BurstClient
 		Path guiFile = wurstFolder.resolve("windows.json");
 
 		//Load the clickGui object if there exists one
-		File clickFile = new File("clickgui.js");
+		File clickFile = new File("scripts/clickgui.js");
 		if (clickFile.exists())
-			gui = loadClickGui("clickgui.js");
+			gui = loadClickGui("scripts/clickgui.js");
 		else
 			gui = new ClickGui(guiFile);
 
 		if(gui == null) {
-			System.out.println("clickgui.js failed to initialize. Using fallback");
+			System.out.println("scripts/clickgui.js failed to initialize. Using fallback");
 			gui = new ClickGui(guiFile);
 		}
 
@@ -154,13 +154,12 @@ public enum BurstClient
 				new KeybindProcessor(hax, keybinds, cmdProcessor);
 		eventManager.add(KeyPressListener.class, keybindProcessor);
 
-		eventManager.add(GUIRenderListener.class, )
 
 
 		//Load the clickGui object if there exists one
-		File ingameFile = new File("ingamehud.js");
+		File ingameFile = new File("scripts/ingamehud.js");
 		if (ingameFile.exists())
-			hud = loadInGameHud("ingamehud.js");
+			hud = loadInGameHud("scripts/ingamehud.js");
 		else
 			hud = new IngameHUD();
 
@@ -168,6 +167,7 @@ public enum BurstClient
 			System.out.println("ingamehud.js failed to initialize. Using fallback");
 			hud = new IngameHUD();
 		}
+		eventManager.add(GUIRenderListener.class, hud);
 
 		autoExecer = new AutoExecProcessor();
 		eventManager.add(GUIRenderListener.class, autoExecer);
@@ -485,4 +485,9 @@ public enum BurstClient
 		return altManager;
 	}
 
+	public void fallbackHud() {
+		eventManager.remove(GUIRenderListener.class, hud);
+		hud = new IngameHUD();
+		eventManager.add(GUIRenderListener.class, hud);
+	}
 }

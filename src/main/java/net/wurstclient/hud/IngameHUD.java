@@ -15,7 +15,7 @@ import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.clickgui.screens.ClickGuiScreen;
 import net.wurstclient.events.GUIRenderListener;
 
-public final class IngameHUD implements GUIRenderListener
+public class IngameHUD implements GUIRenderListener
 {
 	private final WurstLogo wurstLogo = new WurstLogo();
 

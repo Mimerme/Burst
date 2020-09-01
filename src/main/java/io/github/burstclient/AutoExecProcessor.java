@@ -6,6 +6,7 @@ import net.wurstclient.events.GUIRenderListener;
 import net.wurstclient.util.ChatUtils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -14,6 +15,18 @@ public class AutoExecProcessor implements GUIRenderListener {
 
     @Override
     public void onRenderGUI(MatrixStack matrixStack, float partialTicks) {
+        if (exec)
+            return;
+
+        File f = new File("autoexec.mr");
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         exec("autoexec.mr");
         exec = true;
     }

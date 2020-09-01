@@ -26,6 +26,10 @@ import net.wurstclient.util.ChatUtils;
 
 public final class TabGui implements KeyPressListener
 {
+	public ArrayList<Tab> getTabs() {
+		return tabs;
+	}
+
 	private final ArrayList<Tab> tabs = new ArrayList<>();
 	private final TabGuiOtf tabGuiOtf =
 		BurstClient.INSTANCE.getOtfs().tabGuiOtf;

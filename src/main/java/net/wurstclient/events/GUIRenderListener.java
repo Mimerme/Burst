@@ -7,11 +7,17 @@
  */
 package net.wurstclient.events;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
+import io.github.burstclient.EvalError;
 import net.minecraft.client.util.math.MatrixStack;
+import net.wurstclient.BurstClient;
 import net.wurstclient.event.Event;
 import net.wurstclient.event.Listener;
+import net.wurstclient.util.MultiProcessingUtils;
 
 public interface GUIRenderListener extends Listener
 {
@@ -31,8 +37,29 @@ public interface GUIRenderListener extends Listener
 		@Override
 		public void fire(ArrayList<GUIRenderListener> listeners)
 		{
-			for(GUIRenderListener listener : listeners)
-				listener.onRenderGUI(matrixStack, partialTicks);
+			for(GUIRenderListener listener : listeners) {
+				try {
+					listener.onRenderGUI(matrixStack, partialTicks);
+				}
+				catch (Exception e) {
+					BurstClient.INSTANCE.fallbackHud();
+
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+
+					try {
+						Process process = MultiProcessingUtils.startProcessWithIO(
+								EvalError.class, sw.toString());
+					} catch (IOException ioException) {
+						ioException.printStackTrace();
+					}
+
+					System.out.println(sw);
+					System.out.println("failed to call onGuiRender in ingamehud.js. falling back to default");
+
+				}
+			}
 		}
 		
 		@Override
