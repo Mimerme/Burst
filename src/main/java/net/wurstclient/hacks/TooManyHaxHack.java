@@ -29,6 +29,7 @@ import net.wurstclient.util.json.JsonException;
 @DontBlock
 public final class TooManyHaxHack extends Hack
 {
+	//Lol fuck this double reference. Used in TooManyHaxFile and here
 	private final ArrayList<Feature> blockedFeatures = new ArrayList<>();
 	private final Path profilesFolder;
 	private final TooManyHaxFile file;
@@ -118,7 +119,7 @@ public final class TooManyHaxHack extends Hack
 		{
 			if(!feature.isSafeToBlock())
 				throw new IllegalArgumentException();
-			
+
 			blockedFeatures.add(feature);
 			blockedFeatures
 				.sort(Comparator.comparing(f -> f.getName().toLowerCase()));
@@ -142,10 +143,10 @@ public final class TooManyHaxHack extends Hack
 		{
 			if(!feature.isSafeToBlock())
 				continue;
-			
+
 			blockedFeatures.add(feature);
 		}
-		
+
 		blockedFeatures
 			.sort(Comparator.comparing(f -> f.getName().toLowerCase()));
 		
@@ -160,6 +161,6 @@ public final class TooManyHaxHack extends Hack
 	
 	public List<Feature> getBlockedFeatures()
 	{
-		return Collections.unmodifiableList(blockedFeatures);
+		return blockedFeatures;
 	}
 }

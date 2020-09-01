@@ -13,9 +13,11 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.TreeMap;
 
 import com.google.gson.JsonArray;
 
+import net.wurstclient.hack.Hack;
 import net.wurstclient.util.json.JsonException;
 import net.wurstclient.util.json.JsonUtils;
 import net.wurstclient.util.json.WsonArray;
@@ -30,7 +32,7 @@ public final class TooManyHaxFile
 		this.path = path;
 		this.blockedFeatures = blockedFeatures;
 	}
-	
+
 	public void load()
 	{
 		try
@@ -76,6 +78,13 @@ public final class TooManyHaxFile
 		
 		blockedFeatures
 			.sort(Comparator.comparing(f -> f.getName().toLowerCase()));
+
+		//initialize another List indicating features that are unblocked
+		BurstClient.INSTANCE.getHax().enabledHax = (TreeMap<String, Hack>) BurstClient.INSTANCE.getHax().hax.clone();
+
+		for (Feature f: blockedFeatures){
+			BurstClient.INSTANCE.getHax().enabledHax.remove(f.getName());
+		}
 	}
 	
 	public void save()

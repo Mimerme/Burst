@@ -13,10 +13,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.github.burstclient.AutoExecProcessor;
 import io.github.burstclient.EvalError;
 import io.github.burstclient.EvalScreen;
 import javafx.scene.control.Alert;
@@ -90,6 +93,8 @@ public enum BurstClient
 	private RotationFaker rotationFaker;
 	private FriendsList friends;
 
+	private AutoExecProcessor autoExecer;
+
 	private boolean enabled = true;
 
 	//Since we can't intialize clickGuis before the game initialize's its TextRenderer
@@ -149,6 +154,8 @@ public enum BurstClient
 				new KeybindProcessor(hax, keybinds, cmdProcessor);
 		eventManager.add(KeyPressListener.class, keybindProcessor);
 
+		eventManager.add(GUIRenderListener.class, )
+
 
 		//Load the clickGui object if there exists one
 		File ingameFile = new File("ingamehud.js");
@@ -162,8 +169,8 @@ public enum BurstClient
 			hud = new IngameHUD();
 		}
 
-
-		eventManager.add(GUIRenderListener.class, hud);
+		autoExecer = new AutoExecProcessor();
+		eventManager.add(GUIRenderListener.class, autoExecer);
 
 		rotationFaker = new RotationFaker();
 		eventManager.add(PreMotionListener.class, rotationFaker);
@@ -181,6 +188,7 @@ public enum BurstClient
 
 		eventManager.remove(PreMotionListener.class, rotationFaker);
 		eventManager.remove(PostMotionListener.class, rotationFaker);
+		eventManager.remove(GUIRenderListener.class, autoExecer);
 	}
 
 	public void initialize()

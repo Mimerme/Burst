@@ -19,6 +19,7 @@ import io.github.burstclient.EvalError;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.wurstclient.BurstClient;
+import net.wurstclient.Feature;
 import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.event.EventManager;
 import net.wurstclient.events.UpdateListener;
@@ -168,8 +169,10 @@ public final class HackList implements UpdateListener
 
 
 
-	private final TreeMap<String, Hack> hax =
+	public TreeMap<String, Hack> hax =
 		new TreeMap<>((o1, o2) -> o1.compareToIgnoreCase(o2));
+	public TreeMap<String, Hack> enabledHax =
+			new TreeMap<>((o1, o2) -> o1.compareToIgnoreCase(o2));
 	
 	private final EnabledHacksFile enabledHacksFile;
 	private final Path profilesFolder =
@@ -257,6 +260,10 @@ public final class HackList implements UpdateListener
 		
 		eventManager.add(UpdateListener.class, this);
 	}
+
+	public void remove(String h){
+		hax.remove(h);
+	}
 	
 	@Override
 	public void onUpdate()
@@ -279,7 +286,7 @@ public final class HackList implements UpdateListener
 	{
 		return Collections.unmodifiableCollection(hax.values());
 	}
-	
+
 	public int countHax()
 	{
 		return hax.size();

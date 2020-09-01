@@ -147,9 +147,6 @@ public class EvalScreen extends Screen {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int int_3)
     {
-        if(keyCode == GLFW.GLFW_KEY_ENTER)
-            eval();
-
         if(keyCode == GLFW.GLFW_KEY_C) {
             lines.clear();
             viewportStart = 0;

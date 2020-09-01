@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import net.wurstclient.commands.ClickGuiCmd;
 import org.lwjgl.nanovg.NVGColor;
 import org.lwjgl.nanovg.NanoVG;
 import org.lwjgl.opengl.GL11;
@@ -102,7 +103,7 @@ public class ClickGui
 		LinkedHashMap<String, Window> windowMap = new LinkedHashMap<>();
 
 		ArrayList<Feature> features = new ArrayList<>();
-		features.addAll(WURST.getHax().getAllHax());
+		features.addAll(WURST.getHax().enabledHax.values());
 		features.addAll(WURST.getCmds().getAllCmds());
 		features.addAll(WURST.getOtfs().getAllOtfs());
 
@@ -504,11 +505,38 @@ public class ClickGui
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glShadeModel(GL11.GL_SMOOTH);
 		GL11.glLineWidth(1);
+		ClickGuiCmd clickCmd = (ClickGuiCmd) BurstClient.INSTANCE.getCmds().get("click");
 
 		tooltip = "";
 		for(Window window : windows)
 		{
-			if(window.isInvisible())
+			if(window.isInvisible() || clickCmd.blockedWindowNames.contains(window.getTitle().toLowerCase()))
+				continue;
+
+			// dragging
+			if(window.isDragging())
+				if(leftMouseButtonPressed)
+					window.dragTo(mouseX, mouseY);
+				else
+				{
+					window.stopDragging();
+					saveWindows();
+				}
+
+			// scrollbar dragging
+			if(window.isDraggingScrollbar())
+				if(leftMouseButtonPressed)
+					window.dragScrollbarTo(mouseY);
+				else
+					window.stopDraggingScrollbar();
+
+			renderWindow(matrixStack, window, mouseX, mouseY, partialTicks);
+		}
+
+		//Render the alised windows
+		for(Window window : clickCmd.aliasedWindows.values())
+		{
+			if(window.isInvisible() || clickCmd.blockedWindowNames.contains(window.getTitle().toLowerCase()))
 				continue;
 
 			// dragging
