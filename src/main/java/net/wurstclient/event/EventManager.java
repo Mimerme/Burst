@@ -7,15 +7,20 @@
  */
 package net.wurstclient.event;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
+import io.github.burstclient.EvalError;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.crash.CrashReportSection;
 import net.wurstclient.BurstClient;
+import net.wurstclient.util.MultiProcessingUtils;
 
 public final class EventManager
 {
@@ -54,15 +59,18 @@ public final class EventManager
 			
 			event.fire(listeners2);
 			
-		}catch(Throwable e)
+		}catch(Exception e)
 		{
-			e.printStackTrace();
-			
-			CrashReport report = CrashReport.create(e, "Firing Wurst event");
-			CrashReportSection section = report.addElement("Affected event");
-			section.add("Event class", () -> event.getClass().getName());
-			
-			throw new CrashException(report);
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+
+			try {
+				Process process = MultiProcessingUtils.startProcessWithIO(
+						EvalError.class, sw.toString());
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
 		}
 	}
 	
@@ -94,6 +102,10 @@ public final class EventManager
 			
 			throw new CrashException(report);
 		}
+	}
+
+	public void clear(){
+		listenerMap.clear();
 	}
 	
 	public <L extends Listener> void remove(Class<L> type, L listener)

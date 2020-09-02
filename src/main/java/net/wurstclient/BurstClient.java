@@ -19,6 +19,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import baritone.Baritone;
+import baritone.api.BaritoneAPI;
 import io.github.burstclient.AutoExecProcessor;
 import io.github.burstclient.EvalError;
 import io.github.burstclient.EvalScreen;
@@ -181,19 +183,23 @@ public enum BurstClient
 		altManager = new AltManager(altsFile, encFolder);
 	}
 
+	//Called when there is a JS error
+	public void fallback(){
+
+	}
+
 	//Purge all the registered events associated with the current initialized features
 	public void purgeEvents(){
-		eventManager.remove(ChatOutputListener.class, cmdProcessor);
-		eventManager.remove(GUIRenderListener.class, hud);
-
-		eventManager.remove(PreMotionListener.class, rotationFaker);
-		eventManager.remove(PostMotionListener.class, rotationFaker);
-		eventManager.remove(GUIRenderListener.class, autoExecer);
+		eventManager.clear();
 	}
 
 	public void initialize()
 	{
-		System.out.println("Starting Wurst Client...");
+		System.out.println("Starting Burst Client...");
+
+/*
+		System.out.println("Got baritone provider: " + BaritoneAPI.getProvider());
+*/
 
 		wurstFolder = createWurstFolder();
 

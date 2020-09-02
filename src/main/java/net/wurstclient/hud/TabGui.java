@@ -24,20 +24,40 @@ import net.wurstclient.hacks.TooManyHaxHack;
 import net.wurstclient.other_features.TabGuiOtf;
 import net.wurstclient.util.ChatUtils;
 
-public final class TabGui implements KeyPressListener
+public class TabGui implements KeyPressListener
 {
 	public ArrayList<Tab> getTabs() {
 		return tabs;
 	}
 
-	private final ArrayList<Tab> tabs = new ArrayList<>();
-	private final TabGuiOtf tabGuiOtf =
+	public final ArrayList<Tab> tabs = new ArrayList<>();
+	public final TabGuiOtf tabGuiOtf =
 		BurstClient.INSTANCE.getOtfs().tabGuiOtf;
-	
-	private int width;
-	private int height;
-	private int selected;
-	private boolean tabOpened;
+
+	public TabGuiOtf getTabGuiOtf() {
+		return tabGuiOtf;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getSelected() {
+		return selected;
+	}
+
+	public boolean isTabOpened() {
+		return tabOpened;
+	}
+
+	public int width;
+	public int height;
+	public int selected;
+	public boolean tabOpened;
 	
 	public TabGui()
 	{
@@ -69,8 +89,13 @@ public final class TabGui implements KeyPressListener
 		tabs.forEach(tab -> tab.updateSize());
 		updateSize();
 	}
+
+	public void destroy(){
+		BurstClient.INSTANCE.getEventManager().remove(KeyPressListener.class,
+				this);
+	}
 	
-	private void updateSize()
+	public void updateSize()
 	{
 		width = 64;
 		for(Tab tab : tabs)
@@ -87,7 +112,7 @@ public final class TabGui implements KeyPressListener
 	{
 		if(event.getAction() != GLFW.GLFW_PRESS)
 			return;
-		
+
 		if(tabGuiOtf.isHidden())
 			return;
 		
@@ -214,7 +239,7 @@ public final class TabGui implements KeyPressListener
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
 	
-	private void drawBox(int x1, int y1, int x2, int y2)
+	public void drawBox(int x1, int y1, int x2, int y2)
 	{
 		ClickGui gui = BurstClient.INSTANCE.getGui();
 		float[] bgColor = gui.getBgColor();
@@ -288,14 +313,14 @@ public final class TabGui implements KeyPressListener
 		GL11.glEnd();
 	}
 	
-	private static final class Tab
+	public static final class Tab
 	{
-		private final String name;
-		private final ArrayList<Feature> features = new ArrayList<>();
+		public final String name;
+		public final ArrayList<Feature> features = new ArrayList<>();
 		
-		private int width;
-		private int height;
-		private int selected;
+		public int width;
+		public int height;
+		public int selected;
 		
 		public Tab(String name)
 		{
@@ -304,6 +329,9 @@ public final class TabGui implements KeyPressListener
 		
 		public void updateSize()
 		{
+			if (BurstClient.MC.textRenderer == null)
+				return;
+
 			width = 64;
 			for(Feature feature : features)
 			{
@@ -340,7 +368,7 @@ public final class TabGui implements KeyPressListener
 			}
 		}
 		
-		private void onEnter()
+		public void onEnter()
 		{
 			Feature feature = features.get(selected);
 			

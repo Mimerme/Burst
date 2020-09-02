@@ -21,8 +21,6 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 import net.wurstclient.commands.ClickGuiCmd;
-import org.lwjgl.nanovg.NVGColor;
-import org.lwjgl.nanovg.NanoVG;
 import org.lwjgl.opengl.GL11;
 
 import com.google.gson.JsonElement;
