@@ -92,4 +92,8 @@ public final class CmdList
 	{
 		return cmds.size();
 	}
+
+	public void addCommand(String name, Command cmd){
+		cmds.put(name, cmd);
+	}
 }

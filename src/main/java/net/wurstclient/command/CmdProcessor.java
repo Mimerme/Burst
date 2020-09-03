@@ -8,6 +8,7 @@
 package net.wurstclient.command;
 
 import java.util.Arrays;
+import java.util.List;
 
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
@@ -64,7 +65,9 @@ public final class CmdProcessor implements ChatOutputListener
 	
 	private Command parseCmd(String input) throws CmdNotFoundException
 	{
-		String cmdName = input.split(" ")[0];
+		List<String> splits = ArgumentTokenizer.tokenize(input);
+
+		String cmdName = splits.get(0);
 		Command cmd = cmds.getCmdByName(cmdName);
 		
 		if(cmd == null)
@@ -75,9 +78,13 @@ public final class CmdProcessor implements ChatOutputListener
 	
 	private void runCmd(Command cmd, String input)
 	{
-		String[] args = input.split(" ");
-		args = Arrays.copyOfRange(args, 1, args.length);
-		
+		List<String> splits = ArgumentTokenizer.tokenize(input);
+		Object[] objs = splits.subList(1, splits.size()).toArray();
+		String[] args = Arrays.copyOf(objs,
+				objs.length,
+				String[].class);
+
+
 		try
 		{
 			cmd.call(args);

@@ -1,5 +1,6 @@
 package net.wurstclient.commands;
 
+import io.github.burstclient.AliasedCmd;
 import net.wurstclient.BurstClient;
 import net.wurstclient.BurstFeature;
 import net.wurstclient.Feature;
@@ -81,7 +82,6 @@ public class ClickGuiCmd extends Command{
                     return;
                 }
                 blockedWindowNames.add(args[1].toLowerCase());
-                writeState();
                 break;
             case "window":
                 if (args.length < 3)
@@ -97,12 +97,10 @@ public class ClickGuiCmd extends Command{
                         newWindow.pack();
                         aliasedWindows.put(args[2], newWindow);
                         gui.addWindow(newWindow);
-                        writeState();
                         return;
                     case "del":
                         aliasedWindows.remove(args[2]);
                         gui.getWindows().remove(aliasedWindow);
-                        writeState();
                         return;
                 }
 
@@ -119,12 +117,10 @@ public class ClickGuiCmd extends Command{
                 switch (args[1]) {
                     case "add":
                         aliasedWindow.add(new FeatureButton(feature));
-                        writeState();
                         return;
                     case "rm":
                         ChatUtils.message("Enter an index, not feature name. \nLol i'm too lazy to make this easier");
                         aliasedWindow.remove(Integer.parseInt(args[3]));
-                        writeState();
                         return;
                 }
 
@@ -134,22 +130,5 @@ public class ClickGuiCmd extends Command{
                 throw new CmdSyntaxError();
         }
 
-    }
-
-    public void writeState(){
-        BurstClickData e = new BurstClickData(blockedWindowNames, aliasedWindows, aliasedCommands);
-
-        try {
-
-            FileOutputStream fileOut =
-                    new FileOutputStream("burstclickgui.mrmrmr");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(e);
-            out.close();
-            fileOut.close();
-            System.out.printf("Serialized data is saved in burstclickgui.mrmrmr");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
     }
 }
