@@ -71,6 +71,8 @@ public final class EventManager
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
 			}
+
+			BurstClient.INSTANCE.fallback();
 		}
 	}
 	

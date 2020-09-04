@@ -54,7 +54,7 @@ public interface GUIRenderListener extends Listener
 					} catch (IOException ioException) {
 						ioException.printStackTrace();
 					}
-
+					BurstClient.INSTANCE.fallback();
 					System.out.println(sw);
 					System.out.println("failed to call onGuiRender in ingamehud.js. falling back to default");
 

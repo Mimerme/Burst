@@ -213,17 +213,17 @@ public final class HackList implements UpdateListener
 	public void loadJs(String jsDirectory){
 		System.out.println("Loading JS mods from \'" + System.getProperty("user.dir") + "/" + jsDirectory + "\' vis Nashorn");
 
-		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-		Invocable invoker = (Invocable) engine;
 
 		File folder = new File(jsDirectory);
 		for (final File fileEntry : folder.listFiles()) {
 			if (!fileEntry.isDirectory()) {
-				//TODO: error handling is a little harsh rn. Loosen it up
 				try {
+					ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+					Invocable invoker = (Invocable) engine;
 					engine.eval(new FileReader(fileEntry));
 					Hack modObj = (Hack) invoker.invokeFunction("hack");
 					modObj.initAnotations();
+					modObj.init();
 					hax.put(modObj.getName(), modObj);
 					System.out.println("Successfully loaded \'" + fileEntry.getName() + "\' module");
 				} catch (Exception e) {
@@ -237,6 +237,8 @@ public final class HackList implements UpdateListener
 					} catch (IOException ioException) {
 						ioException.printStackTrace();
 					}
+					BurstClient.INSTANCE.fallback();
+
 				}
 			}
 		}
@@ -249,7 +251,7 @@ public final class HackList implements UpdateListener
 		try
 		{
 			loadJava("net.wurstclient.hacks");
-			loadJs("hacks");
+			loadJs("scripts/mods");
 
 		}catch(Exception e)
 		{

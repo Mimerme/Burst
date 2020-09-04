@@ -20,10 +20,10 @@ import net.wurstclient.hacks.TooManyHaxHack;
 
 public abstract class Hack extends Feature
 {
-	private boolean enabled;
-	private final boolean stateSaved =
+	public boolean enabled;
+	public  boolean stateSaved =
 		!getClass().isAnnotationPresent(DontSaveState.class);
-
+	public  ArrayList<Window> hackWindows = new ArrayList<>();
 	public Hack(){
 		this("","");
 	}
@@ -33,7 +33,32 @@ public abstract class Hack extends Feature
 		this.name = Objects.requireNonNull(name);
 		this.description = Objects.requireNonNull(description);
 		addPossibleKeybind(name, "Toggle " + name);
+		this.init();
 	}
+
+	public String getDescription(){
+		return super.getDescription();
+	}
+
+	public void setDescription(String desc){
+		super.description = desc;
+	}
+
+	public void setName(String name){
+		super.name = name;
+	}
+
+	public String getName(){
+		return super.name;
+	}
+
+
+	public String getCategory(){
+		return super.category;
+	}
+
+	//Used by the nashorn API
+	public void init(){}
 
 	@Override
 	public void initAnotations() {
@@ -58,7 +83,7 @@ public abstract class Hack extends Feature
 	}
 
 	public List<Window> getWindows(){
-		ArrayList<Window> windows = new ArrayList<>();
+		ArrayList<Window> windows = this.hackWindows;
 		for (Field f : this.getClass().getDeclaredFields()){
 			if (f.getAnnotation(BurstWindow.class) != null) {
 				f.setAccessible(true);
@@ -73,23 +98,27 @@ public abstract class Hack extends Feature
 		return windows;
 	}
 
+	public void addWindow(Window window){
+		hackWindows.add(window);
+	}
+
 	public String getRenderName()
 	{
 		return name;
 	}
 	
-	protected final void setCategory(String category)
+	public void setCategory(String category)
 	{
 		this.category = category;
 	}
 	
 	@Override
-	public final boolean isEnabled()
+	public boolean isEnabled()
 	{
 		return enabled;
 	}
 	
-	public final void setEnabled(boolean enabled)
+	public void setEnabled(boolean enabled)
 	{
 		if(this.enabled == enabled)
 			return;
@@ -113,18 +142,18 @@ public abstract class Hack extends Feature
 	}
 	
 	@Override
-	public final String getPrimaryAction()
+	public  String getPrimaryAction()
 	{
 		return enabled ? "Disable" : "Enable";
 	}
 	
 	@Override
-	public final void doPrimaryAction()
+	public void doPrimaryAction()
 	{
 		setEnabled(!enabled);
 	}
 	
-	public final boolean isStateSaved()
+	public boolean isStateSaved()
 	{
 		return stateSaved;
 	}
@@ -133,7 +162,7 @@ public abstract class Hack extends Feature
 	{
 		
 	}
-	
+
 	protected void onDisable()
 	{
 		

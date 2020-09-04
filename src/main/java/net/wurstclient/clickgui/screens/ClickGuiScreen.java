@@ -32,22 +32,48 @@ public final class ClickGuiScreen extends Screen
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton)
 	{
-		gui.handleMouseClick((int)mouseX, (int)mouseY, mouseButton);
-		return super.mouseClicked(mouseX, mouseY, mouseButton);
+		try {
+			gui.handleMouseClick((int) mouseX, (int) mouseY, mouseButton);
+			return super.mouseClicked(mouseX, mouseY, mouseButton);
+		}
+		catch (Exception e){
+			//TODO: actually integrated script error handling
+			System.out.println(e);
+			BurstClient.INSTANCE.fallback();
+		}
+
+		return false;
 	}
 	
 	@Override
 	public boolean mouseReleased(double mouseX, double mouseY, int mouseButton)
 	{
-		gui.handleMouseRelease(mouseX, mouseY, mouseButton);
-		return super.mouseReleased(mouseX, mouseY, mouseButton);
+		try {
+			gui.handleMouseRelease(mouseX, mouseY, mouseButton);
+			return super.mouseReleased(mouseX, mouseY, mouseButton);
+		}
+		catch (Exception e){
+			//TODO: actually integrated script error handling
+			System.out.println(e);
+			BurstClient.INSTANCE.fallback();
+		}
+
+		return false;
 	}
 	
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double delta)
 	{
-		gui.handleMouseScroll(mouseX, mouseY, delta);
-		return super.mouseScrolled(mouseX, mouseY, delta);
+		try {
+			gui.handleMouseScroll(mouseX, mouseY, delta);
+			return super.mouseScrolled(mouseX, mouseY, delta);
+		}
+		catch (Exception e){
+			//TODO: actually integrated script error handling
+			System.out.println(e);
+			BurstClient.INSTANCE.fallback();
+		}
+		return false;
 	}
 	
 	@Override
@@ -62,6 +88,7 @@ public final class ClickGuiScreen extends Screen
 		catch (Exception e){
 			//TODO: actually integrated script error handling
 			System.out.println(e);
+			BurstClient.INSTANCE.fallback();
 		}
 	}
 }

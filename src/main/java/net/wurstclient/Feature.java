@@ -21,25 +21,25 @@ import net.wurstclient.settings.Setting;
 
 public abstract class Feature
 {
-	protected static final BurstClient WURST = BurstClient.INSTANCE;
-	protected static final EventManager EVENTS = WURST.getEventManager();
-	protected static final MinecraftClient MC = BurstClient.MC;
-	protected static final IMinecraftClient IMC = BurstClient.IMC;
+	public static  BurstClient WURST = BurstClient.INSTANCE;
+	public static  EventManager EVENTS = WURST.getEventManager();
+	public static  MinecraftClient MC = BurstClient.MC;
+	public static  IMinecraftClient IMC = BurstClient.IMC;
 
-	protected String name;
-	protected String description;
-	protected String category;
+	public String name;
+	public String description;
+	public String category;
 	
-	private final LinkedHashMap<String, Setting> settings =
+	public  LinkedHashMap<String, Setting> settings =
 		new LinkedHashMap<>();
-	private final LinkedHashSet<PossibleKeybind> possibleKeybinds =
+	public  LinkedHashSet<PossibleKeybind> possibleKeybinds =
 		new LinkedHashSet<>();
 	
-	private final String searchTags =
+	public  String searchTags =
 		getClass().isAnnotationPresent(SearchTags.class) ? String.join("\u00a7",
 			getClass().getAnnotation(SearchTags.class).value()) : "";
 	
-	private final boolean safeToBlock =
+	public  boolean safeToBlock =
 		!getClass().isAnnotationPresent(DontBlock.class);
 	
 	public String getName(){
@@ -77,12 +77,12 @@ public abstract class Feature
 		return false;
 	}
 	
-	public final Map<String, Setting> getSettings()
+	public  Map<String, Setting> getSettings()
 	{
 		return Collections.unmodifiableMap(settings);
 	}
 	
-	protected final void addSetting(Setting setting)
+	public  void addSetting(Setting setting)
 	{
 		String key = setting.getName().toLowerCase();
 		
@@ -94,22 +94,22 @@ public abstract class Feature
 		possibleKeybinds.addAll(setting.getPossibleKeybinds(getName()));
 	}
 	
-	protected final void addPossibleKeybind(String command, String description)
+	public  void addPossibleKeybind(String command, String description)
 	{
 		possibleKeybinds.add(new PossibleKeybind(command, description));
 	}
 	
-	public final Set<PossibleKeybind> getPossibleKeybinds()
+	public  Set<PossibleKeybind> getPossibleKeybinds()
 	{
 		return Collections.unmodifiableSet(possibleKeybinds);
 	}
 	
-	public final String getSearchTags()
+	public  String getSearchTags()
 	{
 		return searchTags;
 	}
 	
-	public final boolean isSafeToBlock()
+	public  boolean isSafeToBlock()
 	{
 		return safeToBlock;
 	}

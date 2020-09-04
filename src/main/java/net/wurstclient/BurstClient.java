@@ -24,9 +24,6 @@ import baritone.api.BaritoneAPI;
 import io.github.burstclient.AutoExecProcessor;
 import io.github.burstclient.EvalError;
 import io.github.burstclient.EvalScreen;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.wurstclient.hacks.RainbowUiHack;
 import net.wurstclient.util.ForceOpDialog;
@@ -184,8 +181,27 @@ public enum BurstClient
 	}
 
 	//Called when there is a JS error
+	//NOTE: some of this stuff crashes if there is a JS error before the game starts cuz of null pointer exceptions
 	public void fallback(){
+		purgeEvents();
 
+		Path guiFile = wurstFolder.resolve("windows.json");
+
+		gui = new ClickGui(guiFile);
+
+		Path preferencesFile = wurstFolder.resolve("preferences.json");
+		navigator = new Navigator(preferencesFile, hax, cmds, otfs);
+
+		Path friendsFile = wurstFolder.resolve("friends.json");
+		friends = new FriendsList(friendsFile);
+		friends.load();
+
+		cmdProcessor = new CmdProcessor(cmds);
+		eventManager.add(ChatOutputListener.class, cmdProcessor);
+
+
+		hud = new IngameHUD();
+		BurstClient.guiInitialized = false;
 	}
 
 	//Purge all the registered events associated with the current initialized features
@@ -358,6 +374,9 @@ public enum BurstClient
 					ioException.printStackTrace();
 				}
 
+				BurstClient.INSTANCE.fallback();
+
+
 
 				gui = new ClickGui();
 				System.out.println("clickgui.js exception. falling back to default");
@@ -387,6 +406,8 @@ public enum BurstClient
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
 			}
+
+			BurstClient.INSTANCE.fallback();
 
 			System.out.println(sw);
 			System.out.println("failed to load clickgui.js. falling back to default");
@@ -418,6 +439,7 @@ public enum BurstClient
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
 			}
+			BurstClient.INSTANCE.fallback();
 
 			System.out.println(sw);
 			System.out.println("failed to load ingamehud.js. falling back to default");

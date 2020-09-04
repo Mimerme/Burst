@@ -531,31 +531,6 @@ public class ClickGui
 			renderWindow(matrixStack, window, mouseX, mouseY, partialTicks);
 		}
 
-		//Render the alised windows
-		for(Window window : clickCmd.aliasedWindows.values())
-		{
-			if(window.isInvisible() || clickCmd.blockedWindowNames.contains(window.getTitle().toLowerCase()))
-				continue;
-
-			// dragging
-			if(window.isDragging())
-				if(leftMouseButtonPressed)
-					window.dragTo(mouseX, mouseY);
-				else
-				{
-					window.stopDragging();
-					saveWindows();
-				}
-
-			// scrollbar dragging
-			if(window.isDraggingScrollbar())
-				if(leftMouseButtonPressed)
-					window.dragScrollbarTo(mouseY);
-				else
-					window.stopDraggingScrollbar();
-
-			renderWindow(matrixStack, window, mouseX, mouseY, partialTicks);
-		}
 
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		renderPopupsAndTooltip(matrixStack, mouseX, mouseY);
@@ -1053,35 +1028,12 @@ public class ClickGui
 				GL11.glVertex2i(xs2, ys4);
 				GL11.glVertex2i(xs2, ys3);
 				GL11.glEnd();
-
-				// outline
-				GL11.glColor4f(acColor[0], acColor[1], acColor[2], 0.5F);
-				GL11.glBegin(GL11.GL_LINE_LOOP);
-				GL11.glVertex2i(xs1, ys3);
-				GL11.glVertex2i(xs1, ys4);
-				GL11.glVertex2i(xs2, ys4);
-				GL11.glVertex2i(xs2, ys3);
-				GL11.glEnd();
 			}
 
 			int x3 = x1 + 2;
 			int x4 = window.isScrollingEnabled() ? x2 - 3 : x2;
 			int x5 = x4 - 2;
 			int y4 = y3 + window.getScrollOffset();
-
-			// window background
-			// left & right
-			GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glVertex2i(x1, y3);
-			GL11.glVertex2i(x1, y2);
-			GL11.glVertex2i(x3, y2);
-			GL11.glVertex2i(x3, y3);
-			GL11.glVertex2i(x5, y3);
-			GL11.glVertex2i(x5, y2);
-			GL11.glVertex2i(x4, y2);
-			GL11.glVertex2i(x4, y3);
-			GL11.glEnd();
 
 			net.minecraft.client.util.Window sr = MC.getWindow();
 			int sf = (int)sr.getScaleFactor();
@@ -1091,41 +1043,6 @@ public class ClickGui
 			GL11.glPushMatrix();
 			GL11.glTranslated(x1, y4, 0);
 
-			GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], opacity);
-			GL11.glBegin(GL11.GL_QUADS);
-
-			// window background
-			// between children
-			int xc1 = 2;
-			int xc2 = x5 - x1;
-			for(int i = 0; i < window.countChildren(); i++)
-			{
-				int yc1 = window.getChild(i).getY();
-				int yc2 = yc1 - 2;
-				GL11.glVertex2i(xc1, yc2);
-				GL11.glVertex2i(xc1, yc1);
-				GL11.glVertex2i(xc2, yc1);
-				GL11.glVertex2i(xc2, yc2);
-			}
-
-			// window background
-			// bottom
-			int yc1;
-			if(window.countChildren() == 0)
-				yc1 = 0;
-			else
-			{
-				Component lastChild =
-						window.getChild(window.countChildren() - 1);
-				yc1 = lastChild.getY() + lastChild.getHeight();
-			}
-			int yc2 = yc1 + 2;
-			GL11.glVertex2i(xc1, yc2);
-			GL11.glVertex2i(xc1, yc1);
-			GL11.glVertex2i(xc2, yc1);
-			GL11.glVertex2i(xc2, yc2);
-
-			GL11.glEnd();
 
 			// render children
 			int cMouseX = mouseX - x1;

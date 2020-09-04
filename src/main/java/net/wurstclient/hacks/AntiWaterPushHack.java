@@ -7,6 +7,7 @@
  */
 package net.wurstclient.hacks;
 
+import net.minecraft.util.math.Vec3d;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.IsPlayerInWaterListener;
 import net.wurstclient.events.UpdateListener;
@@ -57,7 +58,7 @@ public final class AntiWaterPushHack extends Hack implements UpdateListener,
 		
 		if(!MC.player.isOnGround())
 			return;
-		
+
 		if(!IMC.getPlayer().isTouchingWaterBypass())
 			return;
 		

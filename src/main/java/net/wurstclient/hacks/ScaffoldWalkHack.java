@@ -59,7 +59,6 @@ public final class ScaffoldWalkHack extends Hack implements GUIRenderListener
 		if(!BlockUtils.getState(belowPlayer).getMaterial().isReplaceable())
 			return;
 
-		System.out.println("placing");
 		// search blocks in hotbar
 		int newSlot = -1;
 		for(int i = 0; i < 9; i++)
@@ -119,10 +118,10 @@ public final class ScaffoldWalkHack extends Hack implements GUIRenderListener
 					new PlayerMoveC2SPacket.LookOnly(rotation.getYaw(),
 							rotation.getPitch(), MC.player.isOnGround());
 			MC.player.networkHandler.sendPacket(packet);
-			IMC.getInteractionManager().rightClickBlock(neighbor, side2,
+			IMC.getInteractionManager().rightClickBlock(MC.player.getBlockPos().down(1), Direction.DOWN,
 					hitVec);
 			MC.player.swingHand(Hand.MAIN_HAND);
-			IMC.setItemUseCooldown(0);
+			IMC.setItemUseCooldown(4);
 
 			return true;
 

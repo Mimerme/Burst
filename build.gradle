@@ -13,7 +13,11 @@ version = project.mod_version
 group = project.maven_group
 
 
-
+allprojects {
+	repositories {
+		maven { url 'https://jitpack.io' }
+	}
+}
 minecraft {
 }
 
@@ -30,6 +34,9 @@ repositories {
 	maven {
 		name = 'SpongePowered'
 		url = 'http://repo.spongepowered.org/maven'
+	}
+	maven {
+		url 'https://dl.bintray.com/earthcomputer/mods'
 	}
 	jcenter()
 }
@@ -56,6 +63,9 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.\\
 	modImplementation 'com.gitlab.CDAGaming:fabritone:fabritone~1.16.x-Fabric-SNAPSHOT'
+	modImplementation 'net.earthcomputer:multiconnect:1.3.18:api'
+	include 'net.earthcomputer:multiconnect:1.3.18:api'
+	modRuntime 'net.earthcomputer:multiconnect:1.3.18:slim'
 }
 
 processResources {
