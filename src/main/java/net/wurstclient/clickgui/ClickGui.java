@@ -15,12 +15,11 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import net.wurstclient.commands.ClickGuiCmd;
+import io.github.burstclient.cmds.ClickGuiCmd;
 import org.lwjgl.opengl.GL11;
 
 import com.google.gson.JsonElement;
@@ -151,6 +150,12 @@ public class ClickGui
 			x += window.getWidth() + 5;
 		}
 
+		loadWindows();
+
+		saveWindows();
+	}
+
+	public void loadWindows(){
 		JsonObject json;
 		try(BufferedReader reader = Files.newBufferedReader(windowsFile))
 		{
@@ -197,11 +202,9 @@ public class ClickGui
 					&& jsonPinned.getAsJsonPrimitive().isBoolean())
 				window.setPinned(jsonPinned.getAsBoolean());
 		}
-
-		saveWindows();
 	}
 
-	protected void saveWindows()
+	public void saveWindows()
 	{
 		JsonObject json = new JsonObject();
 

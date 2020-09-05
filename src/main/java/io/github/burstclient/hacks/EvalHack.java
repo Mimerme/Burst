@@ -1,4 +1,4 @@
-package net.wurstclient.hacks;
+package io.github.burstclient.hacks;
 
 import io.github.burstclient.EvalScreen;
 import net.wurstclient.BurstFeature;

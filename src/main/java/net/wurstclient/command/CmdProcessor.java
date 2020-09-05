@@ -7,9 +7,13 @@
  */
 package net.wurstclient.command;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
+import io.github.burstclient.EvalError;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.crash.CrashReportSection;
@@ -17,6 +21,7 @@ import net.wurstclient.BurstClient;
 import net.wurstclient.events.ChatOutputListener;
 import net.wurstclient.hacks.TooManyHaxHack;
 import net.wurstclient.util.ChatUtils;
+import net.wurstclient.util.MultiProcessingUtils;
 
 public final class CmdProcessor implements ChatOutputListener
 {
@@ -95,10 +100,18 @@ public final class CmdProcessor implements ChatOutputListener
 			
 		}catch(Throwable e)
 		{
-			CrashReport report = CrashReport.create(e, "Running Wurst command");
-			CrashReportSection section = report.addElement("Affected command");
-			section.add("Command input", () -> input);
-			throw new CrashException(report);
+
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			System.out.println(sw.toString());
+
+			try {
+				Process process = MultiProcessingUtils.startProcessWithIO(
+						EvalError.class, sw.toString());
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
 		}
 	}
 	

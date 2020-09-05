@@ -18,8 +18,6 @@ allprojects {
 		maven { url 'https://jitpack.io' }
 	}
 }
-minecraft {
-}
 
 repositories {
 	// uncomment to publish to the local maven
@@ -42,7 +40,6 @@ repositories {
 }
 
 dependencies {
-	compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"

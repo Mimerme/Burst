@@ -1,4 +1,4 @@
-package net.wurstclient.commands;
+package io.github.burstclient.cmds;
 
 import io.github.burstclient.AutoExecProcessor;
 import net.wurstclient.BurstFeature;

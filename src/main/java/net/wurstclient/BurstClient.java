@@ -120,6 +120,8 @@ public enum BurstClient
 		settingsProfileFolder = wurstFolder.resolve("settings");
 		this.settingsFile = new SettingsFile(settingsFile, hax, cmds, otfs);
 		this.settingsFile.load();
+
+
 		hax.getTooManyHaxHack().loadBlockedHacksFile();
 
 		Path keybindsFile = wurstFolder.resolve("keybinds.json");
@@ -393,6 +395,7 @@ public enum BurstClient
 		try {
 			engine.eval(new FileReader(filename));
 			ClickGui modObj = (ClickGui) invoker.invokeFunction("gui");
+			modObj.init();
 			System.out.println("Successfully loaded " + filename);
 			return modObj;
 		} catch (Exception e) {

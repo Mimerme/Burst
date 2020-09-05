@@ -33,6 +33,8 @@ public abstract class Command extends Feature
 		this.syntax = syntax;
 	}
 
+	public void init(){}
+
 	@Override
 	public void initAnotations() {
 		//Initialize hack settings and category annotations here
@@ -42,6 +44,18 @@ public abstract class Command extends Feature
 
 		this.syntax =  cmdInfo.syntax();
 		super.initAnotations();
+	}
+
+	public void setDescription(String description){
+		super.description = description;
+	}
+
+	public void setSearchTags(String searchTags){
+		super.searchTags = searchTags;
+	}
+
+	public void setName(String name){
+		super.name = name;
 	}
 
 	public abstract void call(String[] args) throws CmdException;

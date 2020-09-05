@@ -1,4 +1,4 @@
-package net.wurstclient.commands;
+package io.github.burstclient.cmds;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;

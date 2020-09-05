@@ -1,4 +1,4 @@
-package net.wurstclient.hacks;
+package io.github.burstclient.hacks;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;

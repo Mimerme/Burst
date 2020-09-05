@@ -29,7 +29,7 @@ public class EvalError extends JDialog
 	{
 		SwingUtils.setLookAndFeel();
 		JOptionPane.showMessageDialog(null,
-				args[0].substring(0,Math.min(1000, args[0].length())),
+				args[0].substring(0,Math.min(5000, args[0].length())),
 				"JS Evaluation Error",
 				JOptionPane.WARNING_MESSAGE);
 	}

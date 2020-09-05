@@ -16,23 +16,22 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import io.github.burstclient.EvalError;
+import io.github.burstclient.hacks.EvalHack;
+import io.github.burstclient.hacks.InventoryHudHack;
+import io.github.burstclient.hacks.PlayerHudHack;
+import io.github.burstclient.hacks.ScaffoldWalkHack;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.wurstclient.BurstClient;
-import net.wurstclient.Feature;
-import net.wurstclient.clickgui.ClickGui;
 import net.wurstclient.event.EventManager;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hacks.*;
 import net.wurstclient.util.MultiProcessingUtils;
 import net.wurstclient.util.json.JsonException;
-import org.reflections.Reflections;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 
 
 public final class HackList implements UpdateListener
@@ -167,7 +166,9 @@ public final class HackList implements UpdateListener
 	public final TunnellerHack tunnellerHack = new TunnellerHack();
 	public final XRayHack xRayHack = new XRayHack();
 
-
+	public final EvalHack evalHack = new EvalHack();
+	public final InventoryHudHack inventoryHudHack = new InventoryHudHack();
+	public final PlayerHudHack playerHudHack = new PlayerHudHack();
 
 	public TreeMap<String, Hack> hax =
 		new TreeMap<>((o1, o2) -> o1.compareToIgnoreCase(o2));
@@ -182,7 +183,23 @@ public final class HackList implements UpdateListener
 		BurstClient.INSTANCE.getEventManager();
 
 	public void loadJava(String packageName){
-		System.out.println("Loading Java hacks from \'" + packageName + "\'");
+		System.out.println("Loading Java hacks");
+		for(Field field : HackList.class.getDeclaredFields())
+		{
+			try {
+				if (!field.getName().endsWith("Hack"))
+					continue;
+
+				Hack hack = (Hack) field.get(this);
+				hack.initAnotations();
+				hax.put(hack.getName(), hack);
+				System.out.println("Successfully loaded \'" + hack.getName() + "\' module");
+			}catch (Exception e){
+				String message = "Initializing Wurst hacks";
+				CrashReport report = CrashReport.create(e, message);
+			}
+		}
+/*
 		Reflections reflections = new Reflections(packageName);
 
 		Set<Class<? extends Hack>> subTypes = reflections.getSubTypesOf(Hack.class);
@@ -207,7 +224,7 @@ public final class HackList implements UpdateListener
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 
 	public void loadJs(String jsDirectory){
@@ -250,7 +267,7 @@ public final class HackList implements UpdateListener
 		
 		try
 		{
-			loadJava("net.wurstclient.hacks");
+			loadJava("net.wurstclient");
 			loadJs("scripts/mods");
 
 		}catch(Exception e)

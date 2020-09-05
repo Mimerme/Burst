@@ -1,4 +1,4 @@
-package net.wurstclient.commands;
+package io.github.burstclient.cmds;
 
 import net.minecraft.util.ChatUtil;
 import net.wurstclient.BurstFeature;

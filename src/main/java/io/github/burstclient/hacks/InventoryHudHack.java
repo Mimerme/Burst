@@ -1,4 +1,4 @@
-package net.wurstclient.hacks;
+package io.github.burstclient.hacks;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
